@@ -17,10 +17,8 @@
         }
 
         .hero {
-            background: linear-gradient(to right, black, blue);
-            color: white;
-            padding: 100px 0;
-            text-align: center;
+            width: 100%;
+            position: relative;
         }
 
         .hero h1 {
@@ -156,36 +154,53 @@
             --animate-duration: 2s;
         }
 
-        .profile-info {
-            display: none;
+        .demo-wrap {
+            position: relative;
+            width: 100%;
+            height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .demo-bg {
             position: absolute;
-            top: 60px;
-            right: 20px;
-            background-color: white;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.larepublica.net/storage/images/2020/03/31/20200331134230.abc-finanzas.x2.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5    ;   
+            z-index: 1;
+        }
+
+        .demo-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .demo-content h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #000;
+        }
+
+        .demo-content p {
+            font-size: 1.2em;
+            color: #555;
         }
     </style>
 </head>
 
 <body>
-
-
-    <header class="hero">
-        <h1>Bienvenido a EduFinanzas</h1>
-        <p>Aprende a manejar tus finanzas de manera efectiva.</p>
-        <a href="login.html" class="btn btn-light btn-lg" id="loginBtn">Iniciar Sesión</a>
-        <a href="registro.html" class="btn btn-outline-light btn-lg" id="registerBtn">Registrarse</a>
-        <div id="profileContainer" style="display: none;">
-            <i class="fas fa-user-circle fa-2x" id="profileIcon" style="cursor:pointer;"></i>
-            <div class="profile-info" id="profileInfo">
-                <p id="userName">Usuario: Juan Pérez</p>
-                <button class="btn btn-danger btn-sm" id="logoutBtn">Cerrar Sesión</button>
-            </div>
-        </div>
-    </header>
 
     <nav class="navbar navbar-expand-lg">
         <div class="container">
@@ -205,6 +220,18 @@
             </div>
         </div>
     </nav>
+
+    <header class="hero">
+        <div class="demo-wrap">
+            <div class="demo-bg"></div>
+            <div class="demo-content">
+                <h1>Bienvenido a EduFinanzas</h1>
+                <p>Aprende a manejar tus finanzas de manera efectiva.</p>
+            </div>
+        </div>
+    </header>
+
+
     <div class="container my-5">
 
         <h2 class="text-center" id="cursos">Recursos Educativos</h2>
@@ -340,8 +367,8 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
         <script>
 
-            // Simulación de estado de inicio de sesión
-            let isLoggedIn = true; // Cambia esto según el estado real de inicio de sesión
+
+            let isLoggedIn = true;
 
             if (isLoggedIn) {
                 document.getElementById('loginBtn').style.display = 'none';
@@ -365,19 +392,19 @@
             document.getElementById('simulateCredit').addEventListener('click', function () {
                 const creditAmount = document.getElementById('creditAmount').value;
                 const interestRate = document.getElementById('interestRate').value;
-                // Aquí puedes agregar la lógica del simulador de crédito
+                // la lógica del simulador de crédito
                 const result = `El monto del crédito es de ${creditAmount} con una tasa de interés del ${interestRate}%`;
                 document.getElementById('creditResult').innerHTML = result;
             });
 
             document.getElementById('saveButton').addEventListener('click', function () {
-                // Aquí puedes agregar la lógica del mini-juego de ahorro o gasto
+                // lógica del mini-juego de ahorro o gasto
                 const result = "¡Has ahorrado!";
                 document.getElementById('gameResult').innerHTML = result;
             });
 
             document.getElementById('spendButton').addEventListener('click', function () {
-                // Aquí puedes agregar la lógica del mini-juego de ahorro o gasto
+                // lógica del mini-juego de ahorro o gasto
                 const result = "¡Has gastado!";
                 document.getElementById('gameResult').innerHTML = result;
             });
@@ -385,7 +412,7 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2023 EduFinanzas. Todos los derechos reservados.</p>
+        <p>&copy; 2024 EduFinanzas. Todos los derechos reservados.</p>
     </footer>
 
 </body>

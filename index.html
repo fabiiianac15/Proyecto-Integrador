@@ -29,40 +29,210 @@
 
         /* Navbar Mejorado */
         .navbar {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 1rem 0;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 1rem 0;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 1rem;
+    margin: 0 0.2rem;
+}
+
+/* Nuevos estilos para el perfil */
+.profile-avatar {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dropdown-menu {
+    background: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.dropdown-item {
+    color: #333;
+    padding: 0.7rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(var(--primary-color-rgb), 0.1);
+    transform: translateX(5px);
+}
+
+.dropdown-divider {
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Ajuste para el menú desplegable del perfil */
+#profileDropdown {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 1rem;
+}
+
+#profileDropdown::after {
+    display: none;
+}
+
+.nav-link:hover::after {
+    width: 0; /* Eliminamos la línea bajo los enlaces para el nuevo diseño */
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .profile-avatar {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .dropdown-menu {
+        border: none;
+        background: rgba(255, 255, 255, 0.1);
+        margin-top: 0;
+    }
+    
+    .dropdown-item {
+        color: white;
+    }
+}
+        .offcanvas {
+            width: 320px !important;
+            background: linear-gradient(90deg, #002bba, #3367af);
+            color: white;
         }
 
-        .navbar-brand {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white !important;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .offcanvas-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .menu-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1050;
+            background: linear-gradient(90deg, #002bba, #3367af);
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.05);
         }
 
         .nav-link {
-            color: rgba(255, 255, 255, 0.9) !important;
-            font-weight: 500;
-            position: relative;
-            padding: 0.5rem 1rem;
-            margin: 0 0.2rem;
+            color: rgba(255,255,255,0.9) !important;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 5px 0;
+            transition: all 0.3s ease;
         }
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: white;
-            transition: width 0.3s ease;
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(10px);
         }
 
-        .nav-link:hover::after {
-            width: 100%;
+        .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .stats-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stats-card h5 {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            opacity: 0.9;
+        }
+
+        .stats-card .value {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .progress {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+        }
+
+        .card-highlight {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .resources-section {
+            padding: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 20px;
+        }
+
+        .resource-link {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .resource-link:hover {
+            opacity: 1;
+            color: white;
+        }
+
+        .badge-custom {
+            background: rgba(255,255,255,0.2);
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 12px;
         }
 
         /* Hero Section Mejorado */
@@ -99,25 +269,84 @@
             animation: fadeInUp 1s ease;
         }
 
-        .carousel-inner img {
+        .carousel-item {
             height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            filter: brightness(0.7);
+            transition: transform 0.3s ease-in-out;
         }
 
-        #resourceCarousel .carousel-caption {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 10px;
+        .carousel-item:hover img {
+            transform: scale(1.05);
         }
 
-        #resourceCarousel .carousel-caption h5 {
-            font-size: 24px;
-            color: white;
+        .carousel-caption {
+            background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            text-align: left;
         }
 
-        #resourceCarousel .carousel-caption p {
-            font-size: 18px;
-            color: white;
+        .carousel-caption h5 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .carousel-caption p {
+            font-size: 1.2rem;
+            color: #f8f9fa;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .carousel-control-prev, .carousel-control-next {
+            width: 5%;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .carousel-control-prev:hover, .carousel-control-next:hover {
+            opacity: 1;
+        }
+
+        .carousel-indicators {
+            margin-bottom: 1rem;
+        }
+
+        .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin: 0 5px;
+            background-color: rgba(255,255,255,0.5);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-indicators button.active {
+            background-color: #fff;
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .carousel-caption h5 {
+                font-size: 1.5rem;
+            }
+            .carousel-caption p {
+                font-size: 1rem;
+            }
         }
 
         /* Dashboard Section */
@@ -273,23 +502,130 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#dashboard">Dashboard</a>
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#cursos">Cursos Financieros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#juegos">Juegos</a>
+                        <a class="nav-link" href="#recursos">Recursos Educativos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#simulador">Simulador</a>
+                        <a class="nav-link" href="#asesoria">Asesoría Personal</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#testimonios">Testimonios</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="profile-avatar">
+                                <img src="https://w7.pngwing.com/pngs/669/415/png-transparent-roblox-corporation-wikia-avatar-others-thumbnail.png" alt="Usuario" class="rounded-circle">
+                            </div>
+                            <span class="ms-2">Mi Perfil</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="#perfil"><i class="fas fa-user me-2"></i>Ver Perfil</a></li>
+                            <li><a class="dropdown-item" href="#progreso"><i class="fas fa-chart-bar me-2"></i>Mi Progreso</a></li>
+                            <li><a class="dropdown-item" href="#config"><i class="fas fa-cog me-2"></i>Configuración</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#salir"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <!--Menú Hamburguesa-->
+    <button class="menu-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#eduMenu">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="eduMenu">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">
+                <i class="fas fa-graduation-cap me-2"></i>
+                EduFinanzas
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Progreso General -->
+            <div class="card-highlight">
+                <h6>Tu Progreso</h6>
+                <div class="progress mb-2">
+                    <div class="progress-bar" role="progressbar" style="width: 65%"></div>
+                </div>
+                <small>65% completado</small>
+            </div>
+    
+            <!-- Estadísticas Rápidas -->
+            <div class="stats-card">
+                <h5>Módulos Completados</h5>
+                <div class="value">12/20</div>
+            </div>
+            <div class="stats-card">
+                <h5>Puntos de Aprendizaje</h5>
+                <div class="value">2,450 <span class="badge-custom ms-2">+150 hoy</span></div>
+            </div>
+    
+            <!-- Navegación Principal -->
+            <nav class="nav flex-column mt-4">
+                <a class="nav-link" href="#cursos">
+                    <i class="fas fa-book-open"></i>
+                    Cursos
+                    <span class="badge-custom float-end">4 Nuevos</span>
+                </a>
+                <a class="nav-link" href="#herramientas">
+                    <i class="fas fa-calculator"></i>
+                    Calculadoras
+                </a>
+                <a class="nav-link" href="#inversiones">
+                    <i class="fas fa-chart-line"></i>
+                    Inversiones
+                </a>
+                <a class="nav-link" href="#presupuesto">
+                    <i class="fas fa-wallet"></i>
+                    Presupuesto
+                </a>
+                <a class="nav-link" href="#metas">
+                    <i class="fas fa-bullseye"></i>
+                    Metas
+                </a>
+                <a class="nav-link" href="#comunidad">
+                    <i class="fas fa-users"></i>
+                    Comunidad
+                </a>
+            </nav>
+    
+            <!-- Recursos Educativos -->
+            <div class="resources-section">
+                <h6>Recursos Destacados</h6>
+                <a href="#" class="resource-link">
+                    <i class="fas fa-file-pdf me-2"></i>
+                    Guía de Inversiones 2024
+                </a>
+                <a href="#" class="resource-link">
+                    <i class="fas fa-video me-2"></i>
+                    Webinar: Cripto básico
+                </a>
+                <a href="#" class="resource-link">
+                    <i class="fas fa-podcast me-2"></i>
+                    Podcast: Tips Financieros
+                </a>
+            </div>
+    
+            <!-- Logros -->
+            <div class="card-highlight mt-3">
+                <h6>Últimos Logros</h6>
+                <div class="d-flex align-items-center mt-2">
+                    <i class="fas fa-medal me-2" style="color: gold;"></i>
+                    <small>Experto en Presupuestos</small>
+                </div>
+                <div class="d-flex align-items-center mt-2">
+                    <i class="fas fa-trophy me-2" style="color: silver;"></i>
+                    <small>Inversor Principiante</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
     <!-- Hero Section -->
     <section class="hero">
@@ -300,34 +636,40 @@
             <button class="btn btn-primary btn-lg animate__animated animate__fadeInUp">Comenzar Ahora</button>
         </div>
     </section>
-        <h2 class="text-center" id="cursos">Recursos Educativos</h2>
+
+    <!--Carrousell-->
+        <h2 class="text-center p-4" id="cursos">Recursos Educativos</h2>
         <div id="resourceCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#resourceCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#resourceCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#resourceCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+    
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="https://blog.facialix.com/wp-content/uploads/2024/10/curso-gratuito-de-Finanzas-Personales-de-la-UNAM-jpg.webp"
-                        class="d-block w-100" alt="Curso 1">
-                    <div class="carousel-caption d-none d-md-block">
+                    <img src="https://blog.facialix.com/wp-content/uploads/2024/10/curso-gratuito-de-Finanzas-Personales-de-la-UNAM-jpg.webp" class="d-block w-100" alt="Curso de Ahorro">
+                    <div class="carousel-caption">
                         <h5>Curso de Ahorro</h5>
                         <p>Aprende a ahorrar de manera efectiva.</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://img.freepik.com/vector-gratis/inversor-laptop-monitoreando-crecimiento-dividendos-comerciante-sentado-sobre-pila-dinero-invertir-capital-analizar-graficos-ganancias-ilustracion-vector-finanzas-comercio-acciones-inversion_74855-8432.jpg"
-                        class="d-block w-100" alt="Curso 2">
-                    <div class="carousel-caption d-none d-md-block">
+                    <img src="https://img.freepik.com/vector-gratis/inversor-laptop-monitoreando-crecimiento-dividendos-comerciante-sentado-sobre-pila-dinero-invertir-capital-analizar-graficos-ganancias-ilustracion-vector-finanzas-comercio-acciones-inversion_74855-8432.jpg" class="d-block w-100" alt="Curso de Inversión">
+                    <div class="carousel-caption">
                         <h5>Curso de Inversión</h5>
                         <p>Descubre cómo invertir tu dinero sabiamente.</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://i.postimg.cc/N06H07Jq/PRESUPUESTO-PERSONAL-2.jpg" class="d-block w-100"
-                        alt="Curso 3">
-                    <div class="carousel-caption d-none d-md-block">
+                    <img src="https://i.postimg.cc/N06H07Jq/PRESUPUESTO-PERSONAL-2.jpg" class="d-block w-100" alt="Curso de Presupuesto">
+                    <div class="carousel-caption">
                         <h5>Curso de Presupuesto</h5>
                         <p>Aprende a crear y seguir un presupuesto.</p>
                     </div>
                 </div>
             </div>
+    
             <button class="carousel-control-prev" type="button" data-bs-target="#resourceCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Anterior</span>

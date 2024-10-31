@@ -27,99 +27,100 @@
             background-color: var(--light-bg);
         }
 
-        
+
         .navbar {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    padding: 1rem 0;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-}
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
 
-.navbar-brand {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: white !important;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white !important;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-.nav-link {
-    color: rgba(255, 255, 255, 0.9) !important;
-    font-weight: 500;
-    position: relative;
-    padding: 0.5rem 1rem;
-    margin: 0 0.2rem;
-}
-
-
-.profile-avatar {
-    width: 40px;
-    height: 40px;
-    overflow: hidden;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.8);
-}
-
-.profile-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.dropdown-menu {
-    background: white;
-    border: none;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin-top: 10px;
-}
-
-.dropdown-item {
-    color: #333;
-    padding: 0.7rem 1.5rem;
-    transition: all 0.3s ease;
-}
-
-.dropdown-item:hover {
-    background-color: rgba(var(--primary-color-rgb), 0.1);
-    transform: translateX(5px);
-}
-
-.dropdown-divider {
-    border-color: rgba(0, 0, 0, 0.1);
-}
-
-/* Ajuste para el menú desplegable del perfil */
-#profileDropdown {
-    display: flex;
-    align-items: center;
-    padding: 0.25rem 1rem;
-}
-
-#profileDropdown::after {
-    display: none;
-}
-
-.nav-link:hover::after {
-    width: 0; 
-}
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+        }
 
 
-@media (max-width: 991px) {
-    .profile-avatar {
-        width: 35px;
-        height: 35px;
-    }
-    
-    .dropdown-menu {
-        border: none;
-        background: rgba(255, 255, 255, 0.1);
-        margin-top: 0;
-    }
-    
-    .dropdown-item {
-        color: white;
-    }
-}
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dropdown-menu {
+            background: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .dropdown-item {
+            color: #333;
+            padding: 0.7rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(var(--primary-color-rgb), 0.1);
+            transform: translateX(5px);
+        }
+
+        .dropdown-divider {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ajuste para el menú desplegable del perfil */
+        #profileDropdown {
+            display: flex;
+            align-items: center;
+            padding: 0.25rem 1rem;
+        }
+
+        #profileDropdown::after {
+            display: none;
+        }
+
+        .nav-link:hover::after {
+            width: 0;
+        }
+
+
+        @media (max-width: 991px) {
+            .profile-avatar {
+                width: 35px;
+                height: 35px;
+            }
+
+            .dropdown-menu {
+                border: none;
+                background: rgba(255, 255, 255, 0.1);
+                margin-top: 0;
+            }
+
+            .dropdown-item {
+                color: white;
+            }
+        }
+
         .offcanvas {
             width: 320px !important;
             background: linear-gradient(90deg, #002bba, #3367af);
@@ -128,7 +129,7 @@
 
         .offcanvas-header {
             padding: 1.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .menu-btn {
@@ -141,7 +142,7 @@
             padding: 10px;
             border-radius: 8px;
             color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
         }
 
@@ -150,7 +151,7 @@
         }
 
         .nav-link {
-            color: rgba(255,255,255,0.9) !important;
+            color: rgba(255, 255, 255, 0.9) !important;
             padding: 12px 20px;
             border-radius: 8px;
             margin: 5px 0;
@@ -158,7 +159,7 @@
         }
 
         .nav-link:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             transform: translateX(10px);
         }
 
@@ -169,7 +170,7 @@
         }
 
         .stats-card {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             padding: 15px;
             margin: 10px 0;
@@ -193,7 +194,7 @@
 
         .progress {
             height: 8px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .progress-bar {
@@ -201,7 +202,7 @@
         }
 
         .card-highlight {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
             padding: 15px;
             margin: 15px 0;
@@ -209,7 +210,7 @@
 
         .resources-section {
             padding: 15px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             margin-top: 20px;
         }
 
@@ -229,7 +230,7 @@
         }
 
         .badge-custom {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             font-size: 0.7rem;
             padding: 3px 8px;
             border-radius: 12px;
@@ -288,7 +289,7 @@
         }
 
         .carousel-caption {
-            background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));
+            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
             bottom: 0;
             left: 0;
             right: 0;
@@ -301,23 +302,25 @@
             font-weight: 700;
             margin-bottom: 0.5rem;
             color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .carousel-caption p {
             font-size: 1.2rem;
             color: #f8f9fa;
             margin-bottom: 1rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
-        .carousel-control-prev, .carousel-control-next {
+        .carousel-control-prev,
+        .carousel-control-next {
             width: 5%;
             opacity: 0.7;
             transition: opacity 0.3s;
         }
 
-        .carousel-control-prev:hover, .carousel-control-next:hover {
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
             opacity: 1;
         }
 
@@ -330,7 +333,7 @@
             height: 12px;
             border-radius: 50%;
             margin: 0 5px;
-            background-color: rgba(255,255,255,0.5);
+            background-color: rgba(255, 255, 255, 0.5);
             border: 2px solid transparent;
             transition: all 0.3s ease;
         }
@@ -344,6 +347,7 @@
             .carousel-caption h5 {
                 font-size: 1.5rem;
             }
+
             .carousel-caption p {
                 font-size: 1rem;
             }
@@ -376,42 +380,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Juegos Interactivos */
-        .game-container {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .investment-game {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .market-simulation {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .stock-card {
-            background: var(--light-bg);
-            padding: 1rem;
-            border-radius: 10px;
-            width: 200px;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .stock-card:hover {
-            transform: scale(1.05);
-        }
-
-        
         .credit-simulator {
             background: white;
             border-radius: 15px;
@@ -431,7 +399,50 @@
             margin-top: 1.5rem;
         }
 
-        
+
+        .accordion-custom {
+            --bs-accordion-btn-bg: var(--primary-color);
+            --bs-accordion-btn-color: white;
+            --bs-accordion-btn-active-bg: var(--secondary-color);
+            --bs-accordion-btn-active-color: white;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .accordion-body {
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .section-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: scale(1.02);
+        }
+
+        .tooltip-inner {
+            max-width: 300px;
+            text-align: left;
+        }
+
+
         .testimonial-card {
             background: white;
             border-radius: 15px;
@@ -513,18 +524,26 @@
                         <a class="nav-link" href="#asesoria">Asesoría Personal</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="profile-avatar">
-                                <img src="https://w7.pngwing.com/pngs/669/415/png-transparent-roblox-corporation-wikia-avatar-others-thumbnail.png" alt="Usuario" class="rounded-circle">
+                                <img src="https://w7.pngwing.com/pngs/669/415/png-transparent-roblox-corporation-wikia-avatar-others-thumbnail.png"
+                                    alt="Usuario" class="rounded-circle">
                             </div>
                             <span class="ms-2">Mi Perfil</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                            <li><a class="dropdown-item" href="#perfil"><i class="fas fa-user me-2"></i>Ver Perfil</a></li>
-                            <li><a class="dropdown-item" href="#progreso"><i class="fas fa-chart-bar me-2"></i>Mi Progreso</a></li>
-                            <li><a class="dropdown-item" href="#config"><i class="fas fa-cog me-2"></i>Configuración</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="login.html"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a></li>
+                            <li><a class="dropdown-item" href="#perfil"><i class="fas fa-user me-2"></i>Ver Perfil</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#progreso"><i class="fas fa-chart-bar me-2"></i>Mi
+                                    Progreso</a></li>
+                            <li><a class="dropdown-item" href="#config"><i class="fas fa-cog me-2"></i>Configuración</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="login.html"><i
+                                        class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -536,7 +555,7 @@
     <button class="menu-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#eduMenu">
         <i class="fas fa-bars"></i>
     </button>
-    
+
     <div class="offcanvas offcanvas-start" tabindex="-1" id="eduMenu">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title">
@@ -554,7 +573,7 @@
                 </div>
                 <small>75% completado</small>
             </div>
-    
+
             <!-- Estadísticas Rápidas -->
             <div class="stats-card">
                 <h5>Módulos Completados</h5>
@@ -564,7 +583,7 @@
                 <h5>Puntos de Aprendizaje</h5>
                 <div class="value">2,450 <span class="badge-custom ms-2">+150 hoy</span></div>
             </div>
-    
+
             <!-- Navegación Principal -->
             <nav class="nav flex-column mt-4">
                 <a class="nav-link" href="cursos.html">
@@ -593,7 +612,7 @@
                     Comunidad
                 </a>
             </nav>
-    
+
             <!-- Recursos Educativos -->
             <div class="resources-section">
                 <h6>Recursos Destacados</h6>
@@ -610,7 +629,7 @@
                     Podcast: Tips Financieros
                 </a>
             </div>
-    
+
             <!-- Logros -->
             <div class="card-highlight mt-3">
                 <h6>Últimos Logros</h6>
@@ -625,7 +644,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <!-- Hero Section -->
     <section class="hero">
@@ -638,47 +657,51 @@
     </section>
 
     <!--Carrousell-->
-        <h2 class="text-center p-4" id="cursos">Recursos Educativos</h2>
-        <div id="resourceCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#resourceCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#resourceCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#resourceCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-    
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://blog.destacame.com.mx/wp-content/uploads/sites/2/2023/06/Consejos-pra%CC%81cticos-para-ahorrar-y-lograr-mejorar-tus-decisiones-financieras.jpg" class="d-block w-100" alt="Curso de Ahorro">
-                    <div class="carousel-caption">
-                        <h5>Curso de Ahorro</h5>
-                        <p>Aprende a ahorrar de manera efectiva.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://img.freepik.com/vector-gratis/inversor-laptop-monitoreando-crecimiento-dividendos-comerciante-sentado-sobre-pila-dinero-invertir-capital-analizar-graficos-ganancias-ilustracion-vector-finanzas-comercio-acciones-inversion_74855-8432.jpg" class="d-block w-100" alt="Curso de Inversión">
-                    <div class="carousel-caption">
-                        <h5>Curso de Inversión</h5>
-                        <p>Descubre cómo invertir tu dinero sabiamente.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://i.postimg.cc/N06H07Jq/PRESUPUESTO-PERSONAL-2.jpg" class="d-block w-100" alt="Curso de Presupuesto">
-                    <div class="carousel-caption">
-                        <h5>Curso de Presupuesto</h5>
-                        <p>Aprende a crear y seguir un presupuesto.</p>
-                    </div>
-                </div>
-            </div>
-    
-            <button class="carousel-control-prev" type="button" data-bs-target="#resourceCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#resourceCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Siguiente</span>
-            </button>
+    <h2 class="text-center p-4" id="cursos">Recursos Educativos</h2>
+    <div id="resourceCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#resourceCarousel" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#resourceCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#resourceCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://blog.destacame.com.mx/wp-content/uploads/sites/2/2023/06/Consejos-pra%CC%81cticos-para-ahorrar-y-lograr-mejorar-tus-decisiones-financieras.jpg"
+                    class="d-block w-100" alt="Curso de Ahorro">
+                <div class="carousel-caption">
+                    <h5>Curso de Ahorro</h5>
+                    <p>Aprende a ahorrar de manera efectiva.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://img.freepik.com/vector-gratis/inversor-laptop-monitoreando-crecimiento-dividendos-comerciante-sentado-sobre-pila-dinero-invertir-capital-analizar-graficos-ganancias-ilustracion-vector-finanzas-comercio-acciones-inversion_74855-8432.jpg"
+                    class="d-block w-100" alt="Curso de Inversión">
+                <div class="carousel-caption">
+                    <h5>Curso de Inversión</h5>
+                    <p>Descubre cómo invertir tu dinero sabiamente.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.postimg.cc/N06H07Jq/PRESUPUESTO-PERSONAL-2.jpg" class="d-block w-100"
+                    alt="Curso de Presupuesto">
+                <div class="carousel-caption">
+                    <h5>Curso de Presupuesto</h5>
+                    <p>Aprende a crear y seguir un presupuesto.</p>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#resourceCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#resourceCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+    </div>
 
     <!-- Dashboard Section -->
     <section id="dashboard" class="container">
@@ -720,59 +743,163 @@
             </div>
         </div>
     </section>
+    <div class="container py-5">
+        <h1 class="text-center mb-5 display-4">Educación Financiera</h1>
 
-    <!-- Juegos Interactivos -->
-    <section id="juegos" class="container">
-        <div class="game-container">
-            <h2 class="text-center mb-4">Juegos Financieros</h2>
+        <!-- Ahorro Section -->
+        <div class="section-header">
+            <h2>Ahorro: Tu Camino a la Estabilidad Financiera</h2>
+        </div>
 
-            <!-- Juego de Inversión -->
-            <div class="investment-game mb-5">
-                <h3>Simulador de Mercado</h3>
-                <p>Aprende a invertir con dinero virtual</p>
-                <div class="market-simulation">
-                    <div class="stock-card" onclick="buyStock('TECH')">
-                        <h4>TECH</h4>
-                        <p class="stock-price">$150.25</p>
-                        <span class="badge bg-success">+2.5%</span>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card info-card">
+                    <div class="card-body">
+                        <h3 class="card-title">¿Por qué Ahorrar?</h3>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" data-bs-toggle="tooltip"
+                                title="Tener un respaldo económico para emergencias imprevistas">
+                                Estabilidad Financiera
+                            </li>
+                            <li class="list-group-item" data-bs-toggle="tooltip"
+                                title="Capacidad de tomar decisiones sin presión económica">
+                                Independencia y Libertad
+                            </li>
+                            <li class="list-group-item" data-bs-toggle="tooltip"
+                                title="Alcanzar tus sueños y objetivos personales">
+                                Cumplimiento de Metas Personales
+                            </li>
+                            <li class="list-group-item" data-bs-toggle="tooltip"
+                                title="Planear y asegurar tu bienestar futuro">
+                                Preparación para el Futuro
+                            </li>
+                            <li class="list-group-item" data-bs-toggle="tooltip"
+                                title="Generar ingresos adicionales mediante inversiones">
+                                Creación de Oportunidades de Inversión
+                            </li>
+                        </ul>
                     </div>
-                    <div class="stock-card" onclick="buyStock('FOOD')">
-                        <h4>FOOD</h4>
-                        <p class="stock-price">$85.60</p>
-                        <span class="badge bg-danger">-1.2%</span>
-                    </div>
-                    <div class="stock-card" onclick="buyStock('AUTO')">
-                        <h4>AUTO</h4>
-                        <p class="stock-price">$210.75</p>
-                        <span class="badge bg-success">+3.8%</span>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <h4>Tu Portafolio</h4>
-                    <p>Valor Total: $<span id="portfolio-value">10000</span></p>
                 </div>
             </div>
 
-            <!-- Quiz Financiero -->
-            <div class="quiz-container">
-                <h3 class="text-center">Quiz Financiero</h3>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title" id="question">¿Qué es un interés compuesto?</h5>
-                        <div class="options mt-3">
-                            <button class="btn btn-outline-primary w-100 mb-2" onclick="checkAnswer(0)">A) Interés sobre
-                                el capital inicial</button>
-                            <button class="btn btn-outline-primary w-100 mb-2" onclick="checkAnswer(1)">B) Interés sobre
-                                interés más capital</button>
-                            <button class="btn btn-outline-primary w-100 mb-2" onclick="checkAnswer(2)">C) Una tasa fija
-                                de interés</button>
+            <div class="col-md-6">
+                <div class="accordion accordion-custom" id="accordionAhorro">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingMetodosAhorro">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseMetodosAhorro">
+                                Métodos de Ahorro Efectivos
+                            </button>
+                        </h2>
+                        <div id="collapseMetodosAhorro" class="accordion-collapse collapse"
+                            data-bs-parent="#accordionAhorro">
+                            <div class="accordion-body">
+                                <div class="list-group">
+                                    <div class="list-group-item" data-bs-toggle="tooltip"
+                                        title="Divide tus ingresos: 50% necesidades, 30% deseos, 20% ahorro">
+                                        Regla del 50/30/20
+                                    </div>
+                                    <div class="list-group-item" data-bs-toggle="tooltip"
+                                        title="Guarda un porcentaje de tus ingresos antes de gastar">
+                                        Pago a Ti Mismo Primero
+                                    </div>
+                                    <div class="list-group-item" data-bs-toggle="tooltip"
+                                        title="Configura transferencias automáticas a tu cuenta de ahorros">
+                                        Ahorro Automático
+                                    </div>
+                                    <div class="list-group-item" data-bs-toggle="tooltip"
+                                        title="Asigna efectivo a sobres para control de gastos">
+                                        Sistema de Sobres
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
+        <!-- Inversión Section -->
+        <div class="section-header mt-5">
+            <h2>Inversión: Hacer Crecer tu Dinero</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card info-card">
+                    <div class="card-body">
+                        <h3 class="card-title">Importancia de Invertir</h3>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" data-bs-toggle="tooltip"
+                                title="Aumentar tu patrimonio con el tiempo">
+                                Crecimiento del Capital
+                            </li>
+                            <li class="list-group-item" data-bs-toggle="tooltip"
+                                title="Mantener el valor real de tu dinero frente a la inflación">
+                                Protección contra la Inflación
+                            </li>
+                            <li class="list-group-item" data-bs-toggle="tooltip"
+                                title="Generar múltiples fuentes de ingreso">
+                                Diversificación de Ingresos
+                            </li>
+                            <li class="list-group-item" data-bs-toggle="tooltip"
+                                title="Beneficios fiscales en ciertas inversiones">
+                                Ventajas Fiscales
+                            </li>
+                            <li class="list-group-item" data-bs-toggle="tooltip"
+                                title="Mayor control y opciones financieras">
+                                Flexibilidad Financiera
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="accordion accordion-custom" id="accordionInversion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTiposInversion">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTiposInversion">
+                                Tipos de Inversión
+                            </button>
+                        </h2>
+                        <div id="collapseTiposInversion" class="accordion-collapse collapse"
+                            data-bs-parent="#accordionInversion">
+                            <div class="accordion-body">
+                                <div class="list-group">
+                                    <div class="list-group-item" data-bs-toggle="tooltip"
+                                        title="Propiedad parcial de empresas cotizadas">
+                                        Acciones
+                                    </div>
+                                    <div class="list-group-item" data-bs-toggle="tooltip"
+                                        title="Instrumentos de deuda con pagos de interés regulares">
+                                        Bonos
+                                    </div>
+                                    <div class="list-group-item" data-bs-toggle="tooltip"
+                                        title="Inversión en propiedades para generar ingresos">
+                                        Bienes Raíces
+                                    </div>
+                                    <div class="list-group-item" data-bs-toggle="tooltip"
+                                        title="Inversiones agrupadas gestionadas profesionalmente">
+                                        Fondos de Inversión
+                                    </div>
+                                    <div class="list-group-item" data-bs-toggle="tooltip"
+                                        title="Activos digitales de alto riesgo y volatilidad">
+                                        Criptomonedas
+                                    </div>
+                                    <div class="list-group-item" data-bs-toggle="tooltip"
+                                        title="Inversión en materias primas como oro o petróleo">
+                                        Commodities
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Simulador de Crédito -->
     <section id="simulador" class="container">
         <div class="credit-simulator">
@@ -909,7 +1036,7 @@
                 <div class="footer-section">
                     <h3>Contacto</h3>
                     <p><i class="fas fa-envelope me-2"></i> info@edufinanzas.com</p>
-                    <p><i class="fas fa-phone me-2"></i> +57  123456789</p>
+                    <p><i class="fas fa-phone me-2"></i> +57 123456789</p>
 
                 </div>
             </div>
@@ -922,73 +1049,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Variables globales para el juego de inversión
-        let portfolio = {
-            cash: 10000,
-            stocks: {}
-        };
-
-        // Función para comprar acciones
-        function buyStock(symbol) {
-            const stockPrices = {
-                'TECH': 150.25,
-                'FOOD': 85.60,
-                'AUTO': 210.75
-            };
-
-            if (portfolio.cash >= stockPrices[symbol]) {
-                portfolio.cash -= stockPrices[symbol];
-                portfolio.stocks[symbol] = (portfolio.stocks[symbol] || 0) + 1;
-                updatePortfolio();
-            } else {
-                alert('No tienes suficiente efectivo para esta compra');
-            }
-        }
-
-        // Actualizar el portafolio
-        function updatePortfolio() {
-            const portfolioValue = portfolio.cash + Object.entries(portfolio.stocks)
-                .reduce((total, [symbol, quantity]) => {
-                    const stockPrices = {
-                        'TECH': 150.25,
-                        'FOOD': 85.60,
-                        'AUTO': 210.75
-                    };
-                    return total + (stockPrices[symbol] * quantity);
-                }, 0);
-
-            document.getElementById('portfolio-value').textContent = portfolioValue.toFixed(2);
-        }
-
-        // Quiz financiero
-        const quizQuestions = [
-            {
-                question: "¿Qué es un interés compuesto?",
-                options: [
-                    "Interés sobre el capital inicial",
-                    "Interés sobre interés más capital",
-                    "Una tasa fija de interés"
-                ],
-                correct: 1
-            },
-            // Añadir más preguntas aquí
-        ];
-
-        let currentQuestion = 0;
-
-        function checkAnswer(option) {
-            if (option === quizQuestions[currentQuestion].correct) {
-                alert('¡Correcto!');
-                nextQuestion();
-            } else {
-                alert('Incorrecto. Intenta de nuevo.');
-            }
-        }
-
-        function nextQuestion() {
-            currentQuestion = (currentQuestion + 1) % quizQuestions.length;
-            document.getElementById('question').textContent = quizQuestions[currentQuestion].question;
-        }
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
 
         // Simulador de crédito
         function calculateLoan() {

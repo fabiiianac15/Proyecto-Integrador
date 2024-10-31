@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juegos Financieros Educativos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/11905/11905690.png">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --light-bg: #ecf0f1;
+            --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--light-bg) 0%, #fff 100%);
+            min-height: 100vh;
+        }
+
+        .main-header {
+            background: linear-gradient(90deg, #002bba, #3367af);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-pills .nav-link {
+            color: var(--primary-color);
+            border-radius: 10px;
+            padding: 1rem 2rem;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-pills .nav-link.active {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #2980b9 100%);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+
+        .stock-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 2px solid transparent;
+        }
+
+        .stock-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            border-color: var(--accent-color);
+        }
+
+        .portfolio-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .budget-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .budget-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 1rem 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            padding: 1.2rem;
+            margin: 0.8rem 0;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            background: white;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .option-btn:hover {
+            background: var(--light-bg);
+            transform: translateX(8px);
+            border-color: var(--accent-color);
+        }
+
+        .savings-goal {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #2980b9 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .progress {
+            height: 1.5rem;
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            margin-top: 1rem;
+        }
+
+        .progress-bar {
+            background: linear-gradient(to right, var(--success-color), #2ecc71);
+            border-radius: 1rem;
+            transition: width 0.5s ease;
+        }
+
+        .game-title {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+            font-size: 2.2rem;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .btn-success,
+        .btn-danger {
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color) 0%, #2ecc71 100%);
+            border: none;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger-color) 0%, #c0392b 100%);
+            border: none;
+        }
+
+        .statistics-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .feedback-message {
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1 class="text-center mb-0">
+                <i class="fas fa-chart-line me-3"></i>
+                Juegos Financieros Educativos
+            </h1>
+            <p class="text-center mt-3 mb-0 text-white-50">Aprende finanzas de manera divertida e interactiva</p>
+        </div>
+    </header>
+
+    <div class="container py-4">
+        <ul class="nav nav-pills mb-5 justify-content-center" id="gamesTab">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="pill" href="#marketGame">
+                    <i class="fas fa-chart-bar me-2"></i>Simulador de Mercado
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="pill" href="#budgetGame">
+                    <i class="fas fa-wallet me-2"></i>Desafío Presupuestal
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="pill" href="#quizGame">
+                    <i class="fas fa-graduation-cap me-2"></i>Quiz Financiero
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="pill" href="#savingsGame">
+                    <i class="fas fa-piggy-bank me-2"></i>Reto del Ahorro
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <!-- Juego 1: Simulador de Mercado -->
+            <div class="tab-pane fade show active" id="marketGame">
+                <div class="game-container">
+                    <h2 class="game-title">
+                        <i class="fas fa-chart-line me-3"></i>
+                        Simulador de Mercado
+                    </h2>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="portfolio-card">
+                                <h5><i class="fas fa-briefcase me-2"></i>Tu Portafolio</h5>
+                                <div class="mt-4">
+                                    <p class="mb-2">Efectivo disponible</p>
+                                    <h3>$<span id="cashBalance">10000.00</span></h3>
+                                </div>
+                                <div class="mt-4">
+                                    <p class="mb-2">Valor total del portafolio</p>
+                                    <h3>$<span id="totalPortfolioValue">10000.00</span></h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-star me-2"></i>Tus Acciones</h5>
+                                    <div id="stockHoldings" class="mt-4">
+                                        <!-- Se llenará dinámicamente -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="stockMarket">
+                        <!-- Se llenará dinámicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Juego 2: Desafío Presupuestal -->
+            <div class="tab-pane fade" id="budgetGame">
+                <div class="game-container">
+                    <h2 class="game-title">
+                        <i class="fas fa-wallet me-3"></i>
+                        Desafío Presupuestal
+                    </h2>
+                    <div class="portfolio-card mb-4">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h5>Presupuesto Mensual</h5>
+                                <h2>$3,000,000</h2>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-2">Restante</p>
+                                <h3>$<span id="budgetRemaining">3000000</span></h3>
+                                <div class="progress mt-3">
+                                    <div class="progress-bar" role="progressbar" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="budgetItems">
+                        <!-- Se llenará dinámicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Juego 3: Quiz Financiero -->
+            <div class="tab-pane fade" id="quizGame">
+                <div class="game-container">
+                    <h2 class="game-title">
+                        <i class="fas fa-graduation-cap me-3"></i>
+                        Quiz Financiero
+                    </h2>
+                    <div class="quiz-card">
+                        <div class="statistics-card mb-4">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <i class="fas fa-trophy fa-2x text-warning"></i>
+                                </div>
+                                <div class="col">
+                                    <p class="mb-0">Puntuación actual</p>
+                                    <h3 class="mb-0"><span id="score">0</span> puntos</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 id="questionText" class="mb-4">Cargando pregunta...</h4>
+                        <div id="options">
+                            <!-- Se llenará dinámicamente -->
+                        </div>
+                        <div id="feedback" class="feedback-message mt-3" style="display: none;"></div>
+                        <button id="nextQuestion" class="btn btn-primary mt-4 px-4 py-2" style="display: none;">
+                            <i class="fas fa-arrow-right me-2"></i>Siguiente Pregunta
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Juego 4: Reto del Ahorro -->
+            <div class="tab-pane fade" id="savingsGame">
+                <div class="game-container">
+                    <h2 class="game-title">
+                        <i class="fas fa-piggy-bank me-3"></i>
+                        Reto del Ahorro
+                    </h2>
+                    <div class="savings-goal mb-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Meta de Ahorro</h4>
+                                <h2>$<span id="savingsGoal">5000000</span></h2>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Ahorro Actual</h4>
+                                <h2>$<span id="currentSavings">0</span></h2>
+                            </div>
+                        </div>
+                        <div class="progress mt-4">
+                            <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-plus-circle me-2"></i>Agregar Ahorro</h5>
+                                    <div class="form-group mb-3 mt-4">
+                                        <label class="mb-2">Cantidad a ahorrar:</label>
+                                        <input type="number" id="savingsInput" class="form-control form-control-lg"
+                                            min="1">
+                                    </div>
+                                    <button class="btn btn-success w-100" onclick="addSavings()">
+                                        <i class="fas fa-plus me-2"></i>Agregar Ahorro
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-lightbulb me-2"></i>Consejos de Ahorro</h5>
+                                    <ul id="savingsTips" class="list-group list-group-flush mt-4">
+                                       
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-4 mt-5" style="background: var(--primary-color); color: white;">
+        <div class="container text-center">
+            <p class="mb-0">© 2024 EduFinanzas | Aprende • Invierte • Crece</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Variables globales
+        let portfolio = {
+            cash: 10000,
+            stocks: {}
+        };
+
+        const stocks = [
+            { symbol: 'TECH', name: 'TechCorp', price: 150.25, change: '+2.5%' },
+            { symbol: 'FOOD', name: 'FoodCo', price: 85.60, change: '-1.2%' },
+            { symbol: 'AUTO', name: 'AutoTech', price: 210.75, change: '+3.8%' },
+            { symbol: 'BANK', name: 'BankFin', price: 95.30, change: '+1.5%' }
+        ];
+
+        // Inicialización del Simulador de Mercado
+        function initMarketGame() {
+            const marketContainer = document.getElementById('stockMarket');
+            marketContainer.innerHTML = '';
+
+            stocks.forEach(stock => {
+                const col = document.createElement('div');
+                col.className = 'col-md-6 col-lg-3';
+                col.innerHTML = `
+                    <div class="stock-card">
+                        <h4>${stock.symbol}</h4>
+                        <p>${stock.name}</p>
+                        <p class="h4">$${stock.price}</p>
+                        <p class="text-${stock.change.includes('+') ? 'success' : 'danger'}">${stock.change}</p>
+                        <div class="btn-group w-100">
+                            <button class="btn btn-success" onclick="buyStock('${stock.symbol}')">Comprar</button>
+                            <button class="btn btn-danger" onclick="sellStock('${stock.symbol}')">Vender</button>
+                        </div>
+                    </div>
+                `;
+                marketContainer.appendChild(col);
+            });
+            updatePortfolio();
+        }
+
+        function updatePortfolio() {
+            document.getElementById('cashBalance').textContent = portfolio.cash.toFixed(2);
+            let totalValue = portfolio.cash;
+
+            const holdingsContainer = document.getElementById('stockHoldings');
+            holdingsContainer.innerHTML = '';
+
+            for (const [symbol, quantity] of Object.entries(portfolio.stocks)) {
+                if (quantity > 0) {
+                    const stock = stocks.find(s => s.symbol === symbol);
+                    totalValue += stock.price * quantity;
+
+                    holdingsContainer.innerHTML += `
+                        <div class="mb-2">
+                            ${symbol}: ${quantity} acciones ($${(stock.price * quantity).toFixed(2)})
+                        </div>
+                    `;
+                }
+            }
+
+            document.getElementById('totalPortfolioValue').textContent = totalValue.toFixed(2);
+        }
+
+        function buyStock(symbol) {
+            const stock = stocks.find(s => s.symbol === symbol);
+            if (portfolio.cash >= stock.price) {
+                portfolio.cash -= stock.price;
+                portfolio.stocks[symbol] = (portfolio.stocks[symbol] || 0) + 1;
+                updatePortfolio();
+            } else {
+                alert('No tienes suficiente efectivo para esta compra');
+            }
+        }
+
+        function sellStock(symbol) {
+            if (portfolio.stocks[symbol] > 0) {
+                const stock = stocks.find(s => s.symbol === symbol);
+                portfolio.cash += stock.price;
+                portfolio.stocks[symbol]--;
+                updatePortfolio();
+            } else {
+                alert('No tienes acciones de esta empresa para vender');
+            }
+        }
+
+        // Inicialización del Desafío Presupuestal
+        const budgetItems = [
+            { id: 1, category: 'Vivienda', description: 'Alquiler', cost: 350000 },
+            { id: 2, category: 'Alimentación', description: 'Supermercado', cost: 400000 },
+            { id: 3, category: 'Transporte', description: 'Transporte público', cost: 100000 },
+            { id: 4, category: 'Entretenimiento', description: 'Streaming', cost: 150000 },
+            { id: 5, category: 'Salud', description: 'Seguro médico', cost: 750000 },
+            { id: 6, category: 'Educación', description: 'Cursos online', cost: 1500000 }
+        ];
+
+        let selectedBudgetItems = [];
+        const totalBudget = 3000000;
+
+
+        function initBudgetGame() {
+            const container = document.getElementById('budgetItems');
+            container.innerHTML = '';
+
+            budgetItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'budget-item';
+                div.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5>${item.category}</h5>
+                            <p class="mb-0">${item.description} - $${item.cost}</p>
+                        </div>
+                        <button 
+                            class="btn ${selectedBudgetItems.includes(item.id) ? 'btn-danger' : 'btn-success'}"
+                            onclick="toggleBudgetItem(${item.id})"
+                        >
+                            ${selectedBudgetItems.includes(item.id) ? 'Quitar' : 'Agregar'}
+                        </button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+            updateBudget();
+        }
+
+        function toggleBudgetItem(itemId) {
+            const index = selectedBudgetItems.indexOf(itemId);
+            if (index === -1) {
+                selectedBudgetItems.push(itemId);
+            } else {
+                selectedBudgetItems.splice(index, 1);
+            }
+            initBudgetGame();
+        }
+
+        function updateBudget() {
+            const totalSpent = selectedBudgetItems.reduce((total, itemId) => {
+                const item = budgetItems.find(i => i.id === itemId);
+                return total + item.cost;
+            }, 0);
+
+            const remaining = totalBudget - totalSpent;
+            const percentageRemaining = (remaining / totalBudget) * 100;
+
+            document.getElementById('budgetRemaining').textContent = remaining.toFixed(2);
+            document.querySelector('.progress-bar').style.width = `${percentageRemaining}%`;
+            document.querySelector('.progress-bar').className = `progress-bar ${percentageRemaining < 20 ? 'bg-danger' : percentageRemaining < 50 ? 'bg-warning' : 'bg-success'
+                }`;
+        }
+
+        // Quiz Financiero
+        const quizQuestions = [
+            {
+                question: "¿Qué es un presupuesto?",
+                options: [
+                    "Un registro de gastos pasados",
+                    "Un plan para gastar e invertir dinero futuro",
+                    "Una lista de deudas",
+                    "Un tipo de cuenta bancaria"
+                ],
+                correct: 1
+            },
+            {
+                question: "¿Qué es una acción?",
+                options: [
+                    "Un préstamo bancario",
+                    "Una deuda empresarial",
+                    "Una parte de la propiedad de una empresa",
+                    "Un tipo de seguro"
+                ],
+                correct: 2
+            },
+            {
+                question: "¿Qué es el interés compuesto?",
+                options: [
+                    "Un tipo de préstamo",
+                    "Interés sobre el capital inicial solamente",
+                    "Interés sobre el interés más el capital",
+                    "Una tasa fija de interés"
+                ],
+                correct: 2
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function initQuizGame() {
+            const question = quizQuestions[currentQuestion];
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('score').textContent = score;
+
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'option-btn';
+                button.textContent = option;
+                button.onclick = () => checkAnswer(index);
+                optionsContainer.appendChild(button);
+            });
+
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('nextQuestion').style.display = 'none';
+        }
+
+        function checkAnswer(selectedIndex) {
+            const question = quizQuestions[currentQuestion];
+            const feedback = document.getElementById('feedback');
+            const options = document.querySelectorAll('.option-btn');
+
+            options.forEach(option => option.disabled = true);
+            options[question.correct].classList.add('correct');
+
+            if (selectedIndex === question.correct) {
+                score += 10;
+                feedback.className = 'feedback-message success-message';
+                feedback.textContent = '¡Correcto! +10 puntos';
+            } else {
+                options[selectedIndex].classList.add('incorrect');
+                feedback.className = 'feedback-message error-message';
+                feedback.textContent = 'Incorrecto. La respuesta correcta está marcada en verde.';
+            }
+
+            feedback.style.display = 'block';
+            document.getElementById('nextQuestion').style.display = 'block';
+            document.getElementById('score').textContent = score;
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < quizQuestions.length) {
+                initQuizGame();
+            } else {
+                const quizCard = document.querySelector('.quiz-card');
+                quizCard.innerHTML = `
+                    <h3>¡Quiz completado!</h3>
+                    <p>Puntuación final: ${score} de ${quizQuestions.length * 10}</p>
+                    <button class="btn btn-primary" onclick="resetQuiz()">Reiniciar Quiz</button>
+                `;
+            }
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            initQuizGame();
+        }
+
+        // Reto del Ahorro
+        const savingsGoalAmount = 5000000;
+        let currentSavingsAmount = 0;
+        const savingsTipsList = [
+            "Establece metas de ahorro específicas y alcanzables",
+            "Crea un presupuesto mensual y síguelo",
+            "Ahorra automáticamente un porcentaje de tus ingresos",
+            "Reduce gastos innecesarios",
+            "Compara precios antes de comprar"
+        ];
+
+        function initSavingsGame() {
+            updateSavingsProgress();
+            const tipsList = document.getElementById('savingsTips');
+            tipsList.innerHTML = savingsTipsList.map(tip => `<li>${tip}</li>`).join('');
+        }
+
+        function addSavings() {
+            const input = document.getElementById('savingsInput');
+            const amount = parseFloat(input.value);
+
+            if (isNaN(amount) || amount <= 0) {
+                alert('Por favor ingresa una cantidad válida');
+                return;
+            }
+
+            currentSavingsAmount += amount;
+            input.value = '';
+            updateSavingsProgress();
+
+            if (currentSavingsAmount >= savingsGoalAmount) {
+                alert('¡Felicitaciones! Has alcanzado tu meta de ahorro');
+            }
+        }
+
+        function updateSavingsProgress() {
+            const percentage = (currentSavingsAmount / savingsGoalAmount) * 100;
+            document.getElementById('currentSavings').textContent = currentSavingsAmount.toFixed(2);
+            document.querySelector('#savingsGame .progress-bar').style.width = `${Math.min(percentage, 100)}%`;
+        }
+
+        // Inicialización de todos los juegos
+        document.addEventListener('DOMContentLoaded', function () {
+            initMarketGame();
+            initBudgetGame();
+            initQuizGame();
+            initSavingsGame();
+
+            // Event listeners
+            document.getElementById('nextQuestion').addEventListener('click', nextQuestion);
+        });
+    </script>
+</body>
+
+</html>

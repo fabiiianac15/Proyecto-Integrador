@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos EduFinanzas</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/11905/11905690.png">
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #0d47a1;
+            --accent-color: #00c853;
+            --text-color: #37474f;
+            --light-bg: #f5f7fa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+        }
+
+        .main-header {
+            background: linear-gradient(90deg, #002bba, #3367af);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+            box-shadow: var(--card-shadow);
+        }
+
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.95), rgba(13, 71, 161, 0.9)), url('/api/placeholder/1920/800');
+            background-size: cover;
+            background-position: center;
+            padding: 160px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: white;
+            transform: skewY(-3deg);
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .display-4 {
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .lead {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            border: none;
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #00b34a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.4);
+        }
+
+        .course-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .course-card .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .price-tag {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            box-shadow: 0 10px 20px rgba(26, 35, 126, 0.2);
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+            box-shadow: none;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(26, 35, 126, 0.1);
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin: 1rem 0;
+        }
+        .small-img {
+        width: 50px; 
+        height: 50px;
+    }
+
+        .stats-container {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 4rem 0;
+            color: white;
+            margin: 4rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1 class="text-center mb-0">
+                <i class="fas fa-book-open me-3"></i>
+                Cursos EduFinanzas
+            </h1>
+            <p class="text-center mt-3 mb-0 text-white-50">Aprende finanzas de manera divertida e interactiva</p>
+        </div>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-text">
+                    <h1 class="display-4 text-white">Construye tu futuro financiero</h1>
+                    <p class="lead text-white mb-4">Domina las habilidades financieras esenciales con expertos de la
+                        industria y únete a una comunidad de más de 10,000 estudiantes.</p>
+                    <div class="d-flex gap-3">
+                        <button class="btn btn-primary btn-lg">
+                            Comenzar Ahora
+                            <i class="fas fa-arrow-right ms-2"></i>
+                        </button>
+                        <button class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-play me-2"></i>
+                            Ver Demo
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-1.2.1" alt="Educación Financiera" class="img-fluid floating-element">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estadísticas -->
+    <section class="stats-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">10K+</div>
+                        <div>Estudiantes Activos</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div>Tasa de Satisfacción</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div>Cursos Especializados</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div>Expertos Instructores</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cursos -->
+    <section id="cursos" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h6 class="text-primary text-uppercase fw-bold">Nuestros Cursos</h6>
+                <h2 class="display-5 fw-bold mb-3">Programas Diseñados para tu Éxito</h2>
+                <p class="lead text-muted">Elige entre nuestra selección de cursos especializados y comienza tu viaje
+                    hacia la libertad financiera.</p>
+            </div>
+            <div class="row g-4">
+                <!-- Curso 1 -->
+                <div class="col-md-4">
+                    <div class="course-card card h-100">
+                        <img src="https://escuela.potenciaempresas.cl/wp-content/uploads/2023/04/curso-inversion-basica.png" class="card-img-top" alt="Inversiones básicas">
+                        <span class="price-tag">$199 USD</span>
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="badge bg-primary me-2">Básico</span>
+                                <span class="text-muted"><i class="fas fa-users me-2"></i>2,431 estudiantes</span>
+                            </div>
+                            <h5 class="card-title fw-bold">Inversiones Básicas</h5>
+                            <p class="card-text">Domina los fundamentos de la inversión y construye un portafolio sólido
+                                desde cero.</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>10 módulos
+                                    prácticos</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>20 horas de
+                                    contenido</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Certificado
+                                    incluido</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Acceso de por vida
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary w-100">Inscribirme Ahora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Curso 2 -->
+                <div class="col-md-4">
+                    <div class="course-card card h-100">
+                        <img src="https://soymarite.com/wp-content/uploads/2023/01/Gris-Claro-Azul-Oscuro-Y-Oro-Moderno-Agencia-de-Marketing-Empresarial-Instagram-Post.png" class="card-img-top" alt="Presupuesto personal">
+                        <span class="price-tag">$149 USD</span>
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="badge bg-primary me-2">Básico</span>
+                                <span class="text-muted"><i class="fas fa-users me-2"></i>1,847 estudiantes</span>
+                            </div>
+                            <h5 class="card-title fw-bold">Presupuesto Personal</h5>
+                            <p class="card-text">Aprende a gestionar tus finanzas personales y alcanza tus metas
+                                financieras.</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>8 módulos
+                                    prácticos</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>15 horas de
+                                    contenido</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Plantillas Excel
+                                </li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Soporte continuo
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary w-100">Inscribirme Ahora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Curso 3 -->
+                <div class="col-md-4">
+                    <div class="course-card card h-100">
+                        <img src="https://m.media-amazon.com/images/I/71x8F5qpS0L._UF1000,1000_QL80_.jpg" class="card-img-top" alt="Trading avanzado">
+                        <span class="price-tag">$299 USD</span>
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="badge bg-primary me-2">Avanzado</span>
+                                <span class="text-muted"><i class="fas fa-users me-2"></i>1,234 estudiantes</span>
+                            </div>
+                            <h5 class="card-title fw-bold">Trading Avanzado</h5>
+                            <p class="card-text">Domina las estrategias avanzadas de trading y análisis técnico
+                                profesional.</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>12 módulos
+                                    intensivos</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>30 horas de
+                                    contenido</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Mentoría
+                                    personalizada</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Casos prácticos
+                                    reales</li>
+                            </ul>
+                            <button class="btn btn-primary w-100">Inscribirme Ahora</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Por qué elegirnos -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h6 class="text-primary text-uppercase fw-bold">Ventajas</h6>
+                <h2 class="display-5 fw-bold mb-3">¿Por qué elegirnos?</h2>
+                <p class="lead text-muted">Descubre lo que nos hace diferentes y por qué somos tu mejor opción en
+                    educación financiera</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card border-0 bg-transparent">
+                        <div class="card-body text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h4 class="mb-3">Plataforma Interactiva</h4>
+                            <p class="text-muted">Aprende a tu ritmo con nuestra plataforma moderna y fácil de usar,
+                                accesible desde cualquier dispositivo.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 bg-transparent">
+                        <div class="card-body text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h4 class="mb-3">Instructores Expertos</h4>
+                            <p class="text-muted">Aprende de profesionales con años de experiencia en el mercado
+                                financiero internacional.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 bg-transparent">
+                        <div class="card-body text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h4 class="mb-3">Certificación Reconocida</h4>
+                            <p class="text-muted">Obtén certificados avalados por las principales instituciones
+                                financieras del sector.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h6 class="text-primary text-uppercase fw-bold">Testimonios</h6>
+                <h2 class="display-5 fw-bold mb-3">Lo que dicen nuestros estudiantes</h2>
+                <p class="lead text-muted">Historias reales de éxito de nuestra comunidad</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://b2472105.smushcdn.com/2472105/wp-content/uploads/2023/09/Poses-Perfil-Profesional-Mujeres-ago.-10-2023-1-819x1024.jpg?lossy=1&strip=1&webp=1" class="rounded-circle me-3 small-img" alt="Testimonio">
+                            <div>
+                                <h5 class="mb-0">María González</h5>
+                                <small class="text-muted">Inversora Independiente</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"Los cursos de Academia Financiera transformaron mi visión sobre las
+                            inversiones. Ahora gestiono mi portafolio con confianza y resultados positivos."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://vivolabs.es/wp-content/uploads/2022/03/perfil-hombre-vivo.png" class="rounded-circle me-3 small-img" alt="Testimonio">
+                            <div>
+                                <h5 class="mb-0">Carlos Rodríguez</h5>
+                                <small class="text-muted">Emprendedor</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"Gracias a los conocimientos adquiridos, pude mejorar la gestión financiera de
+                            mi negocio y aumentar la rentabilidad significativamente."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://vivolabs.es/wp-content/uploads/2022/03/perfil-mujer-vivo.png" class="rounded-circle me-3 small-img" alt="Testimonio">
+                            <div>
+                                <h5 class="mb-0">Ana Martínez</h5>
+                                <small class="text-muted">Trader Profesional</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"El programa de trading avanzado me dio las herramientas necesarias para dar el
+                            salto profesional. La mentoría personalizada fue clave."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">EduFinanzas</h4>
+                    <p class="mb-4">Transformando la educación financiera con cursos de calidad y expertos del sector.
+                    </p>
+                    <div class="social-links mb-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h5 class="mb-4">Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Inicio</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Cursos</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Sobre Nosotros</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5 class="mb-4">Cursos Populares</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Inversiones Básicas</a>
+                        </li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Trading Avanzado</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Gestión de Portafolio</a>
+                        </li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Análisis Técnico</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5 class="mb-4">Contacto</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@academiafinanciera.com</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +1 234 567 890</li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Ciudad Financiera, País</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-md-0">&copy; 2024 EduFinanzas. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white text-decoration-none me-3">Términos y Condiciones</a>
+                    <a href="#" class="text-white text-decoration-none">Política de Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

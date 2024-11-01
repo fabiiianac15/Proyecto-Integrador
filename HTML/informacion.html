@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info EduFinanzas </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/CSS/styleInfor.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/11905/11905690.png">
+</head>
+
+<body>
+    <!-- Navbar mejorado -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-chart-line me-2"></i>EduFinanzas
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#cursos">Cursos Financieros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#recursos">Recursos Educativos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#asesoria">Asesoría Personal</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="profile-avatar">
+                                <img src="https://w7.pngwing.com/pngs/669/415/png-transparent-roblox-corporation-wikia-avatar-others-thumbnail.png"
+                                    alt="Usuario" class="rounded-circle">
+                            </div>
+                            <span class="ms-2">Mi Perfil</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="#perfil"><i class="fas fa-user me-2"></i>Ver Perfil</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#progreso"><i class="fas fa-chart-bar me-2"></i>Mi
+                                    Progreso</a></li>
+                            <li><a class="dropdown-item" href="#config"><i class="fas fa-cog me-2"></i>Configuración</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="login.html"><i
+                                        class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <!-- Hero Section mejorado -->
+    <section class="hero-section" id="inicio">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content text-white">
+                    <h1 class="hero-title mb-4">Domina tus Finanzas</h1>
+                    <p class="lead mb-4">Aprende a gestionar, invertir y hacer crecer tu dinero con nuestros expertos
+                        financieros. Transforma tu futuro financiero hoy.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#cursos" class="btn btn-light btn-lg">Explorar Cursos</a>
+                        <a href="#asesoria" class="btn btn-outline-light btn-lg">Obtener Asesoría</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-1.2.1"
+                        alt="Educación Financiera" class="img-fluid rounded-3 shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Ahorro -->
+    <section class="py-5" id="ahorro">
+        <div class="container">
+            <h2 class="text-center section-title mb-5">Ahorro</h2>
+            <p>Ahorrar es el primer paso para construir un futuro financiero sólido. Conoce las razones clave para
+                ahorrar, aprende sobre métodos de ahorro como el 50/30/20, y explora diferentes tipos de cuentas para
+                maximizar tus ahorros.</p>
+            <ul>
+                <li><b>Estabilidad Financiera</b>: Ahorrar permite afrontar gastos inesperados sin endeudarse.</li>
+                <li><b>Libertad Económica</b>: Un fondo de ahorro brinda opciones y oportunidades sin depender de
+                    terceros.</li>
+                <li><b>Métodos de Ahorro</b>: Aprende métodos efectivos como el "pago a ti mismo primero" y el ahorro
+                    automático.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Sección de Inversión -->
+    <section class="py-5 bg-light" id="inversion">
+        <div class="container">
+            <h2 class="text-center section-title mb-5">Inversión</h2>
+            <p>La inversión es clave para hacer crecer tu dinero con el tiempo. Explora opciones como acciones, bonos,
+                bienes raíces y criptomonedas, y aprende a diversificar tu portafolio para reducir riesgos y aumentar
+                rendimientos.</p>
+            <ul>
+                <li><b>Protección contra la Inflación</b>: Invierte para que tu dinero no pierda valor a lo largo del
+                    tiempo.</li>
+                <li><b>Flexibilidad Financiera</b>: Invertir te permite optar por la independencia económica a largo
+                    plazo.</li>
+                <li><b>Diversificación</b>: Descubre las opciones de inversión que mejor se adapten a tu perfil.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Sección de Presupuesto -->
+    <section class="py-5" id="presupuesto">
+        <div class="container">
+            <h2 class="text-center section-title mb-5">Presupuesto</h2>
+            <p>El presupuesto es la base de cualquier plan financiero exitoso. Aprende a planificar tus gastos, asignar
+                límites y definir objetivos financieros para mantener tus finanzas bajo control.</p>
+            <ul>
+                <li><b>Definición de Prioridades</b>: Asigna tus ingresos en base a necesidades, deseos y ahorro.</li>
+                <li><b>Seguimiento de Gastos</b>: Conoce a detalle tus gastos para mantener tu presupuesto equilibrado.
+                </li>
+                <li><b>Ejemplos Prácticos</b>: Plantillas y herramientas para construir tu presupuesto mensual.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Blog Educativo -->
+    <section class="py-5 bg-light" id="blog">
+        <div class="container">
+            <h2 class="text-center section-title mb-5">Blog Educativo</h2>
+            <p class="text-center">Descubre artículos, guías y noticias sobre el mundo de las finanzas personales y la
+                economía global.</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card feature-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Estrategias para la jubilación</h5>
+                            <p class="card-text">Aprende cómo asegurar una jubilación cómoda mediante inversiones y
+                                ahorros.</p>
+                            <a href="#" class="btn btn-outline-primary">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Fondos de inversión y ETFs</h5>
+                            <p class="card-text">Conoce las ventajas de invertir en fondos de inversión para
+                                diversificar tu portafolio.</p>
+                            <a href="#" class="btn btn-outline-primary">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Uso responsable de las tarjetas de crédito</h5>
+                            <p class="card-text">Evita las deudas y aprende a utilizar tu tarjeta de crédito de manera
+                                inteligente.</p>
+                            <a href="#" class="btn btn-outline-primary">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Sección de FAQs -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 class="text-center section-title">Preguntas Frecuentes</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                            <svg class="faq-icon" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+                            </svg>
+                            ¿Por qué es importante ahorrar?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>El ahorro es fundamental por varias razones:</p>
+                            <ul>
+                                <li>Permite crear un fondo de emergencia para imprevistos</li>
+                                <li>Ayuda a alcanzar metas financieras sin depender de deudas</li>
+                                <li>Proporciona seguridad financiera a largo plazo</li>
+                                <li>Genera tranquilidad emocional y reduce el estrés financiero</li>
+                                <li>Permite aprovechar oportunidades de inversión</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            <svg class="faq-icon" viewBox="0 0 24 24">
+                                <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                            </svg>
+                            ¿Qué tipos de inversión existen?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>Existen diversos tipos de inversiones, cada una con diferentes niveles de riesgo y rendimiento:</p>
+                            <ul>
+                                <li><strong>Renta Fija:</strong> Bonos gubernamentales, corporativos, CDTs</li>
+                                <li><strong>Renta Variable:</strong> Acciones, ETFs, fondos mutuos</li>
+                                <li><strong>Bienes Raíces:</strong> Propiedades, REITs, crowdfunding inmobiliario</li>
+                                <li><strong>Alternativos:</strong> Criptomonedas, materias primas, arte</li>
+                                <li><strong>Emprendimiento:</strong> Negocios propios, startups</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                            <svg class="faq-icon" viewBox="0 0 24 24">
+                                <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
+                            </svg>
+                            ¿Cómo empezar a invertir?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>Para comenzar a invertir, sigue estos pasos básicos:</p>
+                            <ol>
+                                <li>Establece tus objetivos financieros y horizonte temporal</li>
+                                <li>Aprende sobre los diferentes instrumentos de inversión</li>
+                                <li>Evalúa tu tolerancia al riesgo</li>
+                                <li>Diversifica tu portafolio</li>
+                                <li>Comienza con pequeñas cantidades</li>
+                                <li>Mantén un seguimiento regular de tus inversiones</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Sección de Asesoría -->
+    <section class="py-5 bg-light" id="asesoria">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Asesoría Personalizada</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <img src="https://img.freepik.com/foto-gratis/increible-mujer-negocios-alegre-pie-brazos-cruzados_171337-8487.jpg"
+                        alt="Asesoría Financiera" class="img-fluid rounded-3 shadow-lg">
+                </div>
+                <div class="col-lg-6">
+                    <div class="ps-lg-4">
+                        <h3 class="mb-4">Obtén guía experta para tus finanzas</h3>
+                        <div class="mb-4">
+                            <h5><i class="fas fa-check-circle text-primary me-2"></i>Diagnóstico Financiero</h5>
+                            <p>Análisis completo de tu situación financiera actual y objetivos futuros.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h5><i class="fas fa-check-circle text-primary me-2"></i>Plan Personalizado</h5>
+                            <p>Estrategias adaptadas a tus metas específicas y tolerancia al riesgo.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h5><i class="fas fa-check-circle text-primary me-2"></i>Seguimiento Continuo</h5>
+                            <p>Monitoreo regular de tu progreso y ajustes según sea necesario.</p>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-lg">Agendar Consulta</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Blog -->
+    <section class="py-5 bg-light" id="blog">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Blog Financiero</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <img src="https://www.finect.com/image/254ca92df54d4c2f9a635a8ec6e341ad" alt="Blog 1" class="card-img-top">
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">Inversiones</span>
+                            <h5 class="card-title">Cómo empezar a invertir con poco capital</h5>
+                            <p class="card-text">Descubre estrategias efectivas para comenzar tu cartera de inversiones
+                                con un presupuesto limitado.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">5 min de lectura</small>
+                                <a href="#" class="btn btn-link">Leer más →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <img src="https://i0.wp.com/blog.kubofinanciero.com/wp-content/uploads/2021/11/Consejos-para-ha%CC%81bitos-de-ahorro-y-gasto-inteligente-scaled.jpg?fit=2560%2C1331&ssl=1" alt="Blog 2" class="card-img-top">
+                        <div class="card-body">
+                            <span class="badge bg-success mb-2">Ahorro</span>
+                            <h5 class="card-title">10 hábitos de ahorro efectivos</h5>
+                            <p class="card-text">Implementa estos hábitos probados para maximizar tus ahorros sin
+                                sacrificar tu calidad de vida.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">7 min de lectura</small>
+                                <a href="#" class="btn btn-link">Leer más →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <img src="https://i.ytimg.com/vi/uTRLHoJsDOY/maxresdefault.jpg" alt="Blog 3" class="card-img-top">
+                        <div class="card-body">
+                            <span class="badge bg-warning mb-2">Emprendimiento</span>
+                            <h5 class="card-title">Finanzas claves para tu startup</h5>
+                            <p class="card-text">Gestiona efectivamente las finanzas de tu startup desde el día uno con
+                                estos consejos expertos.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">6 min de lectura</small>
+                                <a href="#" class="btn btn-link">Leer más →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mb-4">¿Listo para transformar tus finanzas?</h2>
+                    <p class="lead mb-4">Únete a nuestra comunidad de más de 50,000 estudiantes que están construyendo
+                        su libertad financiera.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="#" class="btn btn-light btn-lg">Comenzar Gratis</a>
+                        <a href="#" class="btn btn-outline-light btn-lg">Ver Planes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Mejorado -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Sobre EduFinanzas</h5>
+                    <p>Transformamos vidas a través de la educación financiera, brindando las herramientas y
+                        conocimientos necesarios para alcanzar la libertad financiera.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h5 class="mb-4">Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Inicio</a></li>
+                        <li><a href="#" class="text-white-50">Cursos</a></li>
+                        <li><a href="#" class="text-white-50">Blog</a></li>
+                        <li><a href="#" class="text-white-50">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5 class="mb-4">Recursos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Calculadoras</a></li>
+                        <li><a href="#" class="text-white-50">Guías PDF</a></li>
+                        <li><a href="#" class="text-white-50">Webinars</a></li>
+                        <li><a href="#" class="text-white-50">Podcast</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Boletín Informativo</h5>
+                    <p>Suscríbete para recibir consejos financieros y novedades.</p>
+                    <form class="mb-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Tu correo electrónico">
+                            <button class="btn btn-light" type="submit">Suscribirse</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center text-white-50">
+                <p>&copy; 2024 EduFinanzas. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

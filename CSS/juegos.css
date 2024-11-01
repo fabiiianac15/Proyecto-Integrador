@@ -1,0 +1,179 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --success-color: #27ae60;
+    --danger-color: #e74c3c;
+    --light-bg: #ecf0f1;
+    --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--light-bg) 0%, #fff 100%);
+    min-height: 100vh;
+}
+
+.main-header {
+    background: linear-gradient(90deg, #002bba, #3367af);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 3rem;
+    box-shadow: var(--card-shadow);
+}
+
+.game-container {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin: 2rem 0;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.nav-pills .nav-link {
+    color: var(--primary-color);
+    border-radius: 10px;
+    padding: 1rem 2rem;
+    margin: 0 0.5rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-pills .nav-link.active {
+    background: linear-gradient(135deg, var(--accent-color) 0%, #2980b9 100%);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.stock-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 2px solid transparent;
+}
+
+.stock-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border-color: var(--accent-color);
+}
+
+.portfolio-card {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.budget-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 1rem 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.budget-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2.5rem;
+    margin: 1rem 0;
+    box-shadow: var(--card-shadow);
+}
+
+.option-btn {
+    width: 100%;
+    text-align: left;
+    padding: 1.2rem;
+    margin: 0.8rem 0;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    background: white;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.option-btn:hover {
+    background: var(--light-bg);
+    transform: translateX(8px);
+    border-color: var(--accent-color);
+}
+
+.savings-goal {
+    background: linear-gradient(135deg, var(--accent-color) 0%, #2980b9 100%);
+    color: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    margin: 1rem 0;
+    box-shadow: var(--card-shadow);
+}
+
+.progress {
+    height: 1.5rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    margin-top: 1rem;
+}
+
+.progress-bar {
+    background: linear-gradient(to right, var(--success-color), #2ecc71);
+    border-radius: 1rem;
+    transition: width 0.5s ease;
+}
+
+.game-title {
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+    font-size: 2.2rem;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+}
+
+.btn-success,
+.btn-danger {
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--success-color) 0%, #2ecc71 100%);
+    border: none;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, var(--danger-color) 0%, #c0392b 100%);
+    border: none;
+}
+
+.statistics-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin: 1rem 0;
+    border-left: 5px solid var(--accent-color);
+}
+
+.feedback-message {
+    padding: 1.2rem;
+    border-radius: 12px;
+    margin-top: 1.5rem;
+    font-weight: 500;
+}

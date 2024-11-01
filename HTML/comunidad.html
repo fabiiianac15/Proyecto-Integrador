@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EdiFinanzas Comunidad</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/11905/11905690.png">
+    <link rel="stylesheet" href="/CSS/comunidad.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-chart-line me-2"></i>EduFinanzas
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="cursos.html">Nuestra Comunidad</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="informacion.html">Eventos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="informacion.html">Miembros</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="profile-avatar">
+                                <img src="https://w7.pngwing.com/pngs/669/415/png-transparent-roblox-corporation-wikia-avatar-others-thumbnail.png"
+                                    alt="Usuario" class="rounded-circle">
+                            </div>
+                            <span class="ms-2">Mi Perfil</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="wallet.html"><i class="fas fa-user me-2"></i>Ver
+                                    Perfil</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#progreso"><i class="fas fa-chart-bar me-2"></i>Mi
+                                    Progreso</a></li>
+                            <li><a class="dropdown-item" href="#config"><i class="fas fa-cog me-2"></i>Configuración</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="login.html"><i
+                                        class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 mb-4">Bienvenido a tu comunidad financiera</h1>
+            <p class="lead mb-4">Un espacio donde compartimos conocimiento, crecemos juntos y nos apoyamos mutuamente
+            </p>
+            <button class="btn btn-light btn-lg px-4">Unirme a la comunidad</button>
+        </div>
+    </section>
+
+    <!-- Actividad Reciente -->
+    <section class="py-5" id="actividad">
+        <div class="container">
+            <h2 class="mb-4">Actividad Reciente</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="activity-item">
+                        <h5>Ana compartió su experiencia de inversión</h5>
+                        <p>¡Mi primera inversión en bolsa fue todo un éxito! Gracias por los consejos...</p>
+                        <small class="text-muted">Hace 2 horas · 15 comentarios</small>
+                    </div>
+                    <div class="activity-item">
+                        <h5>Nuevo grupo de estudio: Criptomonedas</h5>
+                        <p>Carlos ha creado un nuevo grupo para principiantes en crypto...</p>
+                        <small class="text-muted">Hace 4 horas · 8 miembros unidos</small>
+                    </div>
+                    <div class="activity-item">
+                        <h5>Debate: Inversión en bienes raíces</h5>
+                        <p>¿Cuál es el mejor momento para invertir en propiedades?...</p>
+                        <small class="text-muted">Hace 6 horas · 32 participantes</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card community-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Miembros Online</h5>
+                            <div class="d-flex flex-wrap gap-2 mb-3">
+                                <img src="https://via.placeholder.com/60" alt="Miembro" class="member-avatar">
+                                <img src="https://via.placeholder.com/60" alt="Miembro" class="member-avatar">
+                                <img src="https://via.placeholder.com/60" alt="Miembro" class="member-avatar">
+                                <img src="https://via.placeholder.com/60" alt="Miembro" class="member-avatar">
+                            </div>
+                            <p class="mb-0">+45 miembros activos ahora</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Próximos Eventos -->
+    <section class="bg-light py-5" id="eventos">
+        <div class="container">
+            <h2 class="mb-4">Próximos Eventos de la Comunidad</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card event-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Sesión de Trading en Vivo</h5>
+                            <p class="card-text">Análisis de mercado en tiempo real con nuestros expertos.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Mañana · 18:00</small>
+                                <span class="badge bg-primary">32 asistentes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card event-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Encuentro de Inversores</h5>
+                            <p class="card-text">Comparte experiencias y networking con otros miembros.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Viernes · 19:00</small>
+                                <span class="badge bg-primary">45 asistentes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grupos de la Comunidad -->
+    <section class="py-5" id="grupos">
+        <div class="container">
+            <h2 class="mb-4">Grupos Activos</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card community-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Inversores Principiantes</h5>
+                            <p class="card-text">Aprende los fundamentos de la inversión con otros miembros.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>156 miembros</span>
+                                <button class="btn btn-outline-primary btn-sm">Unirme</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card community-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Trading Diario</h5>
+                            <p class="card-text">Comparte estrategias y análisis de trading en tiempo real.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>98 miembros</span>
+                                <button class="btn btn-outline-primary btn-sm">Unirme</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card community-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Inversión a Largo Plazo</h5>
+                            <p class="card-text">Estrategias y discusiones sobre inversiones a largo plazo.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>203 miembros</span>
+                                <button class="btn btn-outline-primary btn-sm">Unirme</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Miembros Destacados -->
+    <section class="bg-light py-5" id="miembros">
+        <div class="container">
+            <h2 class="mb-4">Miembros Destacados</h2>
+            <div class="members-grid">
+                <div class="member-preview">
+                    <img src="https://via.placeholder.com/80" alt="Miembro">
+                    <h6 class="mb-0">Carlos R.</h6>
+                    <small class="text-muted">Mentor Principal</small>
+                </div>
+                <div class="member-preview">
+                    <img src="https://via.placeholder.com/80" alt="Miembro">
+                    <h6 class="mb-0">Ana M.</h6>
+                    <small class="text-muted">Top Contribuidor</small>
+                </div>
+                <div class="member-preview">
+                    <img src="https://via.placeholder.com/80" alt="Miembro">
+                    <h6 class="mb-0">Luis P.</h6>
+                    <small class="text-muted">Experto Crypto</small>
+                </div>
+                <div class="member-preview">
+                    <img src="https://via.placeholder.com/80" alt="Miembro">
+                    <h6 class="mb-0">María G.</h6>
+                    <small class="text-muted">Analista Senior</small>
+                </div>
+                <div class="member-preview">
+                    <img src="https://via.placeholder.com/80" alt="Miembro">
+                    <h6 class="mb-0">Pedro S.</h6>
+                    <small class="text-muted">Trader Experto</small>
+                </div>
+                <div class="member-preview">
+                    <img src="https://via.placeholder.com/80" alt="Miembro">
+                    <h6 class="mb-0">Laura B.</h6>
+                    <small class="text-muted">Mentora</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estadísticas de la Comunidad -->
+    <section class="community-stats">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-3 col-6 mb-4 mb-md-0">
+                    <h3 class="display-4 fw-bold">1.2k</h3>
+                    <p class="mb-0">Miembros activos</p>
+                </div>
+                <div class="col-md-3 col-6 mb-4 mb-md-0">
+                    <h3 class="display-4 fw-bold">15</h3>
+                    <p class="mb-0">Grupos de estudio</p>
+                </div>
+                <div class="col-md-3 col-6">
+                    <h3 class="display-4 fw-bold">45</h3>
+                    <p class="mb-0">Eventos mensuales</p>
+                </div>
+                <div class="col-md-3 col-6">
+                    <h3 class="display-4 fw-bold">500+</h3>
+                    <p class="mb-0">Discusiones activas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <h5>Comunidad EduFinanzas</h5>
+                    <p>Un espacio para crecer juntos en el mundo financiero.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <h5>Síguenos</h5>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-telegram social-icon"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-discord social-icon"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-whatsapp social-icon"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Join Button -->
+    <a href="#" class="join-floating">Únete a la Comunidad</a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edufinanzas Metas</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/11905/11905690.png">
+    <link rel="stylesheet" href="/CSS/metas.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-4">Tus Metas Financieras</h1>
+                    <p class="lead">Traza tu camino hacia la libertad financiera con objetivos claros y medibles</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Progress Overview -->
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4">Tu Progreso General</h2>
+                <div class="progress">
+                    <div class="progress-bar bg-success" id="overall-progress" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Goals Cards -->
+        <div class="row" id="goals-container">
+            <!-- Las tarjetas se generarán dinámicamente -->
+        </div>
+
+        <!-- Add New Goal Button -->
+        <div class="row mt-4 mb-5">
+            <div class="col text-center">
+                <button class="btn btn-lg btn-custom" data-bs-toggle="modal" data-bs-target="#newGoalModal">
+                    <i class="fas fa-plus-circle me-2"></i>Añadir Nueva Meta
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Nueva Meta -->
+    <div class="modal fade" id="newGoalModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crear Nueva Meta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newGoalForm">
+                        <div class="mb-3">
+                            <label class="form-label">Título de la Meta</label>
+                            <input type="text" class="form-control" id="goalTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Cantidad Objetivo</label>
+                            <input type="number" class="form-control" id="goalAmount" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tipo de Meta</label>
+                            <select class="form-select" id="goalType">
+                                <option value="savings">Ahorro</option>
+                                <option value="education">Educación</option>
+                                <option value="investment">Inversión</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-custom" onclick="createNewGoal()">Crear Meta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Actualizar Progreso -->
+    <div class="modal fade" id="updateProgressModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Actualizar Progreso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateProgressForm">
+                        <div class="mb-3">
+                            <label class="form-label">Progreso Actual</label>
+                            <input type="number" class="form-control" id="currentProgress" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-custom" onclick="updateGoalProgress()">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast para notificaciones -->
+    <div class="toast-container">
+        <div class="toast" role="alert" id="notificationToast">
+            <div class="toast-header">
+                <strong class="me-auto">Notificación</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="toastMessage"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Estado global de la aplicación
+        let goals = [
+            {
+                id: 1,
+                title: 'Fondo de Emergencia',
+                type: 'savings',
+                target: 10000,
+                current: 7500,
+                icon: 'piggy-bank'
+            },
+            {
+                id: 2,
+                title: 'Educación Financiera',
+                type: 'education',
+                target: 12,
+                current: 6,
+                icon: 'graduation-cap'
+            },
+            {
+                id: 3,
+                title: 'Inversiones',
+                type: 'investment',
+                target: 5000,
+                current: 1500,
+                icon: 'chart-line'
+            }
+        ];
+
+        let selectedGoalId = null;
+
+        // Función para mostrar notificaciones
+        function showNotification(message) {
+            const toastEl = document.getElementById('notificationToast');
+            document.getElementById('toastMessage').textContent = message;
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        }
+
+        // Función para calcular el progreso general
+        function calculateOverallProgress() {
+            const total = goals.reduce((acc, goal) => {
+                return acc + (goal.current / goal.target);
+            }, 0);
+            const average = (total / goals.length) * 100;
+            return Math.round(average);
+        }
+
+        // Función para actualizar el progreso general en la UI
+        function updateOverallProgress() {
+            const progress = calculateOverallProgress();
+            const progressBar = document.getElementById('overall-progress');
+            progressBar.style.width = `${progress}%`;
+            progressBar.textContent = `${progress}%`;
+        }
+
+        // Función para generar el mensaje de logro
+        function getAchievementMessage(percentage) {
+            if (percentage >= 100) return '¡Meta alcanzada!';
+            if (percentage >= 75) return '¡Ya casi lo logras!';
+            if (percentage >= 50) return '¡Vas por buen camino!';
+            return '¡Buen comienzo!';
+        }
+
+        // Función para renderizar las tarjetas de metas
+        function renderGoals() {
+            const container = document.getElementById('goals-container');
+            container.innerHTML = '';
+
+            goals.forEach(goal => {
+                const progress = Math.round((goal.current / goal.target) * 100);
+                const achievementMessage = getAchievementMessage(progress);
+
+                const card = `
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card goal-card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-${goal.icon} goal-icon"></i>
+                                <h4 class="card-title">${goal.title}</h4>
+                                <p class="card-text">Meta: ${goal.type === 'education' ? goal.target + ' Cursos' : '$' + goal.target}</p>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar bg-success" role="progressbar" 
+                                         style="width: ${progress}%;" 
+                                         aria-valuenow="${progress}" 
+                                         aria-valuemin="0" 
+                                         aria-valuemax="100">${progress}%</div>
+                                </div>
+                                <button class="btn btn-custom" onclick="openUpdateProgress(${goal.id})">
+                                    Actualizar Progreso
+                                </button>
+                                <div class="achievement-badge">
+                                    ${achievementMessage}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+
+            updateOverallProgress();
+        }
+
+        // Función para crear una nueva meta
+        function createNewGoal() {
+            const title = document.getElementById('goalTitle').value;
+            const amount = Number(document.getElementById('goalAmount').value);
+            const type = document.getElementById('goalType').value;
+
+            if (!title || !amount) {
+                showNotification('Por favor completa todos los campos');
+                return;
+            }
+
+            const icons = {
+                savings: 'piggy-bank',
+                education: 'graduation-cap',
+                investment: 'chart-line'
+            };
+
+            const newGoal = {
+                id: goals.length + 1,
+                title,
+                type,
+                target: amount,
+                current: 0,
+                icon: icons[type]
+            };
+
+            goals.push(newGoal);
+            renderGoals();
+            
+            const modal = bootstrap.Modal.getInstance(document.getElementById('newGoalModal'));
+            modal.hide();
+            
+            document.getElementById('newGoalForm').reset();
+            showNotification('¡Nueva meta creada con éxito!');
+        }
+
+        // Función para abrir el modal de actualización de progreso
+        function openUpdateProgress(goalId) {
+            selectedGoalId = goalId;
+            const goal = goals.find(g => g.id === goalId);
+            document.getElementById('currentProgress').value = goal.current;
+            const modal = new bootstrap.Modal(document.getElementById('updateProgressModal'));
+            modal.show();
+        }
+
+        // Función para actualizar el progreso de una meta
+        function updateGoalProgress() {
+            const newProgress = Number(document.getElementById('currentProgress').value);
+            const goalIndex = goals.findIndex(g => g.id === selectedGoalId);
+            
+            if (goalIndex === -1) return;
+            
+            const goal = goals[goalIndex];
+            if (newProgress > goal.target) {
+                showNotification('El progreso no puede ser mayor que la meta');
+                return;
+            }
+
+            goals[goalIndex].current = newProgress;
+            renderGoals();
+            
+            const modal = bootstrap.Modal.getInstance(document.getElementById('updateProgressModal'));
+            modal.hide();
+            
+            showNotification('¡Progreso actualizado con éxito!');
+        }
+
+        // Inicializar la aplicación
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGoals();
+        });
+    </script>
+</body>
+</html>

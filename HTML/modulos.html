@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduFinanzas Modulos</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="/CSS/modulos.css">
+    <link rel="icon" href="/img/EduFinanzas.png" />
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar">
+                <h2 class="mb-4"><i class="fas fa-chart-line me-2"></i>EduFinanzas</h2>
+                <div class="profile-container">
+                    <div class="profile-wrapper">
+                        <img src="/img/Fabian.jpg" alt="Profile" class="profile-image">
+                    </div>
+                    <h5 class="profile-name">Pedrito el Financiero</h5>
+                    <p class="profile-email">pedrito123@gmail.com</p>
+                </div>
+                <nav class="mt-4">
+                    <div class="nav flex-column">
+                        <a class="nav-link active" href=""><i class="fas fa-book"></i>Mis Cursos</a>
+                        <a class="nav-link" href="#"><i class="fas fa-calendar"></i>Mi Calendario</a>
+                        <a class="nav-link" href="#"><i class="fas fa-chart-line"></i>Mi Progreso</a>
+                        <a class="nav-link" href="#"><i class="fas fa-question-circle"></i>Ayuda</a>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 p-0">
+                <div class="course-header">
+                    <div class="container">
+                        <div class="d-flex align-items-center mb-4">
+                            <a href="/HTML/index.html" class="text-white text-decoration-none me-3">
+                                <i class="fas fa-arrow-left"></i>
+                            </a>
+                            <h1 class="mb-0">Inversiones Básicas</h1>
+                        </div>
+                        <div class="stats-container">
+                            <div class="stat-card">
+                                <i class="fas fa-clock mb-2 text-primary fa-2x"></i>
+                                <h4>10 horas</h4>
+                                <p class="mb-0 text-muted">Duración total</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-book-open mb-2 text-success fa-2x"></i>
+                                <h4>15 lecciones</h4>
+                                <p class="mb-0 text-muted">Total de lecciones</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-chart-bar mb-2 text-info fa-2x"></i>
+                                <h4>30%</h4>
+                                <p class="mb-0 text-muted">Completado</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container py-4">
+                    <!-- Módulo 1 -->
+                    <div class="module-card">
+                        <div class="module-header" onclick="toggleModule(1)">
+                            <div class="d-flex align-items-center">
+                                <div class="module-icon">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <div>
+                                    <h3 class="mb-1">Módulo 1</h3>
+                                    <p class="text-muted mb-0">Introducción a las Inversiones</p>
+                                </div>
+                            </div>
+                            <span class="badge-custom">3 lecciones</span>
+                        </div>
+                        <div class="module-content" id="module1">
+                            <div class="lesson-item">
+                                <div class="progress-circle">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">¿Qué es invertir?</h5>
+                                    <p class="mb-0 text-muted">Duración: 20 min</p>
+                                </div>
+                            </div>
+                            <div class="lesson-item">
+                                <div class="progress-circle">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Tipos de inversiones</h5>
+                                    <p class="mb-0 text-muted">Duración: 30 min</p>
+                                </div>
+                            </div>
+                            <div class="lesson-item">
+                                <div class="progress-circle">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Perfil del inversor</h5>
+                                    <p class="mb-0 text-muted">Duración: 25 min</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 2 -->
+                    <div class="module-card">
+                        <div class="module-header" onclick="toggleModule(2)">
+                            <div class="d-flex align-items-center">
+                                <div class="module-icon">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                                <div>
+                                    <h3 class="mb-1">Módulo 2</h3>
+                                    <p class="text-muted mb-0">Instrumentos de Inversión</p>
+                                </div>
+                            </div>
+                            <span class="badge-custom">4 lecciones</span>
+                        </div>
+                        <div class="module-content" id="module2">
+                            <div class="lesson-item">
+                                <div class="progress-circle">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Acciones</h5>
+                                    <p class="mb-0 text-muted">Duración: 35 min</p>
+                                </div>
+                            </div>
+                            <div class="lesson-item">
+                                <div class="progress-circle">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Bonos</h5>
+                                    <p class="mb-0 text-muted">Duración: 30 min</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 3 -->
+                    <div class="module-card">
+                        <div class="module-header" onclick="toggleModule(3)">
+                            <div class="d-flex align-items-center">
+                                <div class="module-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div>
+                                    <h3 class="mb-1">Módulo 3</h3>
+                                    <p class="text-muted mb-0">Estrategias de Inversión</p>
+                                </div>
+                            </div>
+                            <span class="badge-custom">3 lecciones</span>
+                        </div>
+                        <div class="module-content" id="module3">
+                            <div class="lesson-item">
+                                <div class="progress-circle">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Análisis Fundamental</h5>
+                                    <p class="mb-0 text-muted">Duración: 45 min</p>
+                                </div>
+                            </div>
+                            <div class="lesson-item">
+                                <div class="progress-circle">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Análisis Técnico</h5>
+                                    <p class="mb-0 text-muted">Duración: 40 min</p>
+                                </div>
+                            </div>
+                            <div class="lesson-item">
+                                <div class="progress-circle">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Diversificación de Portafolio</h5>
+                                    <p class="mb-0 text-muted">Duración: 35 min</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Módulo 4 -->
+                    <div class="module-card">
+                        <div class="module-header" onclick="toggleModule(4)">
+                            <div class="d-flex align-items-center">
+                                <div class="module-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div>
+                                    <h3 class="mb-1">Módulo 4</h3>
+                                    <p class="text-muted mb-0">Gestión de Riesgos</p>
+                                </div>
+                            </div>
+                            <span class="badge-custom">2 lecciones</span>
+                        </div>
+                        <div class="module-content" id="module4">
+                            <div class="lesson-item">
+                                <div class="progress-circle">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Identificación de Riesgos</h5>
+                                    <p class="mb-0 text-muted">Duración: 30 min</p>
+                                </div>
+                            </div>
+                            <div class="lesson-item">
+                                <div class="progress-circle">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Estrategias de Mitigación</h5>
+                                    <p class="mb-0 text-muted">Duración: 35 min</p>
+                                </div>
+                            </div>
+                            <div class="lesson-item">
+                                <div class="progress-circle">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Control y Seguimiento de Riesgos</h5>
+                                    <p class="mb-0 text-muted">Duración: 25 min</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 5 -->
+                    <div class="module-card">
+                        <div class="module-header" onclick="toggleModule(5)">
+                            <div class="d-flex align-items-center">
+                                <div class="module-icon">
+                                    <i class="fas fa-map"></i>
+                                </div>
+                                <div>
+                                    <h3 class="mb-1">Módulo 5</h3>
+                                    <p class="text-muted mb-0">Planificación Financiera</p>
+                                </div>
+                            </div>
+                            <span class="badge-custom">3 lecciones</span>
+                        </div>
+                        <div class="module-content" id="module5">
+                            <div class="lesson-item">
+                                <div class="progress-circle">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Objetivos Financieros</h5>
+                                    <p class="mb-0 text-muted">Duración: 30 min</p>
+                                </div>
+                            </div>
+                            <div class="lesson-item">
+                                <div class="progress-circle">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Plan de Inversión Personal</h5>
+                                    <p class="mb-0 text-muted">Duración: 40 min</p>
+                                </div>
+                            </div>
+                            <div class="lesson-item">
+                                <div class="progress-circle">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Seguimiento y Ajustes del Plan</h5>
+                                    <p class="mb-0 text-muted">Duración: 35 min</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        function toggleModule(moduleNumber) {
+            const moduleContent = document.getElementById(`module${moduleNumber}`);
+            const allModules = document.querySelectorAll('.module-content');
+
+            // Cerrar otros módulos
+            allModules.forEach(module => {
+                if (module.id !== `module${moduleNumber}`) {
+                    module.classList.remove('active');
+                }
+            });
+
+            // Alternar el módulo seleccionado
+            moduleContent.classList.toggle('active');
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+:root {
+    --primary-color: #1a237e;
+    --secondary-color: #0d47a1;
+    --accent-color: #00c853;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.calendar-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 2rem 0;
+}
+
+.calendar-container {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.calendar-nav {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+}
+
+.calendar-nav h2 {
+    margin: 0;
+    font-weight: bold;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: #e0e0e0;
+    padding: 1px;
+}
+
+.calendar-day {
+    background-color: white;
+    padding: 1rem;
+    min-height: 100px;
+    transition: all 0.3s ease;
+}
+
+.calendar-day:hover {
+    background-color: #f0f0f0;
+}
+
+.calendar-day.today {
+    background-color: #e8f5e9;
+    font-weight: bold;
+}
+
+.calendar-day.has-event {
+    background-color: #e3f2fd;
+}
+
+.event {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.btn-custom {
+    background-color: var(--accent-color);
+    border: none;
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: #00a844;
+}

@@ -48,3 +48,29 @@ body {
     margin-bottom: 1rem;
 }
 
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+}
+.toast {
+    min-width: 200px;
+}
+.toast-success {
+    background-color: #28a745;
+    color: white;
+}
+.toast-error {
+    background-color: #dc3545;
+    color: white;
+}
+.toast-header {
+    color: white;
+}
+.toast-success .toast-header {
+    background-color: rgba(40, 167, 69, 0.85);
+}
+.toast-error .toast-header {
+    background-color: rgba(220, 53, 69, 0.85);
+}

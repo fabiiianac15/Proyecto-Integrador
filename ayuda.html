@@ -3,542 +3,611 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Centro de Ayuda - EduFinanzas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-    <link rel="icon" href="EduFinanzas.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Asistente Financiero | EduFinanzas</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="EduFinanzas.png">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
-        :root {
-            --primary-color: #1a237e;
-            --secondary-color: #0d47a1;
-            --accent-color: #00c853;
-            --text-color: #333333;
-            --bg-light: #f8f9fa;
-        }
-
         body {
-            font-family: "Arial", sans-serif;
-            color: var(--text-color);
-            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #000428, #004e92);
         }
 
-        .help-header {
-            background: linear-gradient(135deg,
-                    var(--primary-color),
-                    var(--secondary-color));
+        .chat-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            height: 85vh;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-header {
+            background: linear-gradient(45deg, #000428, #004e92);
             color: white;
-            padding: 3rem 0;
-        }
-
-        .search-input {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .nav-pills .nav-link.active {
-            background-color: var(--accent-color);
-        }
-
-        .nav-pills .nav-link {
-            color: var(--text-color);
-        }
-
-        .btn-custom {
-            background-color: var(--accent-color);
-            border: none;
-            color: white;
-        }
-
-        .btn-custom:hover {
-            background-color: #00a844;
-        }
-
-        .accordion-button:not(.collapsed) {
-            background-color: var(--accent-color);
-            color: white;
-        }
-
-        .chatbot {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background-color: var(--accent-color);
-            border-radius: 50%;
+            padding: 15px 20px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .chat-messages {
+            height: calc(100% - 180px);
+            overflow-y: auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .message {
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .message-content {
+            max-width: 80%;
+            padding: 15px;
+            border-radius: 15px;
+            position: relative;
+            color: white;
+        }
+
+        .bot-message .message-content {
+            background: linear-gradient(45deg, #000428, #004e92);
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-message .message-content {
+            background: linear-gradient(45deg, #004e92, #000428);
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-input {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            gap: 10px;
+            position: relative;
+        }
+
+        .chat-input textarea {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            resize: none;
+            font-family: inherit;
+            font-size: 0.95rem;
             transition: all 0.3s ease;
         }
 
-        .chatbot:hover {
-            transform: scale(1.1);
+        .chat-input textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
-        .chatbot-window {
-            display: none;
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 300px;
-            height: 400px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
+        .chat-input textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
         }
 
-        .chatbot-header {
-            background-color: var(--accent-color);
+        .chat-input button {
+            background: linear-gradient(45deg, #000428, #004e92);
             color: white;
-            padding: 10px;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+            border: none;
+            padding: 0 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .chatbot-body {
-            height: 310px;
-            overflow-y: auto;
+        .chat-input button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .suggestions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .suggestion-chip {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .suggestion-chip:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .suggestion-chip i {
+            font-size: 0.9em;
+        }
+
+        /* Scrollbar personalizado */
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 5px;
             padding: 10px;
         }
 
-        .chatbot-input {
-            padding: 10px;
-            border-top: 1px solid #e0e0e0;
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        /* Estilos actualizados para el avatar y header */
+        .ai-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fff;
+            padding: 3px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            object-fit: cover;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-header {
+            background: linear-gradient(45deg, #000428, #004e92);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .chat-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: #2ecc71;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* Media Queries para Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+                margin: 0;
+            }
+
+            .chat-container {
+                margin: 0;
+                height: 100vh;
+                max-width: 100%;
+                border-radius: 0;
+            }
+
+            .chat-header {
+                padding: 12px 15px;
+            }
+
+            .chat-header h3 {
+                font-size: 1.1rem;
+            }
+
+            .ai-avatar {
+                width: 35px;
+                height: 35px;
+            }
+
+            .chat-messages {
+                height: calc(100vh - 140px);
+                padding: 15px;
+            }
+
+            .message-content {
+                max-width: 85%;
+                padding: 12px;
+                font-size: 0.95rem;
+            }
+
+            .chat-input {
+                padding: 12px;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(10px);
+            }
+
+            .chat-input textarea {
+                padding: 12px;
+                font-size: 0.9rem;
+                max-height: 100px;
+            }
+
+            .chat-input button {
+                padding: 0 20px;
+            }
+
+            .suggestions {
+                margin: 15px 0;
+                gap: 8px;
+            }
+
+            .suggestion-chip {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+
+            /* Mejorar la experiencia táctil */
+            .suggestion-chip {
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            /* Ajustes para pantallas muy pequeñas */
+            @media (max-width: 350px) {
+                .chat-header h3 {
+                    font-size: 1rem;
+                }
+
+                .message-content {
+                    max-width: 90%;
+                    padding: 10px;
+                    font-size: 0.9rem;
+                }
+
+                .suggestion-chip {
+                    padding: 6px 12px;
+                    font-size: 0.8rem;
+                }
+            }
+        }
+
+        /* Ajustes para orientación landscape en móviles */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .chat-container {
+                height: 100vh;
+            }
+
+            .chat-header {
+                padding: 8px 15px;
+            }
+
+            .chat-messages {
+                height: calc(100vh - 120px);
+            }
+
+            .chat-input {
+                padding: 8px;
+            }
+
+            .suggestions {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 5px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .suggestion-chip {
+                flex: 0 0 auto;
+            }
+        }
+
+        /* Mejoras de accesibilidad para dispositivos táctiles */
+        @media (hover: none) {
+            .suggestion-chip:active {
+                background: rgba(255, 255, 255, 0.3);
+                transform: scale(0.98);
+            }
+
+            .chat-input button:active {
+                transform: scale(0.95);
+            }
+        }
+
+        /* Ajustes para dispositivos con notch */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            .chat-container {
+                padding-top: env(safe-area-inset-top);
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+
+            .chat-input {
+                padding-bottom: calc(12px + env(safe-area-inset-bottom));
+            }
+        }
+
+        /* Optimizaciones de rendimiento para móviles */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
         }
     </style>
 </head>
 
 <body>
-    <header class="help-header text-center">
-        <div class="container">
-            <h1 class="display-4 mb-4">Centro de Ayuda</h1>
-            <div class="search-input input-group mb-3">
-                <input type="text" class="form-control" placeholder="Buscar ayuda..." aria-label="Buscar ayuda" />
-                <button class="btn btn-custom" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <main class="container my-5">
-        <div class="row">
-            <div class="col-md-3 mb-4">
-                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <button class="nav-link active" id="v-pills-modules-tab" data-bs-toggle="pill"
-                        data-bs-target="#v-pills-modules" type="button" role="tab" aria-controls="v-pills-modules"
-                        aria-selected="true">
-                        Gestión de Módulos
-                    </button>
-                    <button class="nav-link" id="v-pills-registration-tab" data-bs-toggle="pill"
-                        data-bs-target="#v-pills-registration" type="button" role="tab"
-                        aria-controls="v-pills-registration" aria-selected="false">
-                        Registro de Cursos
-                    </button>
-                    <button class="nav-link" id="v-pills-progress-tab" data-bs-toggle="pill"
-                        data-bs-target="#v-pills-progress" type="button" role="tab" aria-controls="v-pills-progress"
-                        aria-selected="false">
-                        Seguimiento de Progreso
-                    </button>
-                    <button class="nav-link" id="v-pills-technical-tab" data-bs-toggle="pill"
-                        data-bs-target="#v-pills-technical" type="button" role="tab" aria-controls="v-pills-technical"
-                        aria-selected="false">
-                        Soporte Técnico
-                    </button>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-modules" role="tabpanel"
-                        aria-labelledby="v-pills-modules-tab">
-                        <h2 class="mb-4">Gestión de Módulos</h2>
-                        <div class="accordion" id="accordionModules">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        ¿Cómo accedo a mis módulos?
-                                    </button>
-                                </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse show"
-                                    aria-labelledby="headingOne" data-bs-parent="#accordionModules">
-                                    <div class="accordion-body">
-                                        Para acceder a tus módulos, sigue estos pasos:
-                                        <ol>
-                                            <li>Inicia sesión en tu cuenta de EduFinanzas.</li>
-                                            <li>
-                                                Ve a la sección "Mis Cursos" en el menú principal.
-                                            </li>
-                                            <li>Selecciona el curso que deseas estudiar.</li>
-                                            <li>
-                                                Verás una lista de módulos disponibles. Haz clic en el
-                                                módulo al que quieras acceder.
-                                            </li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        ¿Puedo estudiar los módulos en cualquier orden?
-                                    </button>
-                                </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                    data-bs-parent="#accordionModules">
-                                    <div class="accordion-body">
-                                        Aunque recomendamos seguir el orden sugerido para una
-                                        mejor comprensión, la mayoría de los cursos permiten
-                                        acceder a los módulos en el orden que prefieras. Sin
-                                        embargo, ten en cuenta que algunos módulos pueden tener
-                                        prerrequisitos que deberás completar primero.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingThree">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseThree" aria-expanded="false"
-                                        aria-controls="collapseThree">
-                                        ¿Cómo marco un módulo como completado?
-                                    </button>
-                                </h2>
-                                <div id="collapseThree" class="accordion-collapse collapse"
-                                    aria-labelledby="headingThree" data-bs-parent="#accordionModules">
-                                    <div class="accordion-body">
-                                        Los módulos se marcan automáticamente como completados
-                                        cuando:
-                                        <ul>
-                                            <li>Has visto todos los videos del módulo.</li>
-                                            <li>
-                                                Has completado todas las actividades y cuestionarios
-                                                requeridos.
-                                            </li>
-                                            <li>
-                                                Has aprobado la evaluación final del módulo (si
-                                                aplica).
-                                            </li>
-                                        </ul>
-                                        También puedes marcar manualmente un módulo como
-                                        completado haciendo clic en el botón "Marcar como
-                                        completado" al final de cada módulo.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-registration" role="tabpanel"
-                        aria-labelledby="v-pills-registration-tab">
-                        <h2 class="mb-4">Registro de Cursos</h2>
-                        <div class="accordion" id="accordionRegistration">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingFour">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseFour" aria-expanded="true"
-                                        aria-controls="collapseFour">
-                                        ¿Cómo me registro en un nuevo curso?
-                                    </button>
-                                </h2>
-                                <div id="collapseFour" class="accordion-collapse collapse show"
-                                    aria-labelledby="headingFour" data-bs-parent="#accordionRegistration">
-                                    <div class="accordion-body">
-                                        Para registrarte en un nuevo curso:
-                                        <ol>
-                                            <li>
-                                                Ve a la sección "Catálogo de Cursos" en el menú
-                                                principal.
-                                            </li>
-                                            <li>
-                                                Busca el curso que te interesa y haz clic en "Más
-                                                información".
-                                            </li>
-                                            <li>
-                                                Revisa los detalles del curso y haz clic en
-                                                "Inscribirme".
-                                            </li>
-                                            <li>
-                                                Sigue las instrucciones para completar el pago (si es
-                                                un curso de pago).
-                                            </li>
-                                            <li>
-                                                Una vez confirmada la inscripción, el curso aparecerá
-                                                en tu sección "Mis Cursos".
-                                            </li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingFive">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseFive" aria-expanded="false"
-                                        aria-controls="collapseFive">
-                                        ¿Puedo cancelar mi inscripción a un curso?
-                                    </button>
-                                </h2>
-                                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
-                                    data-bs-parent="#accordionRegistration">
-                                    <div class="accordion-body">
-                                        Sí, puedes cancelar tu inscripción a un curso dentro de
-                                        los primeros 7 días después de la inscripción o antes de
-                                        completar el 25% del contenido del curso, lo que ocurra
-                                        primero. Para cancelar:
-                                        <ol>
-                                            <li>Ve a "Mis Cursos" en tu perfil.</li>
-                                            <li>
-                                                Encuentra el curso que deseas cancelar y haz clic en
-                                                "Opciones".
-                                            </li>
-                                            <li>
-                                                Selecciona "Cancelar inscripción" y sigue las
-                                                instrucciones.
-                                            </li>
-                                        </ol>
-                                        Ten en cuenta que las políticas de reembolso pueden variar
-                                        según el curso.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-progress" role="tabpanel"
-                        aria-labelledby="v-pills-progress-tab">
-                        <h2 class="mb-4">Seguimiento de Progreso</h2>
-                        <div class="accordion" id="accordionProgress">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingSix">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-                                        ¿Cómo puedo ver mi progreso en un curso?
-                                    </button>
-                                </h2>
-                                <div id="collapseSix" class="accordion-collapse collapse show"
-                                    aria-labelledby="headingSix" data-bs-parent="#accordionProgress">
-                                    <div class="accordion-body">
-                                        Para ver tu progreso:
-                                        <ol>
-                                            <li>Ve a "Mis Cursos" en tu perfil.</li>
-                                            <li>Selecciona el curso que quieres revisar.</li>
-                                            <li>
-                                                Verás una barra de progreso general y el porcentaje
-                                                completado.
-                                            </li>
-                                            <li>
-                                                También puedes ver el progreso detallado por módulo
-                                                dentro del curso.
-                                            </li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingSeven">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseSeven" aria-expanded="false"
-                                        aria-controls="collapseSeven">
-                                        ¿Cómo obtengo mi certificado al completar un curso?
-                                    </button>
-                                </h2>
-                                <div id="collapseSeven" class="accordion-collapse collapse"
-                                    aria-labelledby="headingSeven" data-bs-parent="#accordionProgress">
-                                    <div class="accordion-body">
-                                        Para obtener tu certificado:
-                                        <ol>
-                                            <li>
-                                                Completa todos los módulos y requisitos del curso.
-                                            </li>
-                                            <li>
-                                                Una vez alcanzado el 100% de progreso, ve a la página
-                                                principal del curso.
-                                            </li>
-                                            <li>Verás un botón "Obtener Certificado".</li>
-                                            <li>
-                                                Haz clic en el botón y sigue las instrucciones para
-                                                descargar o compartir tu certificado.
-                                            </li>
-                                        </ol>
-                                        Recuerda que algunos cursos pueden tener requisitos
-                                        adicionales para la certificación.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-technical" role="tabpanel"
-                        aria-labelledby="v-pills-technical-tab">
-                        <h2 class="mb-4">Soporte Técnico</h2>
-                        <div class="accordion" id="accordionTechnical">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingEight">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseEight" aria-expanded="true"
-                                        aria-controls="collapseEight">
-                                        ¿Qué hago si tengo problemas para acceder a un curso?
-                                    </button>
-                                </h2>
-                                <div id="collapseEight" class="accordion-collapse collapse show"
-                                    aria-labelledby="headingEight" data-bs-parent="#accordionTechnical">
-                                    <div class="accordion-body">
-                                        Si tienes problemas para acceder a un curso:
-                                        <ol>
-                                            <li>Verifica tu conexión a internet.</li>
-                                            <li>
-                                                Cierra sesión y vuelve a iniciar sesión en la
-                                                plataforma.
-                                            </li>
-                                            <li>
-                                                Limpia la caché de tu navegador o intenta con otro
-                                                navegador.
-                                            </li>
-                                            <li>
-                                                Si el problema persiste, contacta a nuestro equipo de
-                                                soporte técnico a través del chat en vivo o enviando
-                                                un correo a soporte@edufinanzas.com.
-                                            </li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingNine">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseNine" aria-expanded="false"
-                                        aria-controls="collapseNine">
-                                        ¿Cómo puedo reportar un error en el contenido del curso?
-                                    </button>
-                                </h2>
-                                <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine"
-                                    data-bs-parent="#accordionTechnical">
-                                    <div class="accordion-body">
-                                        Para reportar un error en el contenido:
-                                        <ol>
-                                            <li>
-                                                Ve al módulo o lección específica donde encontraste el
-                                                error.
-                                            </li>
-                                            <li>
-                                                Busca el botón "Reportar un problema" o "Enviar
-                                                feedback" que suele estar al final de cada lección.
-                                            </li>
-                                            <li>
-                                                Describe el error en detalle, incluyendo capturas de
-                                                pantalla si es posible.
-                                            </li>
-                                            <li>
-                                                Envía el reporte y nuestro equipo lo revisará lo antes
-                                                posible.
-                                            </li>
-                                        </ol>
-                                        Agradecemos tu ayuda para mejorar la calidad de nuestros
-                                        cursos.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="chat-container">
+        <div class="chat-header">
+            <img src="EduFinanzas.png" alt="AI Assistant" class="ai-avatar">
+            <div>
+                <h3>Asistente Financiero</h3>
+                <div class="chat-status">
+                    <span class="status-dot"></span>
+                    <span>En línea</span>
                 </div>
             </div>
         </div>
-    </main>
 
-    <div class="chatbot" id="chatbotButton">
-        <i class="fas fa-comment-dots fa-2x text-white"></i>
-    </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Los mensajes se agregarán aquí dinámicamente -->
+        </div>
 
-    <div class="chatbot-window" id="chatbotWindow">
-        <div class="chatbot-header">
-            <h5 class="mb-0">Asistente Virtual</h5>
-        </div>
-        <div class="chatbot-body" id="chatbotBody">
-            <!-- Chat messages will be added here -->
-        </div>
-        <div class="chatbot-input">
-            <div class="input-group">
-                <input type="text" class="form-control" id="chatbotInput" placeholder="Escribe tu pregunta..." />
-                <button class="btn btn-custom" type="button" id="chatbotSend">
-                    Enviar
-                </button>
-            </div>
+        <div class="chat-input">
+            <textarea 
+                id="userInput"
+                placeholder="Escribe tu pregunta aquí..."
+                rows="1"
+                autofocus
+            ></textarea>
+            <button id="sendButton">
+                <i class="fas fa-paper-plane"></i>
+            </button>
         </div>
     </div>
 
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-        <p>&copy; 2024 EduFinanzas. Todos los derechos reservados.</p>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const chatbotButton = document.getElementById("chatbotButton");
-            const chatbotWindow = document.getElementById("chatbotWindow");
-            const chatbotBody = document.getElementById("chatbotBody");
-            const chatbotInput = document.getElementById("chatbotInput");
-            const chatbotSend = document.getElementById("chatbotSend");
+        // Asegurarse de que el textarea sea interactivo
+        const userInput = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendButton');
+        const chatMessages = document.getElementById('chatMessages');
 
-            chatbotButton.addEventListener("click", function () {
-                chatbotWindow.style.display =
-                    chatbotWindow.style.display === "none" ? "block" : "none";
-            });
+        // Auto-ajuste de altura del textarea
+        userInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
 
-            function addMessage(message, isUser = false) {
-                const messageElement = document.createElement("div");
-                messageElement.className = `p-2 mb-2 rounded ${isUser ? "bg-primary text-white text-end" : "bg-light"
-                    }`;
-                messageElement.textContent = message;
-                chatbotBody.appendChild(messageElement);
-                chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        // Mensaje inicial y sugerencias
+        window.addEventListener('DOMContentLoaded', async () => {
+            const apiAvailable = await checkApiStatus();
+            if (apiAvailable) {
+                addMessage("¡Hola! Soy tu asistente financiero personal. ¿En qué puedo ayudarte hoy?", 'bot');
+                addSuggestions();
+            }
+        });
+
+        function addMessage(content, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}-message animate__animated animate__fadeIn`;
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    <p>${content}</p>
+                </div>
+            `;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Agregar este objeto con respuestas predefinidas
+        const RESPUESTAS_FINANCIERAS = {
+            "invertir": {
+                keywords: ["invertir", "inversión", "inversiones"],
+                response: "Para empezar a invertir, te recomiendo:\n\n1. Establece un fondo de emergencia\n2. Define tus objetivos financieros\n3. Diversifica tus inversiones\n4. Comienza con instrumentos de bajo riesgo\n5. Edúcate constantemente sobre finanzas\n\n¿Te gustaría saber más sobre algún punto específico?"
+            },
+            "ahorro": {
+                keywords: ["ahorro", "ahorrar", "guardar dinero"],
+                response: "Consejos efectivos para ahorrar:\n\n1. Crea un presupuesto mensual\n2. Sigue la regla 50/30/20\n3. Automatiza tus ahorros\n4. Reduce gastos innecesarios\n5. Establece metas específicas de ahorro\n\n¿Necesitas más detalles sobre alguna estrategia?"
+            },
+            "presupuesto": {
+                keywords: ["presupuesto", "gastos", "ingresos"],
+                response: "Para crear un presupuesto efectivo:\n\n1. Registra todos tus ingresos\n2. Categoriza tus gastos\n3. Establece límites por categoría\n4. Monitorea tus gastos diariamente\n5. Ajusta según sea necesario\n\n¿Quieres profundizar en algún aspecto?"
+            },
+            "deudas": {
+                keywords: ["deuda", "deudas", "crédito"],
+                response: "Para gestionar tus deudas eficientemente:\n\n1. Lista todas tus deudas\n2. Prioriza las de mayor interés\n3. Considera la consolidación\n4. Evita nuevas deudas\n5. Crea un plan de pago realista\n\n¿Te gustaría un plan más detallado?"
+            }
+        };
+
+        // Actualizar la función sendMessage
+        async function sendMessage() {
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            // Limpiar input y agregar mensaje del usuario
+            addMessage(message, 'user');
+            userInput.value = '';
+            userInput.style.height = 'auto';
+
+            // Mostrar indicador de escritura
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'message bot-message typing-indicator';
+            loadingDiv.innerHTML = `
+                <div class="message-content">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            chatMessages.appendChild(loadingDiv);
+
+            // Simular delay para una experiencia más natural
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // Buscar respuesta predefinida
+            const messageLower = message.toLowerCase();
+            let respuesta = "Lo siento, no tengo una respuesta específica para esa pregunta. ¿Podrías reformularla o preguntar sobre inversiones, ahorro, presupuesto o deudas?";
+
+            for (const categoria in RESPUESTAS_FINANCIERAS) {
+                if (RESPUESTAS_FINANCIERAS[categoria].keywords.some(keyword => 
+                    messageLower.includes(keyword))) {
+                    respuesta = RESPUESTAS_FINANCIERAS[categoria].response;
+                    break;
+                }
             }
 
-            function botResponse(message) {
-                const responses = {
-                    hola: "¡Hola! ¿En qué puedo ayudarte hoy?",
-                    modulos:
-                        "Para acceder a tus módulos, ve a 'Mis Cursos' en el menú principal y selecciona el curso que deseas estudiar.",
-                    registro:
-                        "Para registrarte en un nuevo curso, visita nuestro 'Catálogo de Cursos' y haz clic en 'Inscribirme' en el curso que te interese.",
-                    progreso:
-                        "Puedes ver tu progreso en 'Mis Cursos'. Selecciona un curso para ver tu avance detallado.",
-                    ayuda:
-                        "Estoy aquí para ayudarte. ¿Tienes alguna pregunta específica sobre módulos, registro de cursos, seguimiento de progreso o soporte técnico?",
+            // Eliminar indicador de escritura y mostrar respuesta
+            loadingDiv.remove();
+            addMessage(respuesta, 'bot');
+
+            // Mostrar sugerencias relacionadas
+            addSuggestions();
+
+            // Scroll al final del chat
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Actualizar las sugerencias para que coincidan con las respuestas predefinidas
+        function addSuggestions() {
+            const suggestions = [
+                { text: "¿Cómo empezar a invertir?", icon: "chart-line" },
+                { text: "Consejos de ahorro", icon: "piggy-bank" },
+                { text: "Crear un presupuesto", icon: "calculator" },
+                { text: "Gestionar deudas", icon: "credit-card" }
+            ];
+
+            const suggestionsDiv = document.createElement('div');
+            suggestionsDiv.className = 'suggestions';
+            
+            suggestions.forEach(suggestion => {
+                const chip = document.createElement('div');
+                chip.className = 'suggestion-chip';
+                chip.innerHTML = `
+                    <i class="fas fa-${suggestion.icon}"></i>
+                    <span>${suggestion.text}</span>
+                `;
+                chip.onclick = () => {
+                    userInput.value = suggestion.text;
+                    sendMessage();
                 };
+                suggestionsDiv.appendChild(chip);
+            });
 
-                const lowerMessage = message.toLowerCase();
-                for (const [key, value] of Object.entries(responses)) {
-                    if (lowerMessage.includes(key)) {
-                        return value;
+            chatMessages.appendChild(suggestionsDiv);
+        }
+
+        // Función para verificar el estado de la API
+        async function checkApiStatus() {
+            try {
+                const response = await fetch('https://api.openai.com/v1/models', {
+                    headers: {
+                        'Authorization': `Bearer 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`
                     }
+                });
+                
+                if (!response.ok) {
+                    console.error('API Status Error:', await response.json());
+                    addMessage("El servicio de IA está temporalmente no disponible. Por favor, intenta más tarde.", 'bot');
+                    return false;
                 }
-                return "Lo siento, no entiendo tu pregunta. ¿Podrías reformularla o ser más específico?";
+                return true;
+            } catch (error) {
+                console.error('API Check Error:', error);
+                return false;
             }
+        }
 
-            chatbotSend.addEventListener("click", function () {
-                const message = chatbotInput.value.trim();
-                if (message) {
-                    addMessage(message, true);
-                    chatbotInput.value = "";
-                    setTimeout(() => {
-                        const response = botResponse(message);
-                        addMessage(response);
-                    }, 500);
-                }
-            });
-
-            chatbotInput.addEventListener("keypress", function (e) {
-                if (e.key === "Enter") {
-                    chatbotSend.click();
-                }
-            });
-
-            // Initial bot message
-            addMessage(
-                "¡Hola! Soy tu asistente virtual. ¿En qué puedo ayudarte hoy?"
-            );
+        // Event listeners
+        sendButton.addEventListener('click', sendMessage);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
         });
     </script>
 </body>

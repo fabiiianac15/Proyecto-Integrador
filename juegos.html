@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juegos Financieros Educativos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="EduFinanzas.png">
     <style>
         :root {
@@ -58,18 +58,146 @@
 
         .stock-card {
             background: white;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 15px;
-            margin: 1rem;
+            margin: 0.5rem;
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
         }
 
         .stock-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
             border-color: var(--accent-color);
+        }
+
+        .stock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stock-symbol {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .stock-sector {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .stock-name {
+            color: var(--secondary-color);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stock-price-container {
+            background: linear-gradient(135deg, var(--light-bg) 0%, #fff 100%);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .stock-price {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .stock-change {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .stock-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .stock-chart {
+            height: 100px;
+            margin: 1rem 0;
+            background: var(--light-bg);
+            border-radius: 10px;
+        }
+
+        .stock-actions {
+            margin-top: 1rem;
+        }
+
+        .market-stats {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .market-event {
+            position: relative;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-color);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .market-event.positive {
+            border-left-color: var(--success-color);
+        }
+
+        .market-event.negative {
+            border-left-color: var(--danger-color);
+        }
+
+        .trade-history {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .trade-item {
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--light-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .trade-item:last-child {
+            border-bottom: none;
+        }
+
+        @keyframes priceFlash {
+            0% { background-color: transparent; }
+            50% { background-color: rgba(52, 152, 219, 0.1); }
+            100% { background-color: transparent; }
+        }
+
+        .price-up {
+            animation: priceFlash 1s ease-out;
+            color: var(--success-color);
+        }
+
+        .price-down {
+            animation: priceFlash 1s ease-out;
+            color: var(--danger-color);
         }
 
         .portfolio-card {
@@ -96,97 +224,2091 @@
 
         .quiz-card {
             background: white;
+            padding: 2rem;
             border-radius: 15px;
-            padding: 2.5rem;
-            margin: 1rem 0;
-            box-shadow: var(--card-shadow);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-progress {
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-progress .progress {
+            height: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-category {
+            margin-bottom: 1rem;
+        }
+
+        .quiz-question {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
         }
 
         .option-btn {
-            width: 100%;
             text-align: left;
-            padding: 1.2rem;
-            margin: 0.8rem 0;
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            background: white;
+            padding: 1rem;
             transition: all 0.3s ease;
-            font-weight: 500;
+            position: relative;
+            overflow: hidden;
         }
 
-        .option-btn:hover {
-            background: var(--light-bg);
-            transform: translateX(8px);
-            border-color: var(--accent-color);
+        .option-btn:hover:not([disabled]) {
+            transform: translateX(5px);
         }
 
-        .savings-goal {
-            background: linear-gradient(135deg, var(--accent-color) 0%, #2980b9 100%);
+        .option-btn.btn-success,
+        .option-btn.btn-danger {
             color: white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            margin: 1rem 0;
-            box-shadow: var(--card-shadow);
         }
 
-        .progress {
-            height: 1.5rem;
-            border-radius: 1rem;
-            background: rgba(255, 255, 255, 0.2);
-            margin-top: 1rem;
-        }
-
-        .progress-bar {
-            background: linear-gradient(to right, var(--success-color), #2ecc71);
-            border-radius: 1rem;
-            transition: width 0.5s ease;
-        }
-
-        .game-title {
-            color: var(--primary-color);
-            margin-bottom: 2rem;
+        .quiz-results {
             text-align: center;
-            font-weight: 700;
-            font-size: 2.2rem;
+            padding: 2rem;
         }
 
-        .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: var(--card-shadow);
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2ecc71 0%, #3498db 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto;
         }
 
-        .btn-success,
-        .btn-danger {
-            padding: 0.8rem 1.5rem;
-            border-radius: 10px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--success-color) 0%, #2ecc71 100%);
-            border: none;
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, var(--danger-color) 0%, #c0392b 100%);
-            border: none;
-        }
-
-        .statistics-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin: 1rem 0;
-            border-left: 5px solid var(--accent-color);
+        .score-number {
+            font-size: 2.5rem;
+            color: white;
+            font-weight: bold;
         }
 
         .feedback-message {
-            padding: 1.2rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .quiz-card {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Estilos para el Desafío Presupuestal */
+        .budget-dashboard {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .budget-stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .budget-stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .budget-stat-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .budget-stat-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .budget-stat-card h2 {
+            font-size: 2rem;
+            margin: 0;
+            color: white;
+        }
+
+        .budget-items-container {
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .budget-item {
+            background: white;
+            padding: 1.5rem;
             border-radius: 12px;
-            margin-top: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            margin-bottom: 1rem;
+        }
+
+        .budget-item.selected {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.05);
+        }
+
+        .budget-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .budget-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .budget-item-header i {
+            font-size: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .budget-item h5 {
+            color: #2c3e50;
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        .budget-item .description {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .cost-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .cost {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .budget-tip {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .budget-tip i {
+            color: #f1c40f;
+            margin-right: 0.5rem;
+        }
+
+        .category-charts {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .category-chart {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .category-chart h6 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-chart .progress {
+            height: 8px;
+            margin: 0.5rem 0;
+            background-color: #f1f1f1;
+        }
+
+        .category-chart .progress-bar {
+            background-color: #3498db;
+        }
+
+        .category-chart .amount {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Estilos para los mensajes de Pedrito */
+        .pedrito-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            min-width: 300px;
+            max-width: 500px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            animation: bounceIn 0.5s ease-out;
+            background: white;
+        }
+
+        .pedrito-message {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pedrito-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .message-content {
+            flex: 1;
+        }
+
+        .message-content h5 {
+            margin: 0;
+            color: #2c3e50;
+        }
+
+        .message-content p {
+            margin: 5px 0 0;
+            font-size: 1.1rem;
+        }
+
+        /* Animaciones */
+        @keyframes bounceIn {
+            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            70% { transform: translate(-50%, -50%) scale(0.9); }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        /* Estilos para botones */
+        .btn-success, .btn-danger {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
+        }
+
+        /* Estilos para badges */
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
             font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .budget-dashboard {
+                padding: 1rem;
+            }
+
+            .budget-stat-card {
+                margin-bottom: 1rem;
+            }
+
+            .budget-item {
+                margin-bottom: 1rem;
+            }
+        }
+
+        .savings-dashboard {
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .savings-stat-card {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            color: white;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .savings-stat-card .progress {
+            width: 100%;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .savings-stat-card .progress-bar {
+            background-color: #2ecc71;
+        }
+
+        .streak-bonus {
+            color: #f1c40f;
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        .savings-stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .savings-stat-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .savings-stat-card h2 {
+            font-size: 2rem;
+            margin: 0.5rem 0;
+        }
+
+        .challenge-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .challenge-card.completed {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.05);
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .challenge-icon {
+            font-size: 2rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        .achievement-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-card.locked {
+            opacity: 0.5;
+            filter: grayscale(1);
+        }
+
+        .achievement-card.unlocked {
+            border: 2px solid #f1c40f;
+            box-shadow: 0 4px 12px rgba(241, 196, 15, 0.2);
+        }
+
+        .achievement-icon {
+            font-size: 2.5rem;
+            color: #f1c40f;
+            margin-bottom: 1rem;
+        }
+
+        .challenge-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .challenge-modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        @keyframes unlockAchievement {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .achievement-unlocked {
+            animation: unlockAchievement 0.5s ease-out;
+        }
+
+        /* Estilos para notificaciones */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            min-width: 300px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Estilos para los nuevos juegos */
+        .games-container {
+            padding: 2rem;
+        }
+
+        .game-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .game-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .game-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Simulador de Inversiones */
+        .investment-dashboard {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+
+        .portfolio-summary {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            color: white;
+        }
+
+        .balance {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .investment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* Emprendedor Virtual */
+        .business-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        .amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* Mercado de Valores */
+        .stock-ticker {
+            background: #1a1a1a;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 1rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stock-symbol {
+            font-weight: bold;
+        }
+
+        .stock-change.positive {
+            color: #2ecc71;
+        }
+
+        .stock-change.negative {
+            color: #e74c3c;
+        }
+
+        .trading-panel {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .stock-search {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stock-search input {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+
+        .trading-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Animaciones */
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .game-section {
+            animation: slideUp 0.5s ease-out forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .investment-dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .business-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .games-menu {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .games-menu button {
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .games-menu button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .games-menu {
+                flex-direction: column;
+            }
+        }
+
+        /* Estilos para Héroe de las Deudas */
+        .debt-hero {
+            background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .debt-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .primary-card {
+            background: rgba(33, 150, 243, 0.2);
+        }
+
+        .success-card {
+            background: rgba(76, 175, 80, 0.2);
+        }
+
+        .danger-card {
+            background: rgba(244, 67, 54, 0.2);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-footer {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .debt-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .debt-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .debt-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .debt-info h5 {
+            margin: 0;
+            color: #fff;
+        }
+
+        .debt-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+
+        .debt-amount {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .strategy-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-strategy {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-strategy:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .btn-strategy i {
+            font-size: 1.5rem;
+        }
+
+        .btn-strategy small {
+            opacity: 0.8;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .debt-tips {
+            list-style: none;
+            padding: 0;
+        }
+
+        .debt-tips li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .debt-tips li:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .debt-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .debt-actions {
+                align-items: center;
+                margin-top: 1rem;
+            }
+        }
+
+        /* Estilos para Ciudad Financiera */
+        .city-dashboard {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .building-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .building-options button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            gap: 0.5rem;
+        }
+
+        .building-options .cost {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .city-events {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .event-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-item.positive {
+            background: rgba(46, 204, 113, 0.1);
+            color: #27ae60;
+        }
+
+        .event-item.negative {
+            background: rgba(231, 76, 60, 0.1);
+            color: #c0392b;
+        }
+
+        /* Estilos compartidos y animaciones */
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card.danger {
+            background: rgba(231, 76, 60, 0.2);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .btn:hover {
+            animation: pulse 1s infinite;
+        }
+
+        /* Actualización de estilos existentes */
+        .debt-hero {
+            background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .debt-header h3 {
+            color: white !important;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .debt-header h3 i {
+            color: white;
+            margin-right: 0.5rem;
+        }
+
+        /* Estilos para los consejos */
+        .tips-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .tip-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tip-card i {
+            font-size: 2rem;
+            color: #3949ab;
+            margin-bottom: 1rem;
+        }
+
+        .tip-card h5 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Estilos para estrategias */
+        .strategy-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-strategy {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-strategy:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-strategy.active {
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid #fff;
+        }
+
+        .debt-item.priority {
+            border: 2px solid #ffd700;
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        #activeStrategy {
+            font-size: 0.9rem;
+        }
+
+        #activeStrategy .badge {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Animaciones mejoradas */
+        @keyframes highlightPriority {
+            0% { border-color: transparent; }
+            50% { border-color: #ffd700; }
+            100% { border-color: transparent; }
+        }
+
+        .debt-item.priority {
+            animation: highlightPriority 2s infinite;
+        }
+
+        /* Estilos para notificaciones mejoradas */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            min-width: 300px;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* Estilos para el modal de victoria */
+        .victory-content {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .victory-content h3 {
+            color: #28a745;
+            margin-bottom: 1rem;
+        }
+
+        .savings-summary {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        /* Mejoras en la visualización de inputs */
+        .input-group-sm input {
+            text-align: right;
+            font-size: 1rem;
+            padding: 0.5rem;
+        }
+
+        .input-group-sm .btn {
+            padding: 0.5rem 1rem;
+        }
+
+        /* Efectos de hover mejorados */
+        .debt-item:hover .debt-amount {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        /* Estilos para el Emprendedor Virtual */
+        .business-tycoon {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .business-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .level-badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .xp-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 5px;
+            width: 100px;
+        }
+
+        .xp-progress {
+            background: #f1c40f;
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .main-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card.money {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card.money:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-card.money i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card.money h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card.money .amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2ecc71;
+        }
+
+        .stat-card.money .stat-trend {
+            font-size: 0.9rem;
+            color: #2ecc71;
+        }
+
+        .stat-card.customers {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card.customers:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-card.customers i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card.customers h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card.customers .amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .stat-card.customers .satisfaction {
+            font-size: 0.9rem;
+            color: #2ecc71;
+        }
+
+        .stat-card.reputation {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card.reputation:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-card.reputation i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card.reputation h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card.reputation .amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #f1c40f;
+        }
+
+        .stat-card.reputation .rating {
+            font-size: 0.9rem;
+            color: #f1c40f;
+        }
+
+        .action-panels {
+            margin-top: 2rem;
+        }
+
+        .action-panels .row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .action-card h4 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-card i {
+            font-size: 1.5rem;
+        }
+
+        .action-card small {
+            opacity: 0.8;
+        }
+
+        .employee-list, .product-list, .upgrade-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .business-events {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .event-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .business-type-option {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .business-type-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .business-type-option i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .business-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Estilos para el modal de contratación */
+        .hiring-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .hiring-modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .hiring-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .hiring-form input[type="text"],
+        .hiring-form input[type="number"],
+        .hiring-form select {
+            padding: 0.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+
+        .hiring-form button[type="submit"] {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hiring-form button[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        /* Estilos para el modal de mejora */
+        .upgrade-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .upgrade-modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .upgrade-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .upgrade-form input[type="text"],
+        .upgrade-form input[type="number"],
+        .upgrade-form select {
+            padding: 0.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+
+        .upgrade-form button[type="submit"] {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .upgrade-form button[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        /* Estilos para el modal de producto */
+        .product-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .product-modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .product-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .product-form input[type="text"],
+        .product-form input[type="number"],
+        .product-form select {
+            padding: 0.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+
+        .product-form button[type="submit"] {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .product-form button[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        /* Estilos para el modal de inicio */
+        .startup-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .startup-modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .startup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .startup-form input[type="text"],
+        .startup-form input[type="number"],
+        .startup-form select {
+            padding: 0.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+
+        .startup-form button[type="submit"] {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .startup-form button[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .business-tycoon {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .business-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .level-badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .xp-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 5px;
+            width: 100px;
+        }
+
+        .xp-progress {
+            background: #f1c40f;
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .main-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card .amount {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .stat-trend {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .stat-trend.positive {
+            color: #2ecc71;
+        }
+
+        .action-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            height: 100%;
+        }
+
+        .action-card h4 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .employee-list, .product-list, .upgrade-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .business-events {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .event-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .business-type-option {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .business-type-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .business-type-option i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .business-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Estilos generales del contenedor de juegos */
+        #newFinanceGames {
+            position: relative;
+            min-height: 500px;
+        }
+
+        /* Estilos del menú de juegos */
+        .games-menu {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .games-menu button {
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .games-menu button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos de notificaciones */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            min-width: 300px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Asegurarse que los modales estén por encima de todo */
+        .modal {
+            z-index: 1050;
+        }
+
+        /* Estilos específicos para el juego de emprendedor */
+        .business-tycoon {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .business-tycoon {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .action-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            height: 100%;
+        }
+
+        .action-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .hire-option {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .income-rate {
+            color: #2ecc71;
+            font-size: 0.9rem;
+        }
+
+        .satisfaction {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .stars {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .business-selection {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+        }
+
+        .business-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .business-type-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .business-type-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .business-type-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .business-type-card h4 {
+            margin-bottom: 1rem;
+        }
+
+        .business-setup input {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 1rem;
+        }
+
+        .business-setup input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .action-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .employee-card, .product-card, .upgrade-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        .hire-option, .product-option, .upgrade-option {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px !important;
+            transition: all 0.3s ease;
+        }
+
+        .hire-option:hover, .product-option:hover, .upgrade-option:hover {
+            transform: translateY(-3px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .modal-body {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1060;
+            min-width: 300px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Estilos generales responsive */
+        .business-tycoon {
+            padding: 1rem;
+            margin: 0.5rem;
+            border-radius: 10px;
+        }
+
+        /* Estilos para el panel de estadísticas */
+        .main-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* Estilos para los paneles de acción */
+        .action-panels .row {
+            margin: 0;
+        }
+
+        .action-card {
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        /* Estilos responsive para móviles */
+        @media (max-width: 768px) {
+            .business-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .business-header h3 {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .level-badge {
+                margin-top: 0.5rem;
+            }
+
+            .stat-card {
+                padding: 0.8rem;
+            }
+
+            .stat-card h4 {
+                font-size: 1rem;
+            }
+
+            .amount {
+                font-size: 1.2rem;
+            }
+
+            .action-panels .col-md-4 {
+                padding: 0.5rem;
+            }
+
+            .action-card {
+                margin-bottom: 0.8rem;
+            }
+
+            .action-card h4 {
+                font-size: 1.1rem;
+            }
+
+            /* Ajustes para modales en móvil */
+            .modal-dialog {
+                margin: 0.5rem;
+            }
+
+            .modal-body {
+                padding: 1rem;
+                max-height: 70vh;
+                overflow-y: auto;
+            }
+
+            .hire-option, .product-option, .upgrade-option {
+                padding: 0.8rem !important;
+            }
+
+            /* Ajustes para las notificaciones */
+            .notification {
+                width: 90%;
+                left: 5%;
+                right: 5%;
+            }
+        }
+
+        /* Estilos para tablets */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .main-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .action-panels .col-md-4 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+        }
+
+        /* Ajustes para la selección de negocio */
+        .business-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .business-type-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .business-type-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Estilos para las listas */
+        .action-list {
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .action-list::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .action-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .action-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        /* Mejoras visuales para botones */
+        .btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 576px) {
+            .btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .business-type-card {
+                padding: 1rem;
+            }
+
+            .business-type-card i {
+                font-size: 2rem;
+            }
+
+            .business-type-card h4 {
+                font-size: 1.1rem;
+            }
+
+            .stat-card .amount {
+                font-size: 1.1rem;
+            }
+
+            .income-rate {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Animaciones suaves */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Mejoras para la accesibilidad */
+        button, 
+        input, 
+        .business-type-card {
+            cursor: pointer;
+        }
+
+        button:focus,
+        input:focus {
+            outline: 2px solid rgba(255, 255, 255, 0.5);
+            outline-offset: 2px;
+        }
+
+        /* Estilos para estados de carga y error */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .error-state {
+            border: 2px solid rgba(255, 0, 0, 0.3);
         }
     </style>
 </head>
@@ -222,6 +2344,11 @@
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="pill" href="#savingsGame">
                     <i class="fas fa-piggy-bank me-2"></i>Reto del Ahorro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="pill" href="#newGames">
+                    <i class="fas fa-gamepad me-2"></i>Nuevos Juegos
                 </a>
             </li>
         </ul>
@@ -272,23 +2399,53 @@
                         <i class="fas fa-wallet me-3"></i>
                         Desafío Presupuestal
                     </h2>
-                    <div class="portfolio-card mb-4">
-                        <div class="row align-items-center">
-                            <div class="col-md-6">
-                                <h5>Presupuesto Mensual</h5>
-                                <h2>$3,000,000</h2>
+                    
+                    <!-- Dashboard Principal -->
+                    <div class="budget-dashboard mb-4">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="budget-stat-card">
+                                    <i class="fas fa-money-bill-wave mb-3"></i>
+                                    <h3>Presupuesto Total</h3>
+                                    <h2>$3,000,000</h2>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p class="mb-2">Restante</p>
-                                <h3>$<span id="budgetRemaining">3000000</span></h3>
-                                <div class="progress mt-3">
-                                    <div class="progress-bar" role="progressbar" style="width: 100%"></div>
+                            <div class="col-md-4">
+                                <div class="budget-stat-card">
+                                    <i class="fas fa-hand-holding-usd mb-3"></i>
+                                    <h3>Disponible</h3>
+                                    <h2>$<span id="budgetRemaining">3000000</span></h2>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="budget-stat-card">
+                                    <i class="fas fa-chart-pie mb-3"></i>
+                                    <h3>Gastos Esenciales</h3>
+                                    <h2><span id="essentialExpenses">0</span>%</h2>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="budgetItems">
-                        <!-- Se llenará dinámicamente -->
+
+                    <!-- Lista de Items -->
+                    <div class="budget-items-container">
+                        <h4 class="mb-4"><i class="fas fa-list me-2"></i>Gastos Mensuales</h4>
+                        <div id="budgetItems" class="row g-4">
+                            <!-- Se llenará dinámicamente -->
+                        </div>
+                    </div>
+
+                    <!-- Categorías de Presupuesto -->
+                    <div class="budget-categories mt-5">
+                        <h4 class="mb-4"><i class="fas fa-tags me-2"></i>Categorías de Gastos</h4>
+                        <div class="row g-4" id="categoryCharts">
+                            <!-- Se llenará dinámicamente -->
+                        </div>
+                    </div>
+
+                    <!-- Escenarios -->
+                    <div id="scenarioContainer" class="mt-5">
+                        <!-- Los escenarios aparecerán aquí -->
                     </div>
                 </div>
             </div>
@@ -300,26 +2457,16 @@
                         <i class="fas fa-graduation-cap me-3"></i>
                         Quiz Financiero
                     </h2>
-                    <div class="quiz-card">
-                        <div class="statistics-card mb-4">
-                            <div class="row align-items-center">
-                                <div class="col-auto">
-                                    <i class="fas fa-trophy fa-2x text-warning"></i>
-                                </div>
-                                <div class="col">
-                                    <p class="mb-0">Puntuación actual</p>
-                                    <h3 class="mb-0"><span id="score">0</span> puntos</h3>
-                                </div>
+                    <div class="container mt-5">
+                        <div id="quizContainer">
+                            <div class="text-center">
+                                <h2>Quiz Financiero</h2>
+                                <p>Pon a prueba tus conocimientos financieros</p>
+                                <button class="btn btn-primary" onclick="initQuiz()">
+                                    <i class="fas fa-play"></i> Comenzar Quiz
+                                </button>
                             </div>
                         </div>
-                        <h4 id="questionText" class="mb-4">Cargando pregunta...</h4>
-                        <div id="options">
-                            <!-- Se llenará dinámicamente -->
-                        </div>
-                        <div id="feedback" class="feedback-message mt-3" style="display: none;"></div>
-                        <button id="nextQuestion" class="btn btn-primary mt-4 px-4 py-2" style="display: none;">
-                            <i class="fas fa-arrow-right me-2"></i>Siguiente Pregunta
-                        </button>
                     </div>
                 </div>
             </div>
@@ -331,49 +2478,74 @@
                         <i class="fas fa-piggy-bank me-3"></i>
                         Reto del Ahorro
                     </h2>
-                    <div class="savings-goal mb-4">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4>Meta de Ahorro</h4>
-                                <h2>$<span id="savingsGoal">5000000</span></h2>
-                            </div>
-                            <div class="col-md-6">
-                                <h4>Ahorro Actual</h4>
-                                <h2>$<span id="currentSavings">0</span></h2>
-                            </div>
-                        </div>
-                        <div class="progress mt-4">
-                            <div class="progress-bar" role="progressbar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <h5><i class="fas fa-plus-circle me-2"></i>Agregar Ahorro</h5>
-                                    <div class="form-group mb-3 mt-4">
-                                        <label class="mb-2">Cantidad a ahorrar:</label>
-                                        <input type="number" id="savingsInput" class="form-control form-control-lg"
-                                            min="1">
+                    <div class="savings-dashboard">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="savings-stat-card">
+                                    <i class="fas fa-piggy-bank"></i>
+                                    <h3>Ahorro Total</h3>
+                                    <h2>$<span id="currentSavings">0</span></h2>
+                                    <div class="progress mt-3">
+                                        <div class="progress-bar" role="progressbar" style="width: 0%"></div>
                                     </div>
-                                    <button class="btn btn-success w-100" onclick="addSavings()">
-                                        <i class="fas fa-plus me-2"></i>Agregar Ahorro
-                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="savings-stat-card">
+                                    <i class="fas fa-fire"></i>
+                                    <h3>Racha de Ahorro</h3>
+                                    <h2><span id="savingsStreak">0</span> días</h2>
+                                    <p class="streak-bonus">Bonus: $${savingsConfig.streakBonus.toLocaleString()} por día</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="savings-stat-card">
+                                    <i class="fas fa-trophy"></i>
+                                    <h3>Meta</h3>
+                                    <h2>$${savingsConfig.goalAmount.toLocaleString()}</h2>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5><i class="fas fa-lightbulb me-2"></i>Consejos de Ahorro</h5>
-                                    <ul id="savingsTips" class="list-group list-group-flush mt-4">
 
-                                    </ul>
-                                </div>
+                        <div class="savings-input-container mt-4">
+                            <h4>Registrar Ahorro</h4>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" id="savingsInput" class="form-control" placeholder="Cantidad a ahorrar">
+                                <button class="btn btn-success" onclick="addSavings()">
+                                    <i class="fas fa-plus"></i> Agregar
+                                </button>
                             </div>
+                            <small class="text-muted">Máximo por transacción: $${savingsConfig.maxTransaction.toLocaleString()}</small>
+                        </div>
+
+                        <div class="savings-challenges mt-5">
+                            <h4>Retos de Ahorro Activos</h4>
+                            <div class="row g-4" id="challengesContainer"></div>
+                        </div>
+
+                        <div class="savings-achievements mt-5">
+                            <h4>Logros</h4>
+                            <div class="row g-4" id="achievementsContainer"></div>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Agregar nuevo contenido aquí -->
+            <div class="tab-pane fade" id="newGames">
+                <div class="games-menu">
+                    <button class="btn btn-primary" onclick="showGame('debtHero')">
+                        <i class="fas fa-shield-alt"></i> Héroe de las Deudas
+                    </button>
+                    <button class="btn btn-success" onclick="showGame('businessTycoon')">
+                        <i class="fas fa-store"></i> Emprendedor Virtual
+                    </button>
+                    <button class="btn btn-info" onclick="showGame('financialCity')">
+                        <i class="fas fa-city"></i> Ciudad Financiera
+                    </button>
+                </div>
+                <div id="newFinanceGames" class="mt-4"></div>
             </div>
         </div>
     </div>
@@ -383,7 +2555,7 @@
             <p class="mb-0">© 2024 EduFinanzas | Aprende • Invierte • Crece</p>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Variables globales
         let portfolio = {
@@ -392,35 +2564,164 @@
         };
 
         const stocks = [
-            { symbol: 'TECH', name: 'TechCorp', price: 150.25, change: '+2.5%' },
-            { symbol: 'FOOD', name: 'FoodCo', price: 85.60, change: '-1.2%' },
-            { symbol: 'AUTO', name: 'AutoTech', price: 210.75, change: '+3.8%' },
-            { symbol: 'BANK', name: 'BankFin', price: 95.30, change: '+1.5%' }
+            { 
+                symbol: 'TECH', 
+                name: 'TechCorp', 
+                sector: 'Tecnología',
+                price: 150.25, 
+                change: '+2.5%',
+                volatility: 0.8,
+                description: 'Empresa líder en desarrollo de software y servicios cloud',
+                history: []
+            },
+            { 
+                symbol: 'BANK', 
+                name: 'GlobalBank', 
+                sector: 'Financiero',
+                price: 95.30, 
+                change: '+1.5%',
+                volatility: 0.5,
+                description: 'Banco internacional con presencia en 50 países',
+                history: []
+            },
+            { 
+                symbol: 'ENRG', 
+                name: 'GreenEnergy', 
+                sector: 'Energía',
+                price: 75.60, 
+                change: '-1.2%',
+                volatility: 0.7,
+                description: 'Compañía de energías renovables y sostenibles',
+                history: []
+            },
+            { 
+                symbol: 'HEAL', 
+                name: 'HealthCare', 
+                sector: 'Salud',
+                price: 210.75, 
+                change: '+3.8%',
+                volatility: 0.6,
+                description: 'Empresa líder en investigación médica y farmacéutica',
+                history: []
+            }
+        ];
+
+        const marketEvents = [
+            {
+                title: "Crisis Económica Global",
+                description: "Tensiones geopolíticas causan incertidumbre en los mercados",
+                impact: -15,
+                sectors: ['Financiero', 'Tecnología'],
+                duration: 3 // días
+            },
+            {
+                title: "Avance Tecnológico",
+                description: "Nueva tecnología revoluciona el mercado",
+                impact: 20,
+                sectors: ['Tecnología', 'Salud'],
+                duration: 2
+            },
+            {
+                title: "Política Energética Verde",
+                description: "Nuevas regulaciones favorecen energías renovables",
+                impact: 25,
+                sectors: ['Energía'],
+                duration: 4
+            },
+            {
+                title: "Pandemia Global",
+                description: "Crisis sanitaria afecta mercados globales",
+                impact: -20,
+                sectors: ['Salud', 'Tecnología'],
+                duration: 5
+            }
         ];
 
         // Inicialización del Simulador de Mercado
         function initMarketGame() {
+            updateMarketView();
+            initializeCharts();
+            startMarketSimulation();
+        }
+
+        // Función para actualizar la vista del mercado
+        function updateMarketView() {
             const marketContainer = document.getElementById('stockMarket');
             marketContainer.innerHTML = '';
 
             stocks.forEach(stock => {
                 const col = document.createElement('div');
-                col.className = 'col-md-6 col-lg-3';
+                col.className = 'col-md-6 col-lg-3 mb-4';
                 col.innerHTML = `
                     <div class="stock-card">
-                        <h4>${stock.symbol}</h4>
-                        <p>${stock.name}</p>
-                        <p class="h4">$${stock.price}</p>
-                        <p class="text-${stock.change.includes('+') ? 'success' : 'danger'}">${stock.change}</p>
-                        <div class="btn-group w-100">
-                            <button class="btn btn-success" onclick="buyStock('${stock.symbol}')">Comprar</button>
-                            <button class="btn btn-danger" onclick="sellStock('${stock.symbol}')">Vender</button>
+                        <div class="stock-header">
+                            <h4 class="stock-symbol">${stock.symbol}</h4>
+                            <span class="stock-sector badge bg-secondary">${stock.sector}</span>
+                        </div>
+                        <p class="stock-name">${stock.name}</p>
+                        <div class="stock-price-container">
+                            <h3 class="stock-price">$${stock.price.toFixed(2)}</h3>
+                            <span class="stock-change ${stock.change.includes('+') ? 'text-success' : 'text-danger'}">
+                                ${stock.change}
+                                <i class="fas fa-${stock.change.includes('+') ? 'arrow-up' : 'arrow-down'}"></i>
+                            </span>
+                        </div>
+                        <p class="stock-description">${stock.description}</p>
+                        <div class="stock-chart" id="chart-${stock.symbol}"></div>
+                        <div class="stock-actions">
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" id="qty-${stock.symbol}" placeholder="Cantidad" min="1">
+                                <button class="btn btn-success" onclick="buyStock('${stock.symbol}')">
+                                    <i class="fas fa-shopping-cart"></i> Comprar
+                                </button>
+                            </div>
+                            <button class="btn btn-danger w-100" onclick="sellStock('${stock.symbol}')">
+                                <i class="fas fa-sell"></i> Vender
+                            </button>
                         </div>
                     </div>
                 `;
                 marketContainer.appendChild(col);
             });
-            updatePortfolio();
+        }
+
+        // Función para inicializar gráficos
+        function initializeCharts() {
+            stocks.forEach(stock => {
+                // Aquí puedes usar una librería de gráficos como Chart.js
+                // para mostrar el histórico de precios
+            });
+        }
+
+        // Simulación del mercado
+        function startMarketSimulation() {
+            setInterval(() => {
+                updateStockPrices();
+                checkForMarketEvents();
+                updateCharts();
+            }, 5000); // Actualizar cada 5 segundos
+        }
+
+        // Función mejorada para actualizar precios
+        function updateStockPrices() {
+            stocks.forEach(stock => {
+                const baseChange = (Math.random() - 0.5) * stock.volatility;
+                const marketSentiment = Math.random() > 0.5 ? 1 : -1;
+                const change = baseChange * marketSentiment;
+                
+                stock.price *= (1 + change/100);
+                stock.change = `${change >= 0 ? '+' : ''}${change.toFixed(2)}%`;
+                stock.history.push({
+                    price: stock.price,
+                    timestamp: new Date()
+                });
+                
+                // Mantener solo último día de historia
+                if (stock.history.length > 288) { // 24h * 12 (5s intervalos)
+                    stock.history.shift();
+                }
+            });
+            updateMarketView();
         }
 
         function updatePortfolio() {
@@ -468,45 +2769,174 @@
             }
         }
 
-        // Inicialización del Desafío Presupuestal
+        function triggerMarketEvent() {
+            const event = marketEvents[Math.floor(Math.random() * marketEvents.length)];
+            showNotification(`${event.title}: ${event.description}`);
+            
+            stocks.forEach(stock => {
+                stock.price *= (1 + (event.impact / 100));
+                stock.change = `${event.impact > 0 ? '+' : ''}${event.impact}%`;
+            });
+            updatePortfolio();
+        }
+
+        // Añadir sistema de notificaciones
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} market-alert`;
+            notification.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-bell'} me-2"></i>
+                ${message}
+            `;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 5000);
+        }
+
+        // Configuración mejorada del Desafío Presupuestal
+        const budgetCategories = {
+            HOUSING: "Vivienda",
+            FOOD: "Alimentación",
+            TRANSPORT: "Transporte",
+            HEALTH: "Salud",
+            EDUCATION: "Educación",
+            ENTERTAINMENT: "Entretenimiento",
+            SAVINGS: "Ahorro",
+            UTILITIES: "Servicios"
+        };
+
         const budgetItems = [
-            { id: 1, category: 'Vivienda', description: 'Alquiler', cost: 350000 },
-            { id: 2, category: 'Alimentación', description: 'Supermercado', cost: 400000 },
-            { id: 3, category: 'Transporte', description: 'Transporte público', cost: 100000 },
-            { id: 4, category: 'Entretenimiento', description: 'Streaming', cost: 150000 },
-            { id: 5, category: 'Salud', description: 'Seguro médico', cost: 750000 },
-            { id: 6, category: 'Educación', description: 'Cursos online', cost: 1500000 }
+            {
+                id: 1,
+                category: budgetCategories.HOUSING,
+                description: "Alquiler",
+                cost: 1200000,
+                essential: true,
+                icon: "fa-home",
+                tip: "Considera compartir vivienda para reducir costos"
+            },
+            {
+                id: 2,
+                category: budgetCategories.FOOD,
+                description: "Supermercado",
+                cost: 800000,
+                essential: true,
+                icon: "fa-shopping-basket",
+                tip: "Planifica tus comidas y compra al por mayor"
+            },
+            {
+                id: 3,
+                category: budgetCategories.ENTERTAINMENT,
+                description: "Netflix y Streaming",
+                cost: 150000,
+                essential: false,
+                icon: "fa-tv",
+                tip: "Comparte cuentas familiares para reducir costos"
+            },
+            {
+                id: 4,
+                category: budgetCategories.ENTERTAINMENT,
+                description: "Salidas con amigos",
+                cost: 500000,
+                essential: false,
+                icon: "fa-glass-cheers",
+                tip: "Busca actividades gratuitas o de bajo costo"
+            },
+            {
+                id: 5,
+                category: budgetCategories.FOOD,
+                description: "Comidas fuera",
+                cost: 300000,
+                essential: false,
+                icon: "fa-utensils",
+                tip: "Prepara tu almuerzo en casa"
+            },
+            {
+                id: 6,
+                category: budgetCategories.TRANSPORT,
+                description: "Gasolina",
+                cost: 250000,
+                essential: true,
+                icon: "fa-gas-pump",
+                tip: "Considera usar transporte público"
+            },
+            {
+                id: 7,
+                category: budgetCategories.UTILITIES,
+                description: "Internet",
+                cost: 80000,
+                essential: true,
+                icon: "fa-wifi",
+                tip: "Compara planes y proveedores"
+            },
+            {
+                id: 8,
+                category: budgetCategories.HEALTH,
+                description: "Gimnasio",
+                cost: 100000,
+                essential: false,
+                icon: "fa-dumbbell",
+                tip: "Considera ejercitarte al aire libre"
+            },
+            {
+                id: 9,
+                category: budgetCategories.SHOPPING,
+                description: "Ropa",
+                cost: 150000,
+                essential: false,
+                icon: "fa-tshirt",
+                tip: "Aprovecha las temporadas de descuentos"
+            },
+            {
+                id: 10,
+                category: budgetCategories.EDUCATION,
+                description: "Cursos online",
+                cost: 200000,
+                essential: false,
+                icon: "fa-laptop",
+                tip: "Busca cursos gratuitos o becas"
+            }
+        ];
+
+        const budgetScenarios = [
+            {
+                title: "Emergencia Médica",
+                description: "Necesitas atención médica urgente",
+                cost: 500000,
+                category: budgetCategories.HEALTH,
+                urgency: "alta",
+                icon: "fa-ambulance",
+                consequences: {
+                    accept: "Mantienes tu salud pero necesitas ajustar el presupuesto",
+                    reject: "Podrías enfrentar problemas de salud más graves después"
+                }
+            },
+            {
+                title: "Oportunidad de Inversión",
+                description: "Curso de especialización con 50% de descuento",
+                cost: 300000,
+                category: budgetCategories.EDUCATION,
+                urgency: "media",
+                icon: "fa-book",
+                consequences: {
+                    accept: "Mejoras tus habilidades y posibilidades de ingreso futuro",
+                    reject: "Pierdes una oportunidad de desarrollo profesional"
+                }
+            },
+            {
+                title: "Avería en el Hogar",
+                description: "La tubería necesita reparación urgente",
+                cost: 250000,
+                category: budgetCategories.HOUSING,
+                urgency: "alta",
+                icon: "fa-wrench",
+                consequences: {
+                    accept: "Evitas daños mayores en tu vivienda",
+                    reject: "Los daños podrían empeorar y costar más después"
+                }
+            }
         ];
 
         let selectedBudgetItems = [];
-        const totalBudget = 3000000;
-
-
-        function initBudgetGame() {
-            const container = document.getElementById('budgetItems');
-            container.innerHTML = '';
-
-            budgetItems.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'budget-item';
-                div.innerHTML = `
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5>${item.category}</h5>
-                            <p class="mb-0">${item.description} - $${item.cost}</p>
-                        </div>
-                        <button 
-                            class="btn ${selectedBudgetItems.includes(item.id) ? 'btn-danger' : 'btn-success'}"
-                            onclick="toggleBudgetItem(${item.id})"
-                        >
-                            ${selectedBudgetItems.includes(item.id) ? 'Quitar' : 'Agregar'}
-                        </button>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-            updateBudget();
-        }
 
         function toggleBudgetItem(itemId) {
             const index = selectedBudgetItems.indexOf(itemId);
@@ -515,139 +2945,665 @@
             } else {
                 selectedBudgetItems.splice(index, 1);
             }
-            initBudgetGame();
+            updateBudgetView();
         }
 
-        function updateBudget() {
+        function initBudgetGame() {
+            const container = document.getElementById('budgetGame');
+            container.innerHTML = `
+                <div class="game-container">
+                    <h2 class="game-title mb-4">
+                        <i class="fas fa-wallet me-3"></i>
+                        Desafío Presupuestal
+                    </h2>
+                    
+                    <!-- Dashboard Principal -->
+                    <div class="budget-dashboard mb-4">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="budget-stat-card">
+                                    <i class="fas fa-money-bill-wave mb-3"></i>
+                                    <h3>Presupuesto Total</h3>
+                                    <h2>$3,000,000</h2>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="budget-stat-card">
+                                    <i class="fas fa-hand-holding-usd mb-3"></i>
+                                    <h3>Disponible</h3>
+                                    <h2>$<span id="budgetRemaining">3000000</span></h2>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="budget-stat-card">
+                                    <i class="fas fa-chart-pie mb-3"></i>
+                                    <h3>Gastos Esenciales</h3>
+                                    <h2><span id="essentialExpenses">0</span>%</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Items -->
+                    <div class="budget-items-container">
+                        <h4 class="mb-4"><i class="fas fa-list me-2"></i>Gastos Mensuales</h4>
+                        <div id="budgetItems" class="row g-4">
+                            <!-- Se llenará dinámicamente -->
+                        </div>
+                    </div>
+
+                    <!-- Categorías de Presupuesto -->
+                    <div class="budget-categories mt-5">
+                        <h4 class="mb-4"><i class="fas fa-tags me-2"></i>Categorías de Gastos</h4>
+                        <div class="row g-4" id="categoryCharts">
+                            <!-- Se llenará dinámicamente -->
+                        </div>
+                    </div>
+
+                    <!-- Escenarios -->
+                    <div id="scenarioContainer" class="mt-5">
+                        <!-- Los escenarios aparecerán aquí -->
+                    </div>
+                </div>
+            `;
+
+            updateBudgetView();
+            startBudgetScenarios();
+        }
+
+        function updateBudgetView() {
+            const itemsContainer = document.getElementById('budgetItems');
+            itemsContainer.innerHTML = '';
+
+            budgetItems.forEach(item => {
+                const col = document.createElement('div');
+                col.className = 'col-md-6 col-lg-4 mb-3';
+                col.innerHTML = `
+                    <div class="budget-item ${selectedBudgetItems.includes(item.id) ? 'selected' : ''}">
+                        <div class="budget-item-header">
+                            <i class="fas ${item.icon}"></i>
+                            <span class="badge ${item.essential ? 'bg-danger' : 'bg-info'}">
+                                ${item.essential ? 'Esencial' : 'Opcional'}
+                            </span>
+                        </div>
+                        <h5>${item.category}</h5>
+                        <p class="description">${item.description}</p>
+                        <div class="cost-container">
+                            <span class="cost">$${item.cost.toLocaleString()}</span>
+                            <button 
+                                class="btn ${selectedBudgetItems.includes(item.id) ? 'btn-danger' : 'btn-success'}"
+                                onclick="toggleBudgetItem(${item.id})"
+                            >
+                                ${selectedBudgetItems.includes(item.id) ? 'Quitar' : 'Agregar'}
+                            </button>
+                        </div>
+                        <div class="budget-tip">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>${item.tip}</span>
+                        </div>
+                    </div>
+                `;
+                itemsContainer.appendChild(col);
+            });
+
+            updateBudgetStats();
+        }
+
+        function updateBudgetStats() {
+            const totalBudget = 3000000;
             const totalSpent = selectedBudgetItems.reduce((total, itemId) => {
                 const item = budgetItems.find(i => i.id === itemId);
                 return total + item.cost;
             }, 0);
 
-            const remaining = totalBudget - totalSpent;
-            const percentageRemaining = (remaining / totalBudget) * 100;
+            const essentialExpenses = selectedBudgetItems.reduce((total, itemId) => {
+                const item = budgetItems.find(i => i.id === itemId);
+                return total + (item.essential ? item.cost : 0);
+            }, 0);
 
-            document.getElementById('budgetRemaining').textContent = remaining.toFixed(2);
-            document.querySelector('.progress-bar').style.width = `${percentageRemaining}%`;
-            document.querySelector('.progress-bar').className = `progress-bar ${percentageRemaining < 20 ? 'bg-danger' : percentageRemaining < 50 ? 'bg-warning' : 'bg-success'
-                }`;
+            const remaining = totalBudget - totalSpent;
+            const essentialPercentage = Math.round((essentialExpenses / totalBudget) * 100);
+            
+            // Actualizar el porcentaje de gastos esenciales en el dashboard
+            document.getElementById('essentialExpenses').textContent = essentialPercentage;
+            document.getElementById('budgetRemaining').textContent = remaining.toLocaleString();
+
+            // Mostrar mensajes según el estado del presupuesto
+            if (remaining <= 0) {
+                showPedritoMessage('gameOver');
+                disableAllItems();
+            } else if (remaining <= totalBudget * 0.2) {
+                showPedritoMessage('danger');
+            } else if (remaining <= totalBudget * 0.4) {
+                showPedritoMessage('warning');
+            } else if (selectedBudgetItems.length > 0 && remaining >= totalBudget * 0.5) {
+                showPedritoMessage('success');
+            }
+
+            updateCategoryCharts();
+            updateEssentialStats(essentialPercentage);
+        }
+
+        function updateEssentialStats(percentage) {
+            const essentialCard = document.querySelector('.budget-stat-card:last-child');
+            const essentialText = document.getElementById('essentialExpenses');
+            
+            // Cambiar color según el porcentaje
+            if (percentage >= 50) {
+                essentialCard.style.background = 'rgba(40, 167, 69, 0.2)'; // Verde para buen balance
+                essentialText.style.color = '#28a745';
+            } else if (percentage >= 30) {
+                essentialCard.style.background = 'rgba(255, 193, 7, 0.2)'; // Amarillo para advertencia
+                essentialText.style.color = '#ffc107';
+            } else {
+                essentialCard.style.background = 'rgba(220, 53, 69, 0.2)'; // Rojo para alerta
+                essentialText.style.color = '#dc3545';
+            }
+        }
+
+        function updateCategoryCharts() {
+            const categoryTotals = {};
+            selectedBudgetItems.forEach(itemId => {
+                const item = budgetItems.find(i => i.id === itemId);
+                categoryTotals[item.category] = (categoryTotals[item.category] || 0) + item.cost;
+            });
+
+            const chartsContainer = document.getElementById('categoryCharts');
+            chartsContainer.innerHTML = '';
+
+            Object.entries(categoryTotals).forEach(([category, total]) => {
+                const col = document.createElement('div');
+                col.className = 'col-md-3 mb-3';
+                col.innerHTML = `
+                    <div class="category-chart">
+                        <h6>${category}</h6>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: ${(total / 3000000) * 100}%"></div>
+                        </div>
+                        <span class="amount">$${total.toLocaleString()}</span>
+                    </div>
+                `;
+                chartsContainer.appendChild(col);
+            });
         }
 
         // Quiz Financiero
-        const quizQuestions = [
+        const quizCategories = {
+            BASIC: "Conceptos Básicos",
+            INVESTMENT: "Inversiones",
+            SAVINGS: "Ahorro",
+            CREDIT: "Créditos"
+        };
+
+        const enhancedQuizQuestions = [
+            // Conceptos Básicos
+            {
+                question: "¿Qué es la inflación?",
+                options: [
+                    "Aumento general de precios",
+                    "Reducción de impuestos",
+                    "Aumento de salarios",
+                    "Crecimiento económico"
+                ],
+                correct: 0,
+                category: quizCategories.BASIC,
+                explanation: "La inflación es el aumento generalizado y sostenido de los precios de bienes y servicios en una economía."
+            },
             {
                 question: "¿Qué es un presupuesto?",
                 options: [
-                    "Un registro de gastos pasados",
-                    "Un plan para gastar e invertir dinero futuro",
-                    "Una lista de deudas",
-                    "Un tipo de cuenta bancaria"
+                    "Una lista de deseos de compra",
+                    "Un plan de ingresos y gastos",
+                    "Una deuda bancaria",
+                    "Un tipo de inversión"
                 ],
-                correct: 1
+                correct: 1,
+                category: quizCategories.BASIC,
+                explanation: "Un presupuesto es una herramienta financiera que ayuda a planificar y controlar los ingresos y gastos durante un período determinado."
+            },
+
+            // Inversiones
+            {
+                question: "¿Qué es un interés compuesto?",
+                options: [
+                    "Interés sobre el capital inicial solamente",
+                    "Interés sobre el capital más los intereses acumulados",
+                    "Una tasa fija de interés",
+                    "Un tipo de préstamo bancario"
+                ],
+                correct: 1,
+                category: quizCategories.INVESTMENT,
+                explanation: "El interés compuesto es el interés que se genera sobre el capital inicial más los intereses acumulados de períodos anteriores."
+            },
+            {
+                question: "¿Qué es la diversificación de inversiones?",
+                options: [
+                    "Invertir todo el dinero en una sola empresa",
+                    "Guardar todo el dinero en efectivo",
+                    "Distribuir las inversiones en diferentes activos",
+                    "Pedir múltiples préstamos"
+                ],
+                correct: 2,
+                category: quizCategories.INVESTMENT,
+                explanation: "La diversificación consiste en distribuir las inversiones en diferentes tipos de activos para reducir el riesgo."
             },
             {
                 question: "¿Qué es una acción?",
                 options: [
-                    "Un préstamo bancario",
-                    "Una deuda empresarial",
+                    "Un préstamo al gobierno",
                     "Una parte de la propiedad de una empresa",
-                    "Un tipo de seguro"
+                    "Un depósito bancario",
+                    "Una deuda empresarial"
                 ],
-                correct: 2
+                correct: 1,
+                category: quizCategories.INVESTMENT,
+                explanation: "Una acción representa una parte de la propiedad de una empresa y otorga derechos sobre sus beneficios."
+            },
+
+            // Ahorro
+            {
+                question: "¿Cuál es la regla del 50/30/20 para el ahorro?",
+                options: [
+                    "50% necesidades, 30% deseos, 20% ahorro",
+                    "50% ahorro, 30% necesidades, 20% deseos",
+                    "50% deseos, 30% ahorro, 20% necesidades",
+                    "50% inversión, 30% gastos, 20% ahorro"
+                ],
+                correct: 0,
+                category: quizCategories.SAVINGS,
+                explanation: "La regla 50/30/20 sugiere destinar 50% del ingreso a necesidades básicas, 30% a deseos y 20% al ahorro."
             },
             {
-                question: "¿Qué es el interés compuesto?",
+                question: "¿Qué es un fondo de emergencia?",
                 options: [
-                    "Un tipo de préstamo",
-                    "Interés sobre el capital inicial solamente",
-                    "Interés sobre el interés más el capital",
-                    "Una tasa fija de interés"
+                    "Dinero para vacaciones",
+                    "Ahorros para gastos imprevistos",
+                    "Inversión en la bolsa",
+                    "Préstamo bancario"
                 ],
-                correct: 2
+                correct: 1,
+                category: quizCategories.SAVINGS,
+                explanation: "Un fondo de emergencia es un ahorro destinado a cubrir gastos imprevistos o períodos sin ingresos."
+            },
+
+            // Créditos
+            {
+                question: "¿Qué es el historial crediticio?",
+                options: [
+                    "Una lista de compras",
+                    "El registro de comportamiento de pago de créditos",
+                    "Un tipo de cuenta bancaria",
+                    "Un plan de ahorro"
+                ],
+                correct: 1,
+                category: quizCategories.CREDIT,
+                explanation: "El historial crediticio es un registro que muestra cómo has manejado tus deudas y pagos a lo largo del tiempo."
+            },
+            {
+                question: "¿Qué es la tasa de interés anual efectiva?",
+                options: [
+                    "El monto total del préstamo",
+                    "El plazo del crédito",
+                    "El costo real anual del crédito incluyendo todos los cargos",
+                    "El pago mensual"
+                ],
+                correct: 2,
+                category: quizCategories.CREDIT,
+                explanation: "La tasa efectiva anual representa el costo real del crédito en un año, incluyendo todos los cargos y la frecuencia de capitalización."
+            },
+            {
+                question: "¿Qué es la capacidad de endeudamiento?",
+                options: [
+                    "El total de deudas que tienes",
+                    "El monto máximo que puedes pedir prestado de manera responsable",
+                    "El valor de tus ahorros",
+                    "El total de tus ingresos"
+                ],
+                correct: 1,
+                category: quizCategories.CREDIT,
+                explanation: "La capacidad de endeudamiento es el monto máximo de deuda que puedes asumir de manera responsable según tus ingresos y gastos."
+            },
+            {
+                question: "¿Qué es un activo financiero?",
+                options: [
+                    "Una deuda que debes pagar",
+                    "Un bien que genera ingresos o aumenta de valor",
+                    "Un gasto mensual",
+                    "Una tarjeta de crédito"
+                ],
+                correct: 1,
+                category: quizCategories.INVESTMENT,
+                explanation: "Un activo financiero es un bien o inversión que tiene el potencial de generar ingresos o aumentar su valor con el tiempo."
+            },
+            {
+                question: "¿Qué es la liquidez?",
+                options: [
+                    "La facilidad para convertir un activo en efectivo",
+                    "El total de deudas",
+                    "El dinero en una cuenta de ahorro",
+                    "El valor de las propiedades"
+                ],
+                correct: 0,
+                category: quizCategories.BASIC,
+                explanation: "La liquidez se refiere a la facilidad y rapidez con la que un activo puede convertirse en efectivo sin perder valor significativo."
             }
         ];
 
         let currentQuestion = 0;
         let score = 0;
+        let quizStarted = false;
 
-        function initQuizGame() {
-            const question = quizQuestions[currentQuestion];
-            document.getElementById('questionText').textContent = question.question;
-            document.getElementById('score').textContent = score;
+        function initQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            quizStarted = true;
+            showQuestion();
+            updateQuizProgress();
+        }
 
-            const optionsContainer = document.getElementById('options');
-            optionsContainer.innerHTML = '';
+        function showQuestion() {
+            const quizContainer = document.getElementById('quizContainer');
+            const question = enhancedQuizQuestions[currentQuestion];
 
-            question.options.forEach((option, index) => {
-                const button = document.createElement('button');
-                button.className = 'option-btn';
-                button.textContent = option;
-                button.onclick = () => checkAnswer(index);
-                optionsContainer.appendChild(button);
-            });
+            quizContainer.innerHTML = `
+                <div class="quiz-card">
+                    <div class="quiz-progress">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: ${(currentQuestion / enhancedQuizQuestions.length) * 100}%"></div>
+                        </div>
+                        <span>Pregunta ${currentQuestion + 1} de ${enhancedQuizQuestions.length}</span>
+                    </div>
+                    
+                    <div class="quiz-category">
+                        <span class="badge bg-primary">${question.category}</span>
+                    </div>
 
-            document.getElementById('feedback').style.display = 'none';
-            document.getElementById('nextQuestion').style.display = 'none';
+                    <h4 class="quiz-question">${question.question}</h4>
+                    
+                    <div class="options-container">
+                        ${question.options.map((option, index) => `
+                            <button class="option-btn btn btn-outline-primary w-100 mb-2" 
+                                    onclick="checkAnswer(${index})">
+                                ${option}
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <div id="feedback" class="mt-3"></div>
+                </div>
+            `;
         }
 
         function checkAnswer(selectedIndex) {
-            const question = quizQuestions[currentQuestion];
+            if (!quizStarted) return;
+
+            const question = enhancedQuizQuestions[currentQuestion];
             const feedback = document.getElementById('feedback');
             const options = document.querySelectorAll('.option-btn');
 
             options.forEach(option => option.disabled = true);
-            options[question.correct].classList.add('correct');
 
             if (selectedIndex === question.correct) {
                 score += 10;
-                feedback.className = 'feedback-message success-message';
-                feedback.textContent = '¡Correcto! +10 puntos';
+                feedback.innerHTML = `
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i> ¡Correcto! ${question.explanation}
+                    </div>
+                    <button class="btn btn-primary mt-3" onclick="${
+                        currentQuestion < enhancedQuizQuestions.length - 1 ? 'nextQuestion()' : 'showResults()'
+                    }">
+                        ${currentQuestion < enhancedQuizQuestions.length - 1 ? 'Siguiente Pregunta' : 'Ver Resultados'}
+                    </button>
+                `;
+                options[selectedIndex].classList.add('btn-success');
             } else {
-                options[selectedIndex].classList.add('incorrect');
-                feedback.className = 'feedback-message error-message';
-                feedback.textContent = 'Incorrecto. La respuesta correcta está marcada en verde.';
+                feedback.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-times-circle"></i> Incorrecto. ${question.explanation}
+                    </div>
+                    <button class="btn btn-primary mt-3" onclick="${
+                        currentQuestion < enhancedQuizQuestions.length - 1 ? 'nextQuestion()' : 'showResults()'
+                    }">
+                        ${currentQuestion < enhancedQuizQuestions.length - 1 ? 'Siguiente Pregunta' : 'Ver Resultados'}
+                    </button>
+                `;
+                options[selectedIndex].classList.add('btn-danger');
+                options[question.correct].classList.add('btn-success');
             }
-
-            feedback.style.display = 'block';
-            document.getElementById('nextQuestion').style.display = 'block';
-            document.getElementById('score').textContent = score;
         }
 
         function nextQuestion() {
             currentQuestion++;
-            if (currentQuestion < quizQuestions.length) {
-                initQuizGame();
-            } else {
-                const quizCard = document.querySelector('.quiz-card');
-                quizCard.innerHTML = `
-                    <h3>¡Quiz completado!</h3>
-                    <p>Puntuación final: ${score} de ${quizQuestions.length * 10}</p>
-                    <button class="btn btn-primary" onclick="resetQuiz()">Reiniciar Quiz</button>
-                `;
-            }
+            showQuestion();
+            updateQuizProgress();
+        }
+
+        function showResults() {
+            const quizContainer = document.getElementById('quizContainer');
+            const percentage = (score / (enhancedQuizQuestions.length * 10)) * 100;
+            
+            quizContainer.innerHTML = `
+                <div class="quiz-results">
+                    <h3>¡Quiz Completado!</h3>
+                    <div class="score-circle">
+                        <span class="score-number">${percentage}%</span>
+                    </div>
+                    <p class="mt-3">Has obtenido ${score} de ${enhancedQuizQuestions.length * 10} puntos posibles</p>
+                    
+                    <div class="feedback-message mt-3">
+                        ${getFeedbackMessage(percentage)}
+                    </div>
+                    
+                    <button class="btn btn-primary mt-4" onclick="resetQuiz()">
+                        <i class="fas fa-redo"></i> Intentar de Nuevo
+                    </button>
+                </div>
+            `;
         }
 
         function resetQuiz() {
             currentQuestion = 0;
             score = 0;
-            initQuizGame();
+            initQuiz();
         }
 
-        // Reto del Ahorro
-        const savingsGoalAmount = 5000000;
-        let currentSavingsAmount = 0;
-        const savingsTipsList = [
-            "Establece metas de ahorro específicas y alcanzables",
-            "Crea un presupuesto mensual y síguelo",
-            "Ahorra automáticamente un porcentaje de tus ingresos",
-            "Reduce gastos innecesarios",
-            "Compara precios antes de comprar"
+        function getFeedbackMessage(percentage) {
+            if (percentage >= 90) {
+                return `
+                    <div class="alert alert-success">
+                        <i class="fas fa-trophy"></i> ¡Excelente! Eres un experto en finanzas.
+                    </div>
+                `;
+            } else if (percentage >= 70) {
+                return `
+                    <div class="alert alert-info">
+                        <i class="fas fa-star"></i> ¡Muy bien! Tienes buenos conocimientos financieros.
+                    </div>
+                `;
+            } else if (percentage >= 50) {
+                return `
+                    <div class="alert alert-warning">
+                        <i class="fas fa-book"></i> Bien, pero puedes mejorar. ¡Sigue aprendiendo!
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-circle"></i> Necesitas repasar los conceptos financieros básicos.
+                    </div>
+                `;
+            }
+        }
+
+        function updateQuizProgress() {
+            const progressBar = document.querySelector('.quiz-progress .progress-bar');
+            if (progressBar) {
+                progressBar.style.width = `${(currentQuestion / enhancedQuizQuestions.length) * 100}%`;
+            }
+        }
+
+        // Configuración del Reto del Ahorro
+        const savingsConfig = {
+            goalAmount: 5000000,
+            initialAmount: 0,
+            maxTransaction: 1000000,
+            bonusMultiplier: 1.1,
+            streakBonus: 50000,
+            dailyGoal: 100000
+        };
+
+        const savingsChallenges = [
+            {
+                id: 1,
+                title: "Reto Cafetería",
+                description: "Prepara café en casa por una semana en lugar de comprarlo",
+                savings: 50000,
+                duration: "7 días",
+                difficulty: "Fácil",
+                icon: "fa-coffee",
+                tips: ["Compra un termo", "Aprende a hacer café casero", "Calcula el ahorro diario"]
+            },
+            {
+                id: 2,
+                title: "Reto Transporte",
+                description: "Usa transporte público o bicicleta por un mes",
+                savings: 200000,
+                duration: "30 días",
+                difficulty: "Medio",
+                icon: "fa-bicycle",
+                tips: ["Planifica tus rutas", "Compra tarjeta de transporte", "Comparte viajes"]
+            },
+            // Agregar más retos...
         ];
 
+        const savingsAchievements = [
+            {
+                amount: 1000000,
+                title: "¡Primer Millón!",
+                icon: "fa-star",
+                bonus: 100000,
+                message: "¡Excelente! Has alcanzado tu primer millón"
+            },
+            {
+                amount: 2500000,
+                title: "Ahorrador Experto",
+                icon: "fa-award",
+                bonus: 250000,
+                message: "¡Vas por buen camino! Mantén el ritmo"
+            },
+            {
+                amount: 4000000,
+                title: "Maestro del Ahorro",
+                icon: "fa-crown",
+                bonus: 500000,
+                message: "¡Increíble! Eres un ejemplo de disciplina financiera"
+            }
+        ];
+
+        let currentSavings = 0;
+        let savingsStreak = 0;
+        let lastSavingDate = null;
+        let completedChallenges = [];
+
         function initSavingsGame() {
+            const container = document.getElementById('savingsGame');
+            container.innerHTML = `
+                <div class="savings-dashboard">
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="savings-stat-card">
+                                <i class="fas fa-piggy-bank"></i>
+                                <h3>Ahorro Total</h3>
+                                <h2>$<span id="currentSavings">0</span></h2>
+                                <div class="progress mt-3">
+                                    <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="savings-stat-card">
+                                <i class="fas fa-fire"></i>
+                                <h3>Racha de Ahorro</h3>
+                                <h2><span id="savingsStreak">0</span> días</h2>
+                                <p class="streak-bonus">Bonus: $${savingsConfig.streakBonus.toLocaleString()} por día</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="savings-stat-card">
+                                <i class="fas fa-trophy"></i>
+                                <h3>Meta</h3>
+                                <h2>$${savingsConfig.goalAmount.toLocaleString()}</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="savings-input-container mt-4">
+                        <h4>Registrar Ahorro</h4>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" id="savingsInput" class="form-control" placeholder="Cantidad a ahorrar">
+                            <button class="btn btn-success" onclick="addSavings()">
+                                <i class="fas fa-plus"></i> Agregar
+                            </button>
+                        </div>
+                        <small class="text-muted">Máximo por transacción: $${savingsConfig.maxTransaction.toLocaleString()}</small>
+                    </div>
+
+                    <div class="savings-challenges mt-5">
+                        <h4>Retos de Ahorro Activos</h4>
+                        <div class="row g-4" id="challengesContainer"></div>
+                    </div>
+
+                    <div class="savings-achievements mt-5">
+                        <h4>Logros</h4>
+                        <div class="row g-4" id="achievementsContainer"></div>
+                    </div>
+                </div>
+            `;
+
+            // Renderizar los retos y logros después de crear el contenedor
+            document.getElementById('challengesContainer').innerHTML = renderChallenges();
+            document.getElementById('achievementsContainer').innerHTML = renderAchievements();
             updateSavingsProgress();
-            const tipsList = document.getElementById('savingsTips');
-            tipsList.innerHTML = savingsTipsList.map(tip => `<li>${tip}</li>`).join('');
+        }
+
+        function renderChallenges() {
+            return savingsChallenges.map(challenge => `
+                <div class="col-md-4">
+                    <div class="challenge-card ${completedChallenges.includes(challenge.id) ? 'completed' : ''}">
+                        <div class="challenge-icon">
+                            <i class="fas ${challenge.icon}"></i>
+                        </div>
+                        <h5>${challenge.title}</h5>
+                        <p>${challenge.description}</p>
+                        <div class="challenge-details">
+                            <span class="badge bg-primary">${challenge.duration}</span>
+                            <span class="badge bg-info">${challenge.difficulty}</span>
+                        </div>
+                        <div class="savings-amount">Ahorro potencial: $${challenge.savings.toLocaleString()}</div>
+                        <button class="btn btn-outline-primary w-100 mt-3" 
+                                onclick="startChallenge(${challenge.id})"
+                                ${completedChallenges.includes(challenge.id) ? 'disabled' : ''}>
+                            ${completedChallenges.includes(challenge.id) ? 'Completado' : 'Comenzar Reto'}
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderAchievements() {
+            return savingsAchievements.map(achievement => `
+                <div class="col-md-4">
+                    <div class="achievement-card ${currentSavings >= achievement.amount ? 'unlocked' : 'locked'}">
+                        <div class="achievement-icon">
+                            <i class="fas ${achievement.icon}"></i>
+                        </div>
+                        <h5>${achievement.title}</h5>
+                        <p>Meta: $${achievement.amount.toLocaleString()}</p>
+                        <div class="bonus-amount">Bonus: $${achievement.bonus.toLocaleString()}</div>
+                    </div>
+                </div>
+            `).join('');
         }
 
         function addSavings() {
@@ -655,35 +3611,1431 @@
             const amount = parseFloat(input.value);
 
             if (isNaN(amount) || amount <= 0) {
-                alert('Por favor ingresa una cantidad válida');
+                showNotification('Por favor ingresa una cantidad válida', 'danger');
                 return;
             }
 
-            currentSavingsAmount += amount;
+            if (amount > savingsConfig.maxTransaction) {
+                showNotification(`El monto máximo por transacción es de $${savingsConfig.maxTransaction.toLocaleString()}`, 'warning');
+                return;
+            }
+
+            // Verificar racha diaria
+            const today = new Date().toDateString();
+            if (lastSavingDate !== today) {
+                savingsStreak++;
+                lastSavingDate = today;
+                // Aplicar bonus por racha
+                const streakBonus = savingsConfig.streakBonus * savingsStreak;
+                currentSavings += streakBonus;
+                showNotification(`¡Bonus por racha de ${savingsStreak} días! +$${streakBonus.toLocaleString()}`, 'success');
+            }
+
+            currentSavings += amount;
             input.value = '';
             updateSavingsProgress();
-
-            if (currentSavingsAmount >= savingsGoalAmount) {
-                alert('¡Felicitaciones! Has alcanzado tu meta de ahorro');
-            }
+            checkAchievements();
         }
 
         function updateSavingsProgress() {
-            const percentage = (currentSavingsAmount / savingsGoalAmount) * 100;
-            document.getElementById('currentSavings').textContent = currentSavingsAmount.toFixed(2);
-            document.querySelector('#savingsGame .progress-bar').style.width = `${Math.min(percentage, 100)}%`;
+            const percentage = (currentSavings / savingsConfig.goalAmount) * 100;
+            document.getElementById('currentSavings').textContent = currentSavings.toLocaleString();
+            document.querySelector('.savings-stat-card .progress-bar').style.width = `${Math.min(percentage, 100)}%`;
+            document.getElementById('savingsStreak').textContent = savingsStreak;
+        }
+
+        function startChallenge(challengeId) {
+            const challenge = savingsChallenges.find(c => c.id === challengeId);
+            showChallengeModal(challenge);
+        }
+
+        function showChallengeModal(challenge) {
+            const modal = document.createElement('div');
+            modal.className = 'challenge-modal';
+            modal.innerHTML = `
+                <div class="challenge-modal-content">
+                    <h4>${challenge.title}</h4>
+                    <p>${challenge.description}</p>
+                    <div class="tips-container">
+                        <h5>Tips para completar el reto:</h5>
+                        <ul>
+                            ${challenge.tips.map(tip => `<li>${tip}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <button class="btn btn-success" onclick="acceptChallenge(${challenge.id})">
+                        ¡Acepto el Reto!
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function acceptChallenge(challengeId) {
+            completedChallenges.push(challengeId);
+            const challenge = savingsChallenges.find(c => c.id === challengeId);
+            currentSavings += challenge.savings;
+            updateSavingsProgress();
+            document.querySelector('.challenge-modal').remove();
+            showNotification(`¡Reto completado! Has ganado $${challenge.savings.toLocaleString()}`, 'success');
+            document.getElementById('challengesContainer').innerHTML = renderChallenges();
+        }
+
+        function checkAchievements() {
+            savingsAchievements.forEach(achievement => {
+                if (currentSavings >= achievement.amount && !achievement.achieved) {
+                    achievement.achieved = true;
+                    currentSavings += achievement.bonus;
+                    showAchievementUnlocked(achievement);
+                    updateSavingsProgress();
+                }
+            });
+            document.getElementById('achievementsContainer').innerHTML = renderAchievements();
         }
 
         // Inicialización de todos los juegos
         document.addEventListener('DOMContentLoaded', function () {
             initMarketGame();
             initBudgetGame();
-            initQuizGame();
+            initQuiz();
             initSavingsGame();
 
             // Event listeners
             document.getElementById('nextQuestion').addEventListener('click', nextQuestion);
         });
+
+        // Corregir la función handleScenario que faltaba
+        function handleScenario(accept, cost) {
+            if (accept) {
+                if (parseFloat(document.getElementById('budgetRemaining').textContent) >= cost) {
+                    const remaining = parseFloat(document.getElementById('budgetRemaining').textContent) - cost;
+                    document.getElementById('budgetRemaining').textContent = remaining.toFixed(2);
+                    showNotification('Has manejado exitosamente el escenario', 'success');
+                } else {
+                    showNotification('No tienes suficiente presupuesto para esta decisión', 'danger');
+                }
+            }
+            // Remover el escenario
+            event.target.closest('.budget-scenario-card').remove();
+        }
+
+        // Corregir la función updateStockPrices que faltaba
+        function updateStockPrices() {
+            stocks.forEach(stock => {
+                // Generar cambio aleatorio entre -5% y +5%
+                const change = (Math.random() - 0.5) * 10;
+                stock.price *= (1 + change/100);
+                stock.change = `${change >= 0 ? '+' : ''}${change.toFixed(1)}%`;
+            });
+            initMarketGame(); // Actualizar la visualización
+        }
+
+        // Mensajes motivacionales de Pedrito el Financiero
+        const pedritoMessages = {
+            warning: [
+                "¡Ojo! Pedrito el Financiero te recuerda que hay que cuidar el presupuesto 🧐",
+                "¡Cuidado! Estás gastando más de lo recomendado 💸",
+                "¡Alto ahí! Pedrito sugiere revisar tus gastos no esenciales 🚫"
+            ],
+            danger: [
+                "¡ALERTA ROJA! Pedrito está preocupado por tus finanzas 😱",
+                "¡SOS Financiero! Estás al borde del sobregasto 🆘",
+                "¡Momento de reflexión! Tus gastos están fuera de control 🤯"
+            ],
+            gameOver: [
+                "😢 ¡No papu! Pedrito está muy decepcionado. Has gastado todo tu presupuesto sin pensar en el futuro.",
+                "😔 ¡Ay no! Pedrito dice que debes aprender a priorizar tus gastos. ¡Inténtalo de nuevo!",
+                "😫 ¡Pedrito está triste! Llegaste a $0 por no seguir un presupuesto responsable.",
+                "🚫 ¡Game Over! Pedrito sugiere que revises tus decisiones financieras y lo intentes nuevamente."
+            ],
+            success: [
+                "¡Bien hecho! Pedrito está orgulloso de tu manejo financiero 🌟",
+                "¡Excelente! Estás siendo responsable como Pedrito 👏",
+                "¡Sigue así! Pedrito ve un futuro financiero brillante 🎯"
+            ]
+        };
+
+        // Función para mostrar mensajes de Pedrito
+        function showPedritoMessage(type) {
+            const messages = pedritoMessages[type];
+            const message = messages[Math.floor(Math.random() * messages.length)];
+            
+            const pedritoAlert = document.createElement('div');
+            pedritoAlert.className = `pedrito-alert alert alert-${type === 'gameOver' ? 'danger' : 
+                type === 'success' ? 'success' : 'warning'}`;
+            
+            pedritoAlert.innerHTML = `
+                <div class="pedrito-message">
+                    <div class="pedrito-icon">
+                        <i class="fas ${type === 'gameOver' ? 'fa-sad-tear' : 
+                            type === 'success' ? 'fa-smile-beam' : 'fa-meh'} fa-3x"></i>
+                    </div>
+                    <div class="message-content">
+                        <h5>Mensaje de Pedrito el Financiero:</h5>
+                        <p>${message}</p>
+                        ${type === 'gameOver' ? `
+                            <button class="btn btn-primary mt-3" onclick="resetBudget()">
+                                <i class="fas fa-redo"></i> Intentar de nuevo
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(pedritoAlert);
+            
+            if (type === 'gameOver') {
+                // El mensaje de game over permanece hasta que el usuario haga clic en "Intentar de nuevo"
+                pedritoAlert.querySelector('button').addEventListener('click', () => {
+                    pedritoAlert.remove();
+                });
+            } else {
+                setTimeout(() => {
+                    pedritoAlert.remove();
+                }, 5000);
+            }
+        }
+
+        // Función para deshabilitar items cuando se acaba el presupuesto
+        function disableAllItems() {
+            const buttons = document.querySelectorAll('.budget-item button');
+            buttons.forEach(button => {
+                if (!selectedBudgetItems.includes(parseInt(button.dataset.itemId))) {
+                    button.disabled = true;
+                    button.classList.add('disabled');
+                }
+            });
+        }
+
+        // Función para reiniciar el presupuesto
+        function resetBudget() {
+            selectedBudgetItems = [];
+            updateBudgetView();
+            const buttons = document.querySelectorAll('.budget-item button');
+            buttons.forEach(button => {
+                button.disabled = false;
+                button.classList.remove('disabled');
+            });
+            showPedritoMessage('success');
+        }
+
+        // Función para mostrar notificaciones
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} notification`;
+            notification.innerHTML = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Asegurarse de que el juego se inicie cuando el documento esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            initSavingsGame();
+        });
+
+        // Nuevos juegos financieros
+        const financeGames = {
+            investmentSimulator: {
+                title: "Simulador de Inversiones",
+                icon: "fa-chart-line",
+                description: "Aprende a invertir con dinero virtual"
+            },
+            businessTycoon: {
+                title: "Emprendedor Virtual",
+                icon: "fa-store",
+                description: "Administra tu propio negocio"
+            },
+            stockMarketGame: {
+                title: "Mercado de Valores",
+                icon: "fa-exchange-alt",
+                description: "Compra y vende acciones"
+            }
+        };
+
+        // Inicializar sección de nuevos juegos
+        function initNewGames() {
+            const container = document.getElementById('newFinanceGames');
+            container.innerHTML = `
+                <div class="games-container">
+                    <!-- Simulador de Inversiones -->
+                    <div class="game-section investment-simulator">
+                        <h3><i class="fas fa-chart-line"></i> Simulador de Inversiones</h3>
+                        <div class="investment-dashboard">
+                            <div class="portfolio-summary">
+                                <h4>Tu Portafolio</h4>
+                                <div class="balance">$1,000,000</div>
+                                <div class="investment-options">
+                                    <button class="btn btn-primary" onclick="showInvestmentModal('stocks')">
+                                        <i class="fas fa-chart-bar"></i> Acciones
+                                    </button>
+                                    <button class="btn btn-success" onclick="showInvestmentModal('bonds')">
+                                        <i class="fas fa-file-invoice-dollar"></i> Bonos
+                                    </button>
+                                    <button class="btn btn-info" onclick="showInvestmentModal('crypto')">
+                                        <i class="fab fa-bitcoin"></i> Criptomonedas
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="investmentChart"></div>
+                        </div>
+                    </div>
+
+                    <!-- Emprendedor Virtual -->
+                    <div class="game-section business-tycoon">
+                        <h3><i class="fas fa-store"></i> Emprendedor Virtual</h3>
+                        <div class="business-dashboard">
+                            <div class="business-stats">
+                                <div class="stat-card">
+                                    <i class="fas fa-coins"></i>
+                                    <h4>Ingresos</h4>
+                                    <div class="amount">$<span id="income">0</span></div>
+                                </div>
+                                <div class="stat-card">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <h4>Ventas</h4>
+                                    <div class="amount"><span id="sales">0</span></div>
+                                </div>
+                                <div class="stat-card">
+                                    <i class="fas fa-users"></i>
+                                    <h4>Clientes</h4>
+                                    <div class="amount"><span id="customers">0</span></div>
+                                </div>
+                            </div>
+                            <div class="business-actions">
+                                <button class="btn btn-primary" onclick="hireEmployee()">
+                                    <i class="fas fa-user-plus"></i> Contratar Empleado
+                                </button>
+                                <button class="btn btn-success" onclick="upgradeStore()">
+                                    <i class="fas fa-store-alt"></i> Mejorar Negocio
+                                </button>
+                                <button class="btn btn-info" onclick="startMarketing()">
+                                    <i class="fas fa-ad"></i> Campaña Marketing
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mercado de Valores -->
+                    <div class="game-section stock-market">
+                        <h3><i class="fas fa-exchange-alt"></i> Mercado de Valores</h3>
+                        <div class="market-dashboard">
+                            <div class="stock-ticker">
+                                <div class="ticker-item">
+                                    <span class="stock-symbol">TECH</span>
+                                    <span class="stock-price">$150.25</span>
+                                    <span class="stock-change positive">+2.5%</span>
+                                </div>
+                                <!-- Más acciones... -->
+                            </div>
+                            <div class="trading-panel">
+                                <div class="stock-search">
+                                    <input type="text" placeholder="Buscar acción...">
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                                <div class="trading-actions">
+                                    <button class="btn btn-success" onclick="buyStock()">
+                                        <i class="fas fa-shopping-cart"></i> Comprar
+                                    </button>
+                                    <button class="btn btn-danger" onclick="sellStock()">
+                                        <i class="fas fa-dollar-sign"></i> Vender
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Función para mostrar el juego seleccionado
+        function showGame(gameType) {
+            const container = document.getElementById('newFinanceGames');
+            
+            // Limpiar contenedor
+            container.innerHTML = '';
+            
+            switch(gameType) {
+                case 'debtHero':
+                    showDebtHero();
+                    break;
+                case 'businessTycoon':
+                    showBusinessTycoon();
+                    break;
+                case 'financialCity':
+                    showFinancialCity();
+                    break;
+            }
+        }
+
+        // Configuración del juego Héroe de las Deudas
+        const debtHeroConfig = {
+            salary: 5000000,          // Salario aumentado
+            initialSavings: 15000000, // Ahorros aumentados
+            debts: {
+                creditCard: {
+                    name: "Tarjeta de Crédito",
+                    amount: 3000000,
+                    interest: 0.35,
+                    minPayment: 100000
+                },
+                personal: {
+                    name: "Préstamo Personal",
+                    amount: 8000000,
+                    interest: 0.25,
+                    minPayment: 200000
+                },
+                education: {
+                    name: "Crédito Educativo",
+                    amount: 4000000,
+                    interest: 0.15,
+                    minPayment: 150000
+                }
+            },
+            activeStrategy: null
+        };
+
+        function showDebtHero() {
+            const container = document.getElementById('newFinanceGames');
+            container.innerHTML = `
+                <div class="game-section debt-hero">
+                    <div class="debt-header">
+                        <h3><i class="fas fa-shield-alt"></i> Héroe de las Deudas</h3>
+                        <p class="text-light">¡Elimina tus deudas estratégicamente!</p>
+                    </div>
+
+                    <div class="debt-dashboard">
+                        <!-- Panel de Estadísticas -->
+                        <div class="hero-stats">
+                            <div class="stat-card primary-card">
+                                <i class="fas fa-wallet"></i>
+                                <h4>Salario Mensual</h4>
+                                <div class="amount">$${debtHeroConfig.salary.toLocaleString()}</div>
+                                <div class="stat-footer">Próximo pago en: 15 días</div>
+                            </div>
+                            <div class="stat-card success-card">
+                                <i class="fas fa-piggy-bank"></i>
+                                <h4>Ahorros</h4>
+                                <div class="amount">$<span id="debtHeroSavings">${debtHeroConfig.initialSavings.toLocaleString()}</span></div>
+                                <div class="stat-footer">+2% interés mensual</div>
+                            </div>
+                            <div class="stat-card danger-card">
+                                <i class="fas fa-credit-card"></i>
+                                <h4>Deuda Total</h4>
+                                <div class="amount">$<span id="debtHeroTotalDebt">15000000</span></div>
+                                <div class="progress mt-2">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Panel de Deudas -->
+                        <div class="debt-management mt-4">
+                            <div class="section-header">
+                                <h4><i class="fas fa-list-alt"></i> Tus Deudas Actuales</h4>
+                                <button class="btn btn-sm btn-outline-light" onclick="showDebtTips()">
+                                    <i class="fas fa-info-circle"></i> Consejos
+                                </button>
+                            </div>
+                            <div class="debt-items" id="debtList">
+                                ${renderDebts()}
+                            </div>
+                        </div>
+
+                        <!-- Panel de Estrategias -->
+                        <div class="strategy-panel mt-4">
+                            <div class="section-header">
+                                <h4><i class="fas fa-chess"></i> Estrategias de Pago</h4>
+                                <div class="strategy-info">
+                                    <span id="activeStrategy">Sin estrategia activa</span>
+                                </div>
+                            </div>
+                            <div class="strategy-buttons">
+                                <button class="btn btn-strategy avalanche" onclick="applyStrategy('avalanche')">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>Método Avalancha</span>
+                                    <small>Prioriza deudas con mayor interés</small>
+                                </button>
+                                <button class="btn btn-strategy snowball" onclick="applyStrategy('snowball')">
+                                    <i class="fas fa-snowflake"></i>
+                                    <span>Método Bola de Nieve</span>
+                                    <small>Prioriza deudas más pequeñas</small>
+                                </button>
+                                <button class="btn btn-strategy balance" onclick="applyStrategy('balance')">
+                                    <i class="fas fa-balance-scale"></i>
+                                    <span>Método Equilibrado</span>
+                                    <small>Distribuye pagos equitativamente</small>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            initDebtHero();
+        }
+
+        // Funciones del juego
+        function initDebtHero() {
+            updateDebtTotals();
+            startDebtSimulation();
+        }
+
+        function renderDebts() {
+            return Object.entries(debtHeroConfig.debts).map(([key, debt]) => `
+                <div class="debt-item" id="debt-${key}">
+                    <div class="debt-info">
+                        <h5>${debt.name}</h5>
+                        <p>Interés: ${(debt.interest * 100)}% anual</p>
+                        <small>Pago mínimo: $${debt.minPayment.toLocaleString()}</small>
+                    </div>
+                    <div class="debt-actions">
+                        <div class="debt-amount">$${debt.amount.toLocaleString()}</div>
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" id="payment-${key}" 
+                                   placeholder="Monto a pagar" min="${debt.minPayment}" max="${debt.amount}">
+                            <button class="btn btn-success" onclick="payDebt('${key}')">
+                                <i class="fas fa-check"></i> Pagar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function payDebt(debtKey) {
+            const input = document.getElementById(`payment-${debtKey}`);
+            const amount = parseInt(input.value);
+            const debt = debtHeroConfig.debts[debtKey];
+            const currentSavings = debtHeroConfig.initialSavings; // Usar directamente de la configuración
+
+            // Validaciones
+            if (isNaN(amount) || amount <= 0) {
+                showNotification('Por favor ingresa un monto válido', 'warning');
+                return;
+            }
+
+            if (amount < debt.minPayment) {
+                showNotification(`El pago mínimo es $${debt.minPayment.toLocaleString()}`, 'warning');
+                return;
+            }
+
+            if (amount > debt.amount) {
+                showNotification('El pago no puede ser mayor que la deuda', 'warning');
+                return;
+            }
+
+            if (amount > currentSavings) {
+                showNotification(`No tienes suficientes ahorros. Tus ahorros actuales son: $${currentSavings.toLocaleString()}`, 'danger');
+                return;
+            }
+
+            // Realizar el pago
+            debt.amount -= amount;
+            debtHeroConfig.initialSavings -= amount;
+            
+            // Actualizar UI
+            updateDebtTotals();
+            input.value = ''; // Limpiar el input
+
+            // Mostrar notificación de éxito
+            showNotification(`¡Pago de $${amount.toLocaleString()} realizado con éxito!`, 'success');
+            
+            // Verificar si la deuda fue pagada completamente
+            if (debt.amount === 0) {
+                showNotification(`¡Felicitaciones! Has pagado completamente tu ${debt.name.toLowerCase()}`, 'success');
+                checkAllDebts();
+            }
+        }
+
+        function updateDebtTotals() {
+            const totalDebt = Object.values(debtHeroConfig.debts)
+                .reduce((sum, debt) => sum + debt.amount, 0);
+            
+            // Actualizar visualización de deuda total
+            document.getElementById('debtHeroTotalDebt').textContent = totalDebt.toLocaleString();
+            
+            // Actualizar visualización de ahorros
+            document.getElementById('debtHeroSavings').textContent = debtHeroConfig.initialSavings.toLocaleString();
+            
+            // Actualizar barra de progreso
+            const initialTotalDebt = 15000000; // Deuda inicial total
+            const progress = ((initialTotalDebt - totalDebt) / initialTotalDebt) * 100;
+            const progressBar = document.querySelector('.progress-bar');
+            progressBar.style.width = `${progress}%`;
+            
+            // Cambiar color de la barra según el progreso
+            if (progress >= 75) {
+                progressBar.classList.remove('bg-danger', 'bg-warning');
+                progressBar.classList.add('bg-success');
+            } else if (progress >= 50) {
+                progressBar.classList.remove('bg-danger', 'bg-success');
+                progressBar.classList.add('bg-warning');
+            }
+        }
+
+        function showDebtTips() {
+            const tips = [
+                {
+                    icon: "fas fa-lightbulb",
+                    title: "Regla 50/30/20",
+                    description: "Destina 50% a necesidades básicas, 30% a deseos y 20% a ahorro y deudas."
+                },
+                {
+                    icon: "fas fa-chart-line",
+                    title: "Prioriza Deudas",
+                    description: "Enfócate primero en las deudas con mayor tasa de interés para minimizar el costo financiero."
+                },
+                {
+                    icon: "fas fa-piggy-bank",
+                    title: "Fondo de Emergencia",
+                    description: "Mantén al menos 3 meses de gastos en ahorros antes de acelerar pagos de deuda."
+                },
+                {
+                    icon: "fas fa-calendar-alt",
+                    title: "Automatiza Pagos",
+                    description: "Programa pagos automáticos para nunca olvidar una fecha límite."
+                },
+                {
+                    icon: "fas fa-shield-alt",
+                    title: "Evita Nuevas Deudas",
+                    description: "Mientras pagas tus deudas actuales, evita adquirir nuevas obligaciones."
+                }
+            ];
+
+            const tipsHtml = tips.map(tip => `
+                <div class="tip-card">
+                    <i class="${tip.icon}"></i>
+                    <h5>${tip.title}</h5>
+                    <p>${tip.description}</p>
+                </div>
+            `).join('');
+            
+            showModal('Consejos Financieros', `
+                <div class="tips-container">
+                    ${tipsHtml}
+                </div>
+            `);
+        }
+
+        // Función para aplicar estrategias
+        function applyStrategy(strategy) {
+            debtHeroConfig.activeStrategy = strategy;
+            const strategies = {
+                avalanche: {
+                    name: "Método Avalancha",
+                    description: "Pagarás primero las deudas con mayor interés",
+                    icon: "mountain"
+                },
+                snowball: {
+                    name: "Método Bola de Nieve",
+                    description: "Pagarás primero las deudas más pequeñas",
+                    icon: "snowflake"
+                },
+                balance: {
+                    name: "Método Equilibrado",
+                    description: "Distribuirás los pagos proporcionalmente",
+                    icon: "balance-scale"
+                }
+            };
+
+            // Actualizar UI de estrategia activa
+            const strategyInfo = strategies[strategy];
+            document.getElementById('activeStrategy').innerHTML = `
+                <span class="badge bg-primary">
+                    <i class="fas fa-${strategyInfo.icon}"></i>
+                    ${strategyInfo.name}
+                </span>
+            `;
+
+            // Mostrar recomendaciones según la estrategia
+            showNotification(`
+                <strong>${strategyInfo.name} activado:</strong><br>
+                ${strategyInfo.description}
+            `, 'info', 5000);
+
+            // Ordenar deudas según la estrategia
+            reorderDebts(strategy);
+        }
+
+        // Función para reordenar deudas según la estrategia
+        function reorderDebts(strategy) {
+            const debts = Object.entries(debtHeroConfig.debts);
+            let sortedDebts;
+
+            switch(strategy) {
+                case 'avalanche':
+                    sortedDebts = debts.sort((a, b) => b[1].interest - a[1].interest);
+                    break;
+                case 'snowball':
+                    sortedDebts = debts.sort((a, b) => a[1].amount - b[1].amount);
+                    break;
+                case 'balance':
+                    sortedDebts = debts.sort((a, b) => 
+                        (b[1].amount * b[1].interest) - (a[1].amount * a[1].interest));
+                    break;
+            }
+
+            // Actualizar visualización de deudas
+            document.getElementById('debtList').innerHTML = sortedDebts.map(([key, debt]) => `
+                <div class="debt-item ${debtHeroConfig.activeStrategy === 'avalanche' && debt.interest === Math.max(...debts.map(d => d[1].interest)) ? 'priority' : ''}" 
+                     id="debt-${key}">
+                    <div class="debt-info">
+                        <h5>${debt.name}</h5>
+                        <p>Interés: ${(debt.interest * 100)}% anual</p>
+                        <small>Pago mínimo: $${debt.minPayment.toLocaleString()}</small>
+                    </div>
+                    <div class="debt-actions">
+                        <div class="debt-amount">$${debt.amount.toLocaleString()}</div>
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" id="payment-${key}" 
+                                   placeholder="Monto a pagar" min="${debt.minPayment}" max="${debt.amount}">
+                            <button class="btn btn-success" onclick="payDebt('${key}')">
+                                <i class="fas fa-check"></i> Pagar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Ciudad Financiera - Un juego de construcción y gestión financiera
+        function showFinancialCity() {
+            const container = document.getElementById('newFinanceGames');
+            container.innerHTML = `
+                <div class="game-section financial-city">
+                    <h3><i class="fas fa-city"></i> Ciudad Financiera</h3>
+                    <div class="city-dashboard">
+                        <div class="city-stats">
+                            <div class="stat-card">
+                                <i class="fas fa-coins"></i>
+                                <h4>Presupuesto Ciudad</h4>
+                                <div class="amount">$<span id="cityBudget">10000000</span></div>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-users"></i>
+                                <h4>Población</h4>
+                                <div class="amount"><span id="population">1000</span></div>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-smile"></i>
+                                <h4>Felicidad</h4>
+                                <div class="amount"><span id="happiness">85</span>%</div>
+                            </div>
+                        </div>
+
+                        <div class="city-grid mt-4">
+                            <div class="construction-panel">
+                                <h4>Construir</h4>
+                                <div class="building-options">
+                                    <button class="btn btn-outline-primary" onclick="buildStructure('bank')">
+                                        <i class="fas fa-university"></i> Banco
+                                        <span class="cost">$500,000</span>
+                                    </button>
+                                    <button class="btn btn-outline-success" onclick="buildStructure('school')">
+                                        <i class="fas fa-school"></i> Escuela Financiera
+                                        <span class="cost">$300,000</span>
+                                    </button>
+                                    <button class="btn btn-outline-info" onclick="buildStructure('market')">
+                                        <i class="fas fa-store"></i> Mercado
+                                        <span class="cost">$200,000</span>
+                                    </button>
+                                    <button class="btn btn-outline-warning" onclick="buildStructure('office')">
+                                        <i class="fas fa-building"></i> Oficina
+                                        <span class="cost">$400,000</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="city-events mt-4">
+                                <h4>Eventos Económicos</h4>
+                                <div class="event-list">
+                                    <div class="event-item positive">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>¡Boom económico! +10% ingresos</span>
+                                    </div>
+                                    <div class="event-item negative">
+                                        <i class="fas fa-arrow-down"></i>
+                                        <span>Inflación: Costos +5%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Funciones específicas para cada juego
+        function showInvestmentSimulator() {
+            const container = document.getElementById('newFinanceGames');
+            container.innerHTML = `
+                <div class="game-section investment-simulator">
+                    <h3><i class="fas fa-chart-line"></i> Simulador de Inversiones</h3>
+                    <div class="investment-dashboard">
+                        <div class="portfolio-summary">
+                            <h4>Tu Portafolio</h4>
+                            <div class="balance">$1,000,000</div>
+                            <div class="investment-options">
+                                <button class="btn btn-primary" onclick="showInvestmentModal('stocks')">
+                                    <i class="fas fa-chart-bar"></i> Acciones
+                                </button>
+                                <button class="btn btn-success" onclick="showInvestmentModal('bonds')">
+                                    <i class="fas fa-file-invoice-dollar"></i> Bonos
+                                </button>
+                                <button class="btn btn-info" onclick="showInvestmentModal('crypto')">
+                                    <i class="fab fa-bitcoin"></i> Criptomonedas
+                                </button>
+                            </div>
+                        </div>
+                        <div id="investmentChart"></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Configuración del juego
+        const businessConfig = {
+            money: 50000000,
+            income: 0,
+            expenses: 0,
+            customers: 0,
+            employees: [],
+            upgrades: [],
+            products: [],
+            level: 1,
+            reputation: 50,
+            businessName: '',
+            businessType: '',
+            lastUpdate: Date.now(),
+            gameLoop: null
+        };
+
+        // Catálogo de negocios disponibles
+        const businessTypes = {
+            restaurant: {
+                name: 'Restaurante',
+                icon: 'utensils',
+                products: [
+                    { id: 'menu1', name: 'Menú Básico', cost: 500000, price: 1000000, quality: 1 },
+                    { id: 'menu2', name: 'Menú Premium', cost: 1000000, price: 2500000, quality: 2 },
+                    { id: 'drinks', name: 'Bebidas', cost: 200000, price: 500000, quality: 1 }
+                ],
+                employees: [
+                    { id: 'chef', name: 'Chef', cost: 3000000, income: 300000, efficiency: 1.5 },
+                    { id: 'waiter', name: 'Mesero', cost: 1000000, income: 100000, efficiency: 1.2 },
+                    { id: 'cashier', name: 'Cajero', cost: 800000, income: 80000, efficiency: 1 }
+                ],
+                upgrades: [
+                    { id: 'kitchen', name: 'Cocina Moderna', cost: 5000000, benefit: 'Aumenta eficiencia 20%' },
+                    { id: 'decor', name: 'Decoración', cost: 3000000, benefit: 'Aumenta satisfacción 15%' }
+                ]
+            },
+            tech: {
+                name: 'Tienda de Tecnología',
+                icon: 'laptop',
+                products: [
+                    { id: 'phones', name: 'Smartphones', cost: 2000000, price: 4000000, quality: 2 },
+                    { id: 'laptops', name: 'Laptops', cost: 3000000, price: 6000000, quality: 2 },
+                    { id: 'accessories', name: 'Accesorios', cost: 500000, price: 1500000, quality: 1 }
+                ],
+                employees: [
+                    { id: 'techExpert', name: 'Experto Técnico', cost: 4000000, income: 400000, efficiency: 1.8 },
+                    { id: 'sales', name: 'Vendedor', cost: 2000000, income: 200000, efficiency: 1.5 },
+                    { id: 'support', name: 'Soporte', cost: 1500000, income: 150000, efficiency: 1.3 }
+                ],
+                upgrades: [
+                    { id: 'showroom', name: 'Sala de Exhibición', cost: 8000000, benefit: 'Aumenta ventas 25%' },
+                    { id: 'service', name: 'Centro de Servicio', cost: 5000000, benefit: 'Aumenta satisfacción 20%' }
+                ]
+            },
+            cafe: {
+                name: 'Café',
+                icon: 'coffee',
+                products: [
+                    { id: 'coffee', name: 'Café Premium', cost: 300000, price: 800000, quality: 2 },
+                    { id: 'pastries', name: 'Pastelería', cost: 400000, price: 1000000, quality: 1.5 },
+                    { id: 'snacks', name: 'Snacks', cost: 200000, price: 500000, quality: 1 }
+                ],
+                employees: [
+                    { id: 'barista', name: 'Barista', cost: 2000000, income: 200000, efficiency: 1.6 },
+                    { id: 'baker', name: 'Panadero', cost: 1800000, income: 180000, efficiency: 1.4 },
+                    { id: 'server', name: 'Mesero', cost: 1000000, income: 100000, efficiency: 1.2 }
+                ],
+                upgrades: [
+                    { id: 'machine', name: 'Máquina de Café Pro', cost: 4000000, benefit: 'Aumenta calidad 30%' },
+                    { id: 'ambient', name: 'Ambiente Acogedor', cost: 3000000, benefit: 'Aumenta satisfacción 15%' }
+                ]
+            }
+        };
+
+        function showBusinessTycoon() {
+            const container = document.getElementById('newFinanceGames');
+            
+            // Si no hay negocio seleccionado, mostrar pantalla de selección
+            if (!businessConfig.businessType) {
+                showBusinessSelection();
+                return;
+            }
+
+            // Obtener el tipo de negocio seleccionado
+            const selectedBusiness = businessTypes[businessConfig.businessType];
+            
+            container.innerHTML = `
+                <div class="business-tycoon">
+                    <div class="business-header">
+                        <h3>
+                            <i class="fas fa-${selectedBusiness.icon}"></i> 
+                            ${businessConfig.businessName} - ${selectedBusiness.name}
+                        </h3>
+                        <div class="level-badge">
+                            Nivel ${businessConfig.level}
+                        </div>
+                    </div>
+
+                    <div class="business-dashboard">
+                        <!-- Panel de Estadísticas -->
+                        <div class="main-stats">
+                            <div class="stat-card money">
+                                <i class="fas fa-wallet"></i>
+                                <h4>Capital</h4>
+                                <div class="amount">$<span id="businessMoney">${businessConfig.money.toLocaleString()}</span></div>
+                                <div class="income-rate">+$<span id="incomeRate">${(businessConfig.income * 60).toLocaleString()}</span>/min</div>
+                            </div>
+                            <div class="stat-card customers">
+                                <i class="fas fa-users"></i>
+                                <h4>Clientes</h4>
+                                <div class="amount"><span id="customerCount">${businessConfig.customers}</span></div>
+                                <div class="satisfaction">Satisfacción: <span id="satisfaction">${calculateSatisfaction()}</span>%</div>
+                            </div>
+                            <div class="stat-card reputation">
+                                <i class="fas fa-star"></i>
+                                <h4>Reputación</h4>
+                                <div class="amount">${businessConfig.reputation}/100</div>
+                                <div id="reputationStars" class="stars">${'⭐'.repeat(Math.floor(businessConfig.reputation/20))}</div>
+                            </div>
+                        </div>
+
+                        <!-- Panel de Acciones -->
+                        <div class="action-panels mt-4">
+                            <div class="row">
+                                <!-- Panel de Empleados -->
+                                <div class="col-md-4">
+                                    <div class="action-card">
+                                        <h4><i class="fas fa-user-tie"></i> Empleados</h4>
+                                        <div id="employeeList" class="action-list">
+                                            ${businessConfig.employees.map(emp => `
+                                                <div class="employee-card">
+                                                    <h5>${emp.name}</h5>
+                                                    <p>Ingreso: $${emp.income.toLocaleString()}/min</p>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                        <button class="btn btn-primary w-100 mt-3" onclick="showHiringOptions()">
+                                            <i class="fas fa-user-plus"></i> Contratar Empleado
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Panel de Productos -->
+                                <div class="col-md-4">
+                                    <div class="action-card">
+                                        <h4><i class="fas fa-box"></i> Productos</h4>
+                                        <div id="productList" class="action-list">
+                                            ${businessConfig.products.map(prod => `
+                                                <div class="product-card">
+                                                    <h5>${prod.name}</h5>
+                                                    <p>Precio: $${prod.price.toLocaleString()}</p>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                        <button class="btn btn-success w-100 mt-3" onclick="showProductOptions()">
+                                            <i class="fas fa-plus"></i> Nuevo Producto
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Panel de Mejoras -->
+                                <div class="col-md-4">
+                                    <div class="action-card">
+                                        <h4><i class="fas fa-arrow-up"></i> Mejoras</h4>
+                                        <div id="upgradeList" class="action-list">
+                                            ${businessConfig.upgrades.map(upg => `
+                                                <div class="upgrade-card">
+                                                    <h5>${upg.name}</h5>
+                                                    <p>${upg.benefit}</p>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                        <button class="btn btn-info w-100 mt-3" onclick="showUpgradeOptions()">
+                                            <i class="fas fa-star"></i> Mejorar Negocio
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            initBusinessGame();
+        }
+
+        // Función para mostrar opciones de contratación
+        function showHiringOptions() {
+            const selectedBusiness = businessTypes[businessConfig.businessType];
+            const employeeHtml = `
+                <div class="hiring-options">
+                    ${selectedBusiness.employees.map(emp => `
+                        <div class="hire-option mb-3 p-3 border rounded">
+                            <h5>${emp.name}</h5>
+                            <p><i class="fas fa-money-bill"></i> Costo: $${emp.cost.toLocaleString()}</p>
+                            <p><i class="fas fa-coins"></i> Ingreso: $${emp.income.toLocaleString()}/min</p>
+                            <p><i class="fas fa-star"></i> Eficiencia: ${emp.efficiency}x</p>
+                            <button class="btn btn-primary w-100" onclick="hireEmployee('${emp.id}')">
+                                <i class="fas fa-user-plus"></i> Contratar
+                            </button>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            showModal('Contratar Empleados', employeeHtml);
+        }
+
+        // Función para mostrar opciones de productos
+        function showProductOptions() {
+            const selectedBusiness = businessTypes[businessConfig.businessType];
+            const productHtml = `
+                <div class="product-options">
+                    ${selectedBusiness.products.map(prod => `
+                        <div class="product-option mb-3 p-3 border rounded">
+                            <h5>${prod.name}</h5>
+                            <p><i class="fas fa-money-bill"></i> Costo: $${prod.cost.toLocaleString()}</p>
+                            <p><i class="fas fa-tag"></i> Precio: $${prod.price.toLocaleString()}</p>
+                            <p><i class="fas fa-star"></i> Calidad: ${prod.quality}</p>
+                            <button class="btn btn-success w-100" onclick="addProduct('${prod.id}')">
+                                <i class="fas fa-plus"></i> Agregar al Catálogo
+                            </button>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            showModal('Agregar Productos', productHtml);
+        }
+
+        // Función para mostrar opciones de mejoras
+        function showUpgradeOptions() {
+            const selectedBusiness = businessTypes[businessConfig.businessType];
+            const upgradeHtml = `
+                <div class="upgrade-options">
+                    ${selectedBusiness.upgrades.map(upg => `
+                        <div class="upgrade-option mb-3 p-3 border rounded">
+                            <h5>${upg.name}</h5>
+                            <p><i class="fas fa-money-bill"></i> Costo: $${upg.cost.toLocaleString()}</p>
+                            <p><i class="fas fa-arrow-up"></i> ${upg.benefit}</p>
+                            <button class="btn btn-info w-100" onclick="purchaseUpgrade('${upg.id}')">
+                                <i class="fas fa-star"></i> Comprar Mejora
+                            </button>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            showModal('Mejoras Disponibles', upgradeHtml);
+        }
+
+        function showBusinessSelection() {
+            const container = document.getElementById('newFinanceGames');
+            container.innerHTML = `
+                <div class="business-selection">
+                    <h3 class="text-center mb-4">Elige tu Tipo de Negocio</h3>
+                    <div class="business-types-grid">
+                        ${Object.entries(businessTypes).map(([id, type]) => `
+                            <div class="business-type-card" onclick="selectBusinessType('${id}')">
+                                <i class="fas fa-${type.icon}"></i>
+                                <h4>${type.name}</h4>
+                                <button class="btn btn-primary">Seleccionar</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="business-setup mt-4">
+                        <input type="text" id="businessNameInput" class="form-control mb-3" 
+                               placeholder="Nombre de tu Negocio">
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectBusinessType(typeId) {
+            const businessName = document.getElementById('businessNameInput').value.trim();
+            if (!businessName) {
+                showNotification('Por favor ingresa un nombre para tu negocio', 'warning');
+                return;
+            }
+
+            businessConfig.businessType = typeId;
+            businessConfig.businessName = businessName;
+            
+            // Inicializar configuración específica del tipo de negocio
+            const selectedType = businessTypes[typeId];
+            businessConfig.availableProducts = [...selectedType.products];
+            businessConfig.availableEmployees = [...selectedType.employees];
+            businessConfig.availableUpgrades = [...selectedType.upgrades];
+
+            showNotification(`¡${businessName} ha sido fundado con éxito!`, 'success');
+            showBusinessTycoon(); // Mostrar el juego principal
+        }
+
+        function hireEmployee(employeeId) {
+            const employeeType = businessTypes[businessConfig.businessType].employees.find(e => e.id === employeeId);
+            if (!employeeType) {
+                showNotification('Empleado no encontrado', 'error');
+                return;
+            }
+
+            if (businessConfig.money < employeeType.cost) {
+                showNotification(`Necesitas $${employeeType.cost.toLocaleString()} para contratar`, 'warning');
+                return;
+            }
+
+            // Realizar la contratación
+            businessConfig.money -= employeeType.cost;
+            businessConfig.income += employeeType.income;
+            businessConfig.employees.push({...employeeType, hired: Date.now()});
+            
+            // Actualizar UI
+            updateUI();
+            showNotification(`¡${employeeType.name} contratado con éxito!`, 'success');
+            closeModal();
+        }
+
+        function addProduct(productId) {
+            const product = businessTypes[businessConfig.businessType].products.find(p => p.id === productId);
+            if (!product) {
+                showNotification('Producto no encontrado', 'error');
+                return;
+            }
+
+            if (businessConfig.money < product.cost) {
+                showNotification(`Necesitas $${product.cost.toLocaleString()} para agregar este producto`, 'warning');
+                return;
+            }
+
+            // Agregar producto
+            businessConfig.money -= product.cost;
+            businessConfig.products.push({...product, added: Date.now()});
+            businessConfig.income += (product.price - product.cost) / 2;
+            
+            // Actualizar UI
+            updateUI();
+            showNotification(`¡${product.name} agregado al catálogo!`, 'success');
+            closeModal();
+        }
+
+        function purchaseUpgrade(upgradeId) {
+            const upgrade = businessTypes[businessConfig.businessType].upgrades.find(u => u.id === upgradeId);
+            if (!upgrade) {
+                showNotification('Mejora no encontrada', 'error');
+                return;
+            }
+
+            if (businessConfig.money < upgrade.cost) {
+                showNotification(`Necesitas $${upgrade.cost.toLocaleString()} para esta mejora`, 'warning');
+                return;
+            }
+
+            // Aplicar mejora
+            businessConfig.money -= upgrade.cost;
+            businessConfig.upgrades.push({...upgrade, purchased: Date.now()});
+            
+            // Aplicar efectos de la mejora
+            applyUpgradeEffects(upgrade);
+            
+            // Actualizar UI
+            updateUI();
+            showNotification(`¡${upgrade.name} instalado con éxito!`, 'success');
+            closeModal();
+        }
+
+        function applyUpgradeEffects(upgrade) {
+            // Aplicar efectos según el tipo de mejora
+            if (upgrade.benefit.includes('eficiencia')) {
+                const percentage = parseInt(upgrade.benefit.match(/\d+/)[0]) / 100;
+                businessConfig.income *= (1 + percentage);
+            }
+            if (upgrade.benefit.includes('satisfacción')) {
+                const percentage = parseInt(upgrade.benefit.match(/\d+/)[0]) / 100;
+                businessConfig.reputation = Math.min(100, businessConfig.reputation * (1 + percentage));
+            }
+            if (upgrade.benefit.includes('ventas')) {
+                const percentage = parseInt(upgrade.benefit.match(/\d+/)[0]) / 100;
+                businessConfig.income *= (1 + percentage);
+            }
+        }
+
+        function updateUI() {
+            // Actualizar estadísticas principales
+            document.getElementById('businessMoney').textContent = 
+                Math.floor(businessConfig.money).toLocaleString();
+            document.getElementById('customerCount').textContent = 
+                businessConfig.customers.toLocaleString();
+            document.getElementById('incomeRate').textContent = 
+                Math.floor(businessConfig.income * 60).toLocaleString();
+            document.getElementById('satisfaction').textContent = 
+                Math.floor(calculateSatisfaction());
+            
+            // Actualizar listas
+            updateEmployeeList();
+            updateProductList();
+            updateUpgradeList();
+        }
+
+        function updateEmployeeList() {
+            const employeeList = document.getElementById('employeeList');
+            if (employeeList) {
+                employeeList.innerHTML = businessConfig.employees.map(emp => `
+                    <div class="employee-card">
+                        <h5>${emp.name}</h5>
+                        <p>Ingreso: $${emp.income.toLocaleString()}/min</p>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function updateProductList() {
+            const productList = document.getElementById('productList');
+            if (productList) {
+                productList.innerHTML = businessConfig.products.map(prod => `
+                    <div class="product-card">
+                        <h5>${prod.name}</h5>
+                        <p>Precio: $${prod.price.toLocaleString()}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function updateUpgradeList() {
+            const upgradeList = document.getElementById('upgradeList');
+            if (upgradeList) {
+                upgradeList.innerHTML = businessConfig.upgrades.map(upg => `
+                    <div class="upgrade-card">
+                        <h5>${upg.name}</h5>
+                        <p>${upg.benefit}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function closeModal() {
+            const modal = document.querySelector('.modal');
+            if (modal) {
+                const modalInstance = bootstrap.Modal.getInstance(modal);
+                if (modalInstance) {
+                    modalInstance.hide();
+                }
+            }
+        }
+
+        function initBusinessGame() {
+            // Limpiar intervalo anterior si existe
+            if (businessConfig.gameLoop) {
+                clearInterval(businessConfig.gameLoop);
+            }
+
+            // Iniciar el bucle del juego
+            businessConfig.gameLoop = setInterval(updateBusiness, 1000);
+            updateUI();
+        }
+
+        function updateBusiness() {
+            const now = Date.now();
+            const timeDiff = (now - businessConfig.lastUpdate) / 1000;
+
+            // Actualizar ingresos
+            businessConfig.money += (businessConfig.income * timeDiff);
+            
+            // Actualizar clientes
+            const newCustomers = Math.floor(calculateNewCustomers(timeDiff));
+            businessConfig.customers += newCustomers;
+
+            // Actualizar reputación
+            businessConfig.reputation = Math.min(100, 
+                businessConfig.reputation + (calculateReputationChange(timeDiff)));
+
+            businessConfig.lastUpdate = now;
+            updateUI();
+        }
+
+        function calculateNewCustomers(timeDiff) {
+            const baseCustomers = businessConfig.reputation / 10;
+            const employeeMultiplier = (businessConfig.employees.length * 0.5) + 1;
+            return (baseCustomers * employeeMultiplier * timeDiff) / 60;
+        }
+
+        function calculateReputationChange(timeDiff) {
+            const satisfaction = calculateSatisfaction();
+            return ((satisfaction - businessConfig.reputation) / 100) * timeDiff;
+        }
+
+        function calculateSatisfaction() {
+            const baseValue = 50;
+            const employeeImpact = businessConfig.employees.length * 5;
+            const upgradeImpact = businessConfig.upgrades.length * 3;
+            return Math.min(100, baseValue + employeeImpact + upgradeImpact);
+        }
+
+        function showInvestmentSimulator() {
+            const container = document.getElementById('newFinanceGames');
+            container.innerHTML = `
+                <div class="game-section investment-simulator">
+                    <h3><i class="fas fa-chart-line"></i> Simulador de Inversiones</h3>
+                    <div class="investment-dashboard">
+                        <div class="portfolio-summary">
+                            <h4>Tu Portafolio</h4>
+                            <div class="balance">$1,000,000</div>
+                            <div class="investment-options">
+                                <button class="btn btn-primary" onclick="showInvestmentModal('stocks')">
+                                    <i class="fas fa-chart-bar"></i> Acciones
+                                </button>
+                                <button class="btn btn-success" onclick="showInvestmentModal('bonds')">
+                                    <i class="fas fa-file-invoice-dollar"></i> Bonos
+                                </button>
+                                <button class="btn btn-info" onclick="showInvestmentModal('crypto')">
+                                    <i class="fab fa-bitcoin"></i> Criptomonedas
+                                </button>
+                            </div>
+                        </div>
+                        <div id="investmentChart"></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Función para verificar si todas las deudas están pagadas
+        function checkAllDebts() {
+            const allPaid = Object.values(debtHeroConfig.debts)
+                .every(debt => debt.amount === 0);
+            
+            if (allPaid) {
+                showVictoryModal();
+            }
+        }
+
+        // Función para mostrar modal de victoria
+        function showVictoryModal() {
+            showModal('¡Felicitaciones! 🎉', `
+                <div class="victory-content text-center">
+                    <h3>¡Has vencido todas tus deudas!</h3>
+                    <p>Eres oficialmente un Héroe de las Deudas</p>
+                    <div class="savings-summary mt-3">
+                        <h4>Ahorros Restantes</h4>
+                        <p class="h2 text-success">$${debtHeroConfig.initialSavings.toLocaleString()}</p>
+                    </div>
+                    <button class="btn btn-success mt-3" onclick="resetDebtHero()">
+                        <i class="fas fa-redo"></i> Jugar de Nuevo
+                    </button>
+                </div>
+            `);
+        }
+
+        // Función para reiniciar el juego
+        function resetDebtHero() {
+            // Restaurar valores iniciales
+            debtHeroConfig.initialSavings = 15000000;
+            debtHeroConfig.debts = {
+                creditCard: {
+                    name: "Tarjeta de Crédito",
+                    amount: 3000000,
+                    interest: 0.35,
+                    minPayment: 100000
+                },
+                personal: {
+                    name: "Préstamo Personal",
+                    amount: 8000000,
+                    interest: 0.25,
+                    minPayment: 200000
+                },
+                education: {
+                    name: "Crédito Educativo",
+                    amount: 4000000,
+                    interest: 0.15,
+                    minPayment: 150000
+                }
+            };
+            debtHeroConfig.activeStrategy = null;
+
+            // Actualizar UI
+            showDebtHero();
+            showNotification('Juego reiniciado con éxito', 'info');
+        }
+
+        // Función mejorada para mostrar notificaciones
+        function showNotification(message, type, duration = 3000) {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} notification`;
+            notification.innerHTML = message;
+            document.body.appendChild(notification);
+
+            // Agregar animación de entrada
+            notification.style.animation = 'slideIn 0.5s ease-out';
+
+            setTimeout(() => {
+                // Agregar animación de salida
+                notification.style.animation = 'slideOut 0.5s ease-out';
+                setTimeout(() => notification.remove(), 500);
+            }, duration);
+        }
+
+        // Inicialización cuando el documento esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Asegurarse de que los tabs de Bootstrap funcionen
+            const triggerTabList = [].slice.call(document.querySelectorAll('#gamesTab a'));
+            triggerTabList.forEach(function(triggerEl) {
+                const tabTrigger = new bootstrap.Tab(triggerEl);
+                triggerEl.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    tabTrigger.show();
+                });
+            });
+
+            // Verificar que las funciones necesarias estén definidas
+            console.log('Checking game functions:', {
+                showDebtHero: typeof showDebtHero !== 'undefined',
+                showBusinessTycoon: typeof showBusinessTycoon !== 'undefined',
+                showFinancialCity: typeof showFinancialCity !== 'undefined'
+            });
+        });
+
+        // Función para mostrar modales
+        function showModal(title, content) {
+            // Remover modal anterior si existe
+            const existingModal = document.querySelector('.modal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+
+            const modalHtml = `
+                <div class="modal fade" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">${title}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                ${content}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            const modal = document.querySelector('.modal');
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
     </script>
 </body>
 

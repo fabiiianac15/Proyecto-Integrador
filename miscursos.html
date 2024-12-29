@@ -7,7 +7,10 @@
     <title>Mis Cursos - EduFinanzas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" href="EduFinanzas.png">
+    <link href="styles.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #1a237e;
@@ -18,80 +21,1192 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            color: var(--text-color);
-            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #000428, #004e92);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .courses-container {
+            padding: 15px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .courses-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .courses-title {
             color: white;
-            padding: 3rem 0;
+            font-size: 2rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .courses-title i {
+            color: #4CAF50;
+            animation: pulse 2s infinite;
+        }
+
+        .courses-grid {
+            display: grid;
+            gap: 20px;
+            padding: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .course-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: none;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 400px;
+            padding-bottom: 80px;
+        }
+
+        .course-image {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover .course-image img {
+            transform: scale(1.05);
+        }
+
+        .course-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .course-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .course-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .course-progress {
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
+            height: 8px;
+            margin: 15px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #64B5F6, #1E88E5);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .progress-text {
+            color: white;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .course-stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            padding: 10px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item {
+            color: white;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .stat-item i {
+            color: #64B5F6;
+        }
+
+        .course-actions {
+            margin-top: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .course-image {
+                height: 160px;
+            }
+            
+            .course-content {
+                padding: 15px;
+            }
+            
+            .course-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .course-card {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Botón Comenzar */
+        .start-button {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .start-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+            background: linear-gradient(135deg, #45a049, #388E3C);
+        }
+
+        /* Botón Continuar */
+        .continue-button {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .continue-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+            background: linear-gradient(135deg, #1976D2, #1565C0);
+        }
+
+        /* Botón Detalles */
+        .details-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .details-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Efecto al hacer clic */
+        .course-button:active {
+            transform: translateY(1px);
+        }
+
+        /* Iconos en los botones */
+        .course-button i {
+            font-size: 1rem;
+        }
+
+        /* Estado completado */
+        .completed-button {
+            background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+            color: white;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+        }
+
+        .completed-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(156, 39, 176, 0.4);
+            background: linear-gradient(135deg, #7B1FA2, #6A1B9A);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .course-actions {
+                flex-direction: column;
+            }
+            
+            .course-button {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Animación al cargar */
+        @keyframes buttonFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .course-button {
+            animation: buttonFadeIn 0.3s ease forwards;
+        }
+
+        /* Animaciones */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .courses-container {
+                padding: 15px;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .course-card {
+                padding: 15px;
+            }
+
+            .course-image {
+                height: 160px;
+            }
+        }
+
+        /* Estilos para la barra de navegación */
+        .navbar {
+            background: rgba(0, 74, 146, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo i {
+            color: #64B5F6;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link.active {
+            background: #64B5F6;
+            color: white;
+        }
+
+        /* Responsive para la navegación */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 74, 146, 0.95);
+                padding: 20px;
+                flex-direction: column;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+        }
+
+        /* Estilos base */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #000428, #004e92);
+            min-height: 100vh;
+            color: white;
+        }
+
+        /* Navbar mejorado */
+        .navbar {
+            background: rgba(0, 74, 146, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link.active {
+            background: #64B5F6;
+            color: white;
+        }
+
+        /* Mejoras en los botones existentes */
+        .button-primary {
+            background: linear-gradient(135deg, #64B5F6, #1E88E5);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-primary:hover {
+            background: linear-gradient(135deg, #1E88E5, #1976D2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .button-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Mejoras en las tarjetas existentes */
+        .course-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
             overflow: hidden;
         }
 
         .course-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .course-card .card-img-top {
-            height: 200px;
-            object-fit: cover;
+        /* Mejoras en las barras de progreso */
+        .progress-bar {
+            background: linear-gradient(90deg, #64B5F6, #1E88E5);
+            height: 8px;
+            border-radius: 4px;
+            transition: width 1.5s ease-in-out;
         }
 
-        .course-category {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background-color: var(--accent-color);
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                padding: 0 15px;
+            }
+            
+            .course-card {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .button-primary,
+            .button-secondary {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Textos en blanco */
+        .course-card h3 {
             color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-weight: 600;
         }
 
-        .progress {
+        .course-card p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .course-modules {
+            color: white;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        /* Mejoras en las barras de progreso */
+        .progress-container {
+            background: rgba(255, 255, 255, 0.1);
             height: 10px;
             border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+            position: relative;
         }
 
-        .btn-custom {
-            background-color: var(--accent-color);
-            border: none;
-            color: white;
-            padding: 0.5rem 1.5rem;
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #64B5F6, #1E88E5);
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            transition: width 1.5s ease-in-out;
+            position: relative;
         }
 
-        .btn-custom:hover {
-            background-color: #00a844;
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.3) 50%,
+                rgba(255,255,255,0) 100%
+            );
+            animation: shimmer 2s infinite;
         }
 
-        .search-bar {
-            max-width: 500px;
-            margin: 0 auto;
+        /* Botones mejorados */
+        .course-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        .filter-btn {
-            background-color: white;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
+        .course-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .continue-button {
+            background: linear-gradient(135deg, #64B5F6, #1E88E5);
+            color: white;
+            box-shadow: 0 4px 15px rgba(100, 181, 246, 0.3);
+        }
+
+        .continue-button:hover {
+            background: linear-gradient(135deg, #1E88E5, #1976D2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(100, 181, 246, 0.4);
+        }
+
+        .details-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .details-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Estadísticas del curso */
+        .course-stats {
+            display: flex;
+            justify-content: space-between;
+            color: white;
+            font-size: 0.9rem;
+            margin: 15px 0;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .stat-item i {
+            color: #64B5F6;
+        }
+
+        /* Animaciones */
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .course-card {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .course-button {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+            
+            .course-card h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Textos blancos para las cartas */
+        .card-title {
+            color: white !important;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .card-type {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .card-progress {
+            color: white !important;
+            font-size: 0.9rem;
+            margin: 10px 0;
+        }
+
+        .card-button {
+            color: white !important;
+            font-weight: 500;
+        }
+
+        /* Mejoras adicionales para la legibilidad */
+        .progress-text {
+            color: white !important;
+            font-size: 0.9rem;
+        }
+
+        .card-description {
+            color: rgba(255, 255, 255, 0.9) !important;
+            line-height: 1.5;
+        }
+
+        .start-button,
+        .continue-button {
+            color: white !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Asegurar que los textos de los botones sean blancos */
+        .course-button {
+            color: white !important;
+        }
+
+        /* Mejorar el contraste de los textos secundarios */
+        .course-stats span {
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+
+        /* Títulos de los cursos */
+        .course-card h3,
+        .course-title {
+            color: white !important;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+        }
+
+        /* Descripción del curso */
+        .course-description,
+        .course-card p {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+        }
+
+        /* Tipo de curso y categoría */
+        .course-type,
+        .course-category {
+            color: #64B5F6 !important;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        /* Progreso y estadísticas */
+        .progress-text,
+        .course-progress,
+        .course-stats,
+        .course-modules {
+            color: white !important;
+            font-size: 0.9rem;
+            margin: 10px 0;
+        }
+
+        /* Textos en los botones */
+        .course-button,
+        .continue-button,
+        .start-button,
+        .details-button {
+            color: white !important;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Estado del curso (Completado, En progreso, etc.) */
+        .course-status {
+            color: #64B5F6 !important;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* Información adicional */
+        .additional-info {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-size: 0.85rem;
+        }
+
+        /* Estadísticas específicas */
+        .stat-item {
+            color: white !important;
+        }
+
+        .stat-item i {
+            color: #64B5F6;
+        }
+
+        /* Asegurar visibilidad en modo oscuro */
+        @media (prefers-color-scheme: dark) {
+            .course-card {
+                background: rgba(0, 0, 0, 0.4);
+            }
+            
+            .course-card * {
+                color: white !important;
+            }
+        }
+
+        /* Estilos para la navegación de filtros */
+        .filter-nav {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 10px 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-button {
+            padding: 10px 25px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-button:hover {
+            background: rgba(100, 181, 246, 0.2);
+            border-color: #64B5F6;
+            transform: translateY(-2px);
+        }
+
+        .filter-button.active {
+            background: #64B5F6;
+            border-color: #64B5F6;
+            color: white;
+            box-shadow: 0 2px 10px rgba(100, 181, 246, 0.3);
+        }
+
+        /* Asegurarse que los botones sean visibles */
+        .filter-button {
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .filter-nav {
+                gap: 10px;
+            }
+            
+            .filter-button {
+                padding: 8px 20px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Asegurarse que las tarjetas tengan una transición suave */
+        .course-card {
             transition: all 0.3s ease;
         }
 
-        .filter-btn:hover,
-        .filter-btn.active {
-            background-color: var(--primary-color);
+        /* Reset de estilos para la navegación */
+        .filter-section {
+            width: 100%;
+            margin: 20px 0;
+            padding: 0 15px;
+        }
+
+        .filter-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .filter-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+            border-radius: 25px;
+            color: white !important;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 10px 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .filter-text {
+            color: white !important;
+            position: relative;
+            z-index: 2;
+        }
+
+        .filter-button:hover {
+            background: rgba(100, 181, 246, 0.2);
+            border-color: #64B5F6;
+            transform: translateY(-2px);
+        }
+
+        .filter-button.active {
+            background: #64B5F6;
+            border-color: #64B5F6;
+            color: white !important;
+            box-shadow: 0 2px 10px rgba(100, 181, 246, 0.3);
+        }
+
+        /* Forzar colores */
+        .filter-button,
+        .filter-button span,
+        .filter-button.active,
+        .filter-button.active span {
+            color: white !important;
+        }
+
+        /* Asegurar que no haya interferencias */
+        .filter-button {
+            text-decoration: none !important;
+            border: none;
+            outline: none;
+            display: inline-block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .filter-button {
+                padding: 8px 20px;
+                min-width: 100px;
+                font-size: 13px;
+            }
+        }
+
+        /* Estilos responsive mejorados */
+        /* Contenedor principal */
+        .courses-container {
+            padding: 15px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Navegación de filtros */
+        .filter-section {
+            width: 100%;
+            margin: 15px 0;
+            padding: 0 10px;
+        }
+
+        .filter-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        /* Grid de cursos responsive */
+        .courses-grid {
+            display: grid;
+            gap: 20px;
+            padding: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Media queries para diferentes tamaños de pantalla */
+        @media screen and (max-width: 1200px) {
+            .courses-grid {
+                grid-template-columns: repeat(3, 1fr);
+                padding: 15px;
+            }
+        }
+
+        @media screen and (max-width: 992px) {
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            /* Ajustes para tablets */
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                padding: 10px;
+            }
+
+            .course-card {
+                min-height: 350px;
+            }
+
+            .filter-nav {
+                padding: 10px;
+                gap: 8px;
+            }
+
+            .filter-button {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            /* Ajustes para móviles */
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .course-card {
+                min-height: auto;
+                margin-bottom: 15px;
+            }
+
+            .filter-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 6px;
+            }
+
+            .filter-button {
+                flex: 1;
+                min-width: calc(50% - 6px);
+                font-size: 0.8rem;
+                padding: 8px 10px;
+            }
+
+            .card-buttons {
+                flex-direction: column;
+                gap: 8px;
+                padding: 10px;
+            }
+
+            .card-btn {
+                width: 100%;
+                padding: 12px;
+            }
+
+            .course-title {
+                font-size: 1.1rem;
+            }
+
+            .course-description {
+                font-size: 0.9rem;
+            }
+
+            .course-stats {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        @media screen and (max-width: 360px) {
+            /* Ajustes para pantallas muy pequeñas */
+            .courses-grid {
+                padding: 8px;
+            }
+
+            .course-card {
+                padding-bottom: 70px;
+            }
+
+            .filter-button {
+                width: 100%;
+                min-width: 100%;
+            }
+
+            .card-buttons {
+                padding: 8px;
+            }
+        }
+
+        /* Orientación landscape */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .course-card {
+                min-height: 300px;
+            }
+        }
+
+        /* Mejoras táctiles */
+        @media (hover: none) {
+            .card-btn:active,
+            .filter-button:active {
+                transform: scale(0.98);
+            }
+        }
+
+        /* Estilos específicos para los botones de las tarjetas */
+        .card-buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            padding: 0 15px 15px 15px;
+        }
+
+        .card-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .continue-btn {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
             color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .continue-btn:hover {
+            background: linear-gradient(135deg, #1976D2, #1565C0);
+            transform: translateY(-2px);
+        }
+
+        .details-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .details-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Asegurar que las tarjetas tengan el espacio correcto */
+        .course-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 400px;
+            padding-bottom: 70px; /* Espacio para los botones */
+        }
+
+        /* Posicionar los botones al final de la tarjeta */
+        .card-buttons {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .card-buttons {
+                flex-direction: column;
+                padding: 0 10px 10px 10px;
+            }
+            
+            .card-btn {
+                width: 100%;
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+            
+            .course-card {
+                min-height: 350px;
+                padding-bottom: 90px;
+            }
         }
     </style>
 </head>
@@ -114,13 +1229,21 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-center mb-4">
-            <div class="btn-group" role="group" aria-label="Filtros de cursos">
-                <button type="button" class="btn filter-btn active">Todos</button>
-                <button type="button" class="btn filter-btn">En Progreso</button>
-                <button type="button" class="btn filter-btn">Completados</button>
-                <button type="button" class="btn filter-btn">No Iniciados</button>
-            </div>
+        <div class="filter-section">
+            <nav class="filter-nav">
+                <button class="filter-button active" data-filter="Todos">
+                    <span class="filter-text">Todos</span>
+                </button>
+                <button class="filter-button" data-filter="EnProgreso">
+                    <span class="filter-text">En Progreso</span>
+                </button>
+                <button class="filter-button" data-filter="Completados">
+                    <span class="filter-text">Completados</span>
+                </button>
+                <button class="filter-button" data-filter="NoIniciados">
+                    <span class="filter-text">No Iniciados</span>
+                </button>
+            </nav>
         </div>
 
         <div class="row g-4">
@@ -142,7 +1265,12 @@
                             <div class="progress-bar bg-success" role="progressbar" style="width: 60%"
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <a href="#" class="btn btn-custom">Continuar</a>
+                        <div class="course-actions">
+                            <button class="course-button continue-button">
+                                <i class="fas fa-forward"></i>
+                                Continuar
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -165,7 +1293,10 @@
                             <div class="progress-bar bg-success" role="progressbar" style="width: 30%"
                                 aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <a href="#" class="btn btn-custom">Continuar</a>
+                        <button class="course-button continue-button">
+                            <i class="fas fa-forward"></i>
+                            Continuar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -188,7 +1319,10 @@
                             <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <a href="#" class="btn btn-custom">Revisar</a>
+                        <button class="course-button details-button">
+                            <i class="fas fa-info-circle"></i>
+                            Detalles
+                        </button>
                     </div>
                 </div>
             </div>
@@ -211,7 +1345,10 @@
                             <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <a href="#" class="btn btn-custom">Comenzar</a>
+                        <button class="course-button start-button">
+                            <i class="fas fa-play"></i>
+                            Comenzar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -234,7 +1371,10 @@
                             <div class="progress-bar bg-success" role="progressbar" style="width: 75%"
                                 aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <a href="#" class="btn btn-custom">Continuar</a>
+                        <button class="course-button continue-button">
+                            <i class="fas fa-forward"></i>
+                            Continuar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -257,7 +1397,10 @@
                             <div class="progress-bar bg-success" role="progressbar" style="width: 40%"
                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <a href="#" class="btn btn-custom">Continuar</a>
+                        <button class="course-button continue-button">
+                            <i class="fas fa-forward"></i>
+                            Continuar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -269,6 +1412,85 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // Animación de las barras de progreso
+    document.addEventListener('DOMContentLoaded', function() {
+        const progressBars = document.querySelectorAll('.progress-bar');
+        const cards = document.querySelectorAll('.course-card');
+
+        // Observador para animar cuando los elementos sean visibles
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideIn 0.5s ease forwards';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observar cada tarjeta
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.animationDelay = `${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Animar barras de progreso
+        progressBars.forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0';
+            setTimeout(() => {
+                bar.style.width = width;
+            }, 300);
+        });
+    });
+
+    // Función para mostrar detalles del curso
+    function showCourseDetails(courseId) {
+        // Implementa la lógica para mostrar detalles
+        console.log(`Mostrando detalles del curso ${courseId}`);
+    }
+
+    // Funcionalidad del menú móvil
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        menuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-button');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remover clase active de todos los botones
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Agregar clase active al botón clickeado
+                this.classList.add('active');
+                
+                // Aquí puedes agregar la lógica de filtrado
+                console.log('Filtro seleccionado:', this.getAttribute('data-filter'));
+            });
+        });
+    });
+    </script>
 </body>
 
 </html>

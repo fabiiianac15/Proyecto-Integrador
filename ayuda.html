@@ -503,53 +503,6 @@
             }
         };
 
-        // Actualizar la función sendMessage
-        async function sendMessage() {
-            const message = userInput.value.trim();
-            if (!message) return;
-
-            // Limpiar input y agregar mensaje del usuario
-            addMessage(message, 'user');
-            userInput.value = '';
-            userInput.style.height = 'auto';
-
-            // Mostrar indicador de escritura
-            const loadingDiv = document.createElement('div');
-            loadingDiv.className = 'message bot-message typing-indicator';
-            loadingDiv.innerHTML = `
-                <div class="message-content">
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                </div>
-            `;
-            chatMessages.appendChild(loadingDiv);
-
-            // Simular delay para una experiencia más natural
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
-            // Buscar respuesta predefinida
-            const messageLower = message.toLowerCase();
-            let respuesta = "Lo siento, no tengo una respuesta específica para esa pregunta. ¿Podrías reformularla o preguntar sobre inversiones, ahorro, presupuesto o deudas?";
-
-            for (const categoria in RESPUESTAS_FINANCIERAS) {
-                if (RESPUESTAS_FINANCIERAS[categoria].keywords.some(keyword => 
-                    messageLower.includes(keyword))) {
-                    respuesta = RESPUESTAS_FINANCIERAS[categoria].response;
-                    break;
-                }
-            }
-
-            // Eliminar indicador de escritura y mostrar respuesta
-            loadingDiv.remove();
-            addMessage(respuesta, 'bot');
-
-            // Mostrar sugerencias relacionadas
-            addSuggestions();
-
-            // Scroll al final del chat
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
 
         // Actualizar las sugerencias para que coincidan con las respuestas predefinidas
         function addSuggestions() {

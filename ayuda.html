@@ -580,25 +580,6 @@
             chatMessages.appendChild(suggestionsDiv);
         }
 
-        // Función para verificar el estado de la API
-        async function checkApiStatus() {
-            try {
-                // Simplemente retornamos true ya que no usaremos la API por ahora
-                return true;
-                
-                /* Se eliminó:
-                const response = await fetch('https://api.openai.com/v1/models', {
-                    headers: {
-                        'Authorization': `Bearer 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`
-                    }
-                }); */
-                
-            } catch (error) {
-                console.error('API Check Error:', error);
-                return false;
-            }
-        }
-
         // Event listeners
         sendButton.addEventListener('click', sendMessage);
         userInput.addEventListener('keypress', (e) => {

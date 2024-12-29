@@ -1,18 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuración de Perfil - EduFinanzas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/CSS/configuracion.css">
-    <link rel="icon" href="/img/EduFinanzas.png" />
+    <link rel="icon" href="EduFinanzas.png" />
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #0d47a1;
+            --accent-color: #00c853;
+            --text-color: #333333;
+            --bg-light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-light);
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: var(--accent-color);
+        }
+
+        .nav-pills .nav-link {
+            color: var(--text-color);
+        }
+
+        .btn-custom {
+            background-color: var(--accent-color);
+            border: none;
+            color: white;
+        }
+
+        .btn-custom:hover {
+            background-color: #00a844;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+    </style>
 </head>
+
 <body>
     <header class="profile-header text-center">
         <div class="container">
-            <img src="/img/Fabian.jpg" alt="Foto de perfil" class="profile-picture mb-3">
+            <img src="Fabian.jpg" alt="Foto de perfil" class="profile-picture mb-3">
             <h1 class="display-4">Pedrito el Financiero</h1>
             <p class="lead">Estudiante de Finanzas</p>
         </div>
@@ -22,15 +76,24 @@
         <div class="row">
             <div class="col-md-3 mb-4">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <button class="nav-link active" id="v-pills-personal-tab" data-bs-toggle="pill" data-bs-target="#v-pills-personal" type="button" role="tab" aria-controls="v-pills-personal" aria-selected="true">Información Personal</button>
-                    <button class="nav-link" id="v-pills-account-tab" data-bs-toggle="pill" data-bs-target="#v-pills-account" type="button" role="tab" aria-controls="v-pills-account" aria-selected="false">Cuenta</button>
-                    <button class="nav-link" id="v-pills-privacy-tab" data-bs-toggle="pill" data-bs-target="#v-pills-privacy" type="button" role="tab" aria-controls="v-pills-privacy" aria-selected="false">Privacidad</button>
-                    <button class="nav-link" id="v-pills-notifications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-notifications" type="button" role="tab" aria-controls="v-pills-notifications" aria-selected="false">Notificaciones</button>
+                    <button class="nav-link active" id="v-pills-personal-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-personal" type="button" role="tab" aria-controls="v-pills-personal"
+                        aria-selected="true">Información Personal</button>
+                    <button class="nav-link" id="v-pills-account-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-account" type="button" role="tab" aria-controls="v-pills-account"
+                        aria-selected="false">Cuenta</button>
+                    <button class="nav-link" id="v-pills-privacy-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-privacy" type="button" role="tab" aria-controls="v-pills-privacy"
+                        aria-selected="false">Privacidad</button>
+                    <button class="nav-link" id="v-pills-notifications-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-notifications" type="button" role="tab"
+                        aria-controls="v-pills-notifications" aria-selected="false">Notificaciones</button>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-personal" role="tabpanel" aria-labelledby="v-pills-personal-tab">
+                    <div class="tab-pane fade show active" id="v-pills-personal" role="tabpanel"
+                        aria-labelledby="v-pills-personal-tab">
                         <h2 class="mb-4">Información Personal</h2>
                         <form>
                             <div class="mb-3">
@@ -51,12 +114,14 @@
                             </div>
                             <div class="mb-3">
                                 <label for="bio" class="form-label">Biografía</label>
-                                <textarea class="form-control" id="bio" rows="3">Estudiante apasionado por las finanzas y la inversión.</textarea>
+                                <textarea class="form-control" id="bio"
+                                    rows="3">Estudiante apasionado por las finanzas y la inversión.</textarea>
                             </div>
                             <button type="submit" class="btn btn-custom">Guardar Cambios</button>
                         </form>
                     </div>
-                    <div class="tab-pane fade" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab">
+                    <div class="tab-pane fade" id="v-pills-account" role="tabpanel"
+                        aria-labelledby="v-pills-account-tab">
                         <h2 class="mb-4">Configuración de la Cuenta</h2>
                         <form>
                             <div class="mb-3">
@@ -82,34 +147,41 @@
                             <button type="submit" class="btn btn-custom">Actualizar Cuenta</button>
                         </form>
                     </div>
-                    <div class="tab-pane fade" id="v-pills-privacy" role="tabpanel" aria-labelledby="v-pills-privacy-tab">
+                    <div class="tab-pane fade" id="v-pills-privacy" role="tabpanel"
+                        aria-labelledby="v-pills-privacy-tab">
                         <h2 class="mb-4">Configuración de Privacidad</h2>
                         <form>
                             <div class="mb-3 form-check form-switch">
                                 <input class="form-check-input" type="checkbox" id="profileVisibility" checked>
-                                <label class="form-check-label" for="profileVisibility">Perfil visible para otros usuarios</label>
+                                <label class="form-check-label" for="profileVisibility">Perfil visible para otros
+                                    usuarios</label>
                             </div>
                             <div class="mb-3 form-check form-switch">
                                 <input class="form-check-input" type="checkbox" id="courseProgress" checked>
-                                <label class="form-check-label" for="courseProgress">Mostrar progreso de cursos públicamente</label>
+                                <label class="form-check-label" for="courseProgress">Mostrar progreso de cursos
+                                    públicamente</label>
                             </div>
                             <div class="mb-3 form-check form-switch">
                                 <input class="form-check-input" type="checkbox" id="achievementSharing">
-                                <label class="form-check-label" for="achievementSharing">Compartir logros en redes sociales</label>
+                                <label class="form-check-label" for="achievementSharing">Compartir logros en redes
+                                    sociales</label>
                             </div>
                             <button type="submit" class="btn btn-custom">Guardar Preferencias</button>
                         </form>
                     </div>
-                    <div class="tab-pane fade" id="v-pills-notifications" role="tabpanel" aria-labelledby="v-pills-notifications-tab">
+                    <div class="tab-pane fade" id="v-pills-notifications" role="tabpanel"
+                        aria-labelledby="v-pills-notifications-tab">
                         <h2 class="mb-4">Configuración de Notificaciones</h2>
                         <form>
                             <div class="mb-3 form-check">
                                 <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
-                                <label class="form-check-label" for="emailNotifications">Recibir notificaciones por correo electrónico</label>
+                                <label class="form-check-label" for="emailNotifications">Recibir notificaciones por
+                                    correo electrónico</label>
                             </div>
                             <div class="mb-3 form-check">
                                 <input class="form-check-input" type="checkbox" id="pushNotifications" checked>
-                                <label class="form-check-label" for="pushNotifications">Recibir notificaciones push</label>
+                                <label class="form-check-label" for="pushNotifications">Recibir notificaciones
+                                    push</label>
                             </div>
                             <div class="mb-3 form-check">
                                 <input class="form-check-input" type="checkbox" id="courseUpdates" checked>
@@ -121,7 +193,8 @@
                             </div>
                             <div class="mb-3 form-check">
                                 <input class="form-check-input" type="checkbox" id="promotions">
-                                <label class="form-check-label" for="promotions">Promociones y ofertas especiales</label>
+                                <label class="form-check-label" for="promotions">Promociones y ofertas
+                                    especiales</label>
                             </div>
                             <button type="submit" class="btn btn-custom">Guardar Preferencias</button>
                         </form>
@@ -137,4 +210,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

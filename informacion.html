@@ -7,8 +7,397 @@
     <title>Info EduFinanzas </title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/CSS/styleInfor.css">
-    <link rel="icon" href="/img/EduFinanzas.png">
+    <link rel="icon" href="EduFinanzas.png">
+    <style>
+        :root {
+            --primary-color: #1a5f7a;
+            --secondary-color: #86b7fe;
+            --accent-color: #ff6b6b;
+            --gradient-start: #1a5f7a;
+            --gradient-end: #2d95c2;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white !important;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+        }
+
+
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dropdown-menu {
+            background: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .dropdown-item {
+            color: #333;
+            padding: 0.7rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(var(--primary-color-rgb), 0.1);
+            transform: translateX(5px);
+        }
+
+        .dropdown-divider {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ajuste para el menú desplegable del perfil */
+        #profileDropdown {
+            display: flex;
+            align-items: center;
+            padding: 0.25rem 1rem;
+        }
+
+        #profileDropdown::after {
+            display: none;
+        }
+
+        .nav-link:hover::after {
+            width: 0;
+        }
+
+
+        @media (max-width: 991px) {
+            .profile-avatar {
+                width: 35px;
+                height: 35px;
+            }
+
+            .dropdown-menu {
+                border: none;
+                background: rgba(255, 255, 255, 0.1);
+                margin-top: 0;
+            }
+
+            .dropdown-item {
+                color: white;
+            }
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)),
+                url('/api/placeholder/1920/1080') center/cover;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/api/placeholder/100/100') center/30px repeat;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card {
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), transparent);
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .resource-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .resource-card img {
+            transition: transform 0.3s ease;
+        }
+
+        .resource-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .resource-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Animaciones */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mejoras para formularios */
+        .form-control {
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(134, 183, 254, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 95, 122, 0.3);
+        }
+
+
+
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            margin: 10px auto;
+            background-color: var(--accent-color);
+        }
+
+        .feature-card,
+        .faq-card,
+        .testimonial-card,
+        .resource-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover,
+        .faq-card:hover,
+        .testimonial-card:hover,
+        .resource-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .faq-section {
+            background-color: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: #3498db;
+        }
+
+        .accordion-item {
+            border: none;
+            margin-bottom: 1rem;
+            border-radius: 10px !important;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .accordion-button {
+            background-color: #ffffff;
+            color: #2c3e50;
+            font-weight: 600;
+            padding: 1.5rem;
+            border-radius: 10px !important;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: #3498db;
+        }
+
+        .accordion-button::after {
+            background-size: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-body {
+            padding: 1.5rem;
+            color: #666;
+            line-height: 1.6;
+            background-color: #ffffff;
+        }
+
+        .faq-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            fill: currentColor;
+        }
+    </style>
 </head>
 
 <body>
@@ -30,23 +419,24 @@
                         <a class="nav-link" href="informacion.html">Recursos Educativos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#asesoria">Asesoría Personal</a>
+                        <a class="nav-link" href="informacion.html#asesoria">Asesoría Personal</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="profile-avatar">
-                                <img src="/img/Fabian.jpg"
-                                    alt="Usuario" class="rounded-circle">
+                                <img src="Fabian.jpg" alt="Usuario" class="rounded-circle">
                             </div>
                             <span class="ms-2">Mi Perfil</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                            <li><a class="dropdown-item" href="wallet.html"><i class="fas fa-user me-2"></i>Ver Perfil</a>
+                            <li><a class="dropdown-item" href="wallet.html"><i class="fas fa-user me-2"></i>Ver
+                                    Perfil</a>
                             </li>
-                            <li><a class="dropdown-item" href="/HTML/miProgreso.html"><i class="fas fa-chart-bar me-2"></i>Mi
+                            <li><a class="dropdown-item" href="miProgreso.html"><i class="fas fa-chart-bar me-2"></i>Mi
                                     Progreso</a></li>
-                            <li><a class="dropdown-item" href="/HTML/configuracion.html"><i class="fas fa-cog me-2"></i>Configuración</a>
+                            <li><a class="dropdown-item" href="configuracion.html"><i
+                                        class="fas fa-cog me-2"></i>Configuración</a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -60,7 +450,7 @@
         </div>
     </nav>
 
-    
+
     <!-- Hero Section mejorado -->
     <section class="hero-section" id="inicio">
         <div class="container">
@@ -71,7 +461,7 @@
                         financieros. Transforma tu futuro financiero hoy.</p>
                     <div class="d-flex gap-3">
                         <a href="cursos.html" class="btn btn-light btn-lg">Explorar Cursos</a>
-                        <a href="#asesoria" class="btn btn-outline-light btn-lg">Obtener Asesoría</a>
+                        <a href="informacion.html#asesoria" class="btn btn-outline-light btn-lg">Obtener Asesoría</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -144,7 +534,8 @@
                             <h5 class="card-title">Estrategias para la jubilación</h5>
                             <p class="card-text">Aprende cómo asegurar una jubilación cómoda mediante inversiones y
                                 ahorros.</p>
-                            <a href="https://repository.universidadean.edu.co/server/api/core/bitstreams/51124709-72b5-47b6-abe0-3d08f62cfb06/content" class="btn btn-outline-primary">Leer más</a>
+                            <a href="https://repository.universidadean.edu.co/server/api/core/bitstreams/51124709-72b5-47b6-abe0-3d08f62cfb06/content"
+                                class="btn btn-outline-primary">Leer más</a>
                         </div>
                     </div>
                 </div>
@@ -154,7 +545,8 @@
                             <h5 class="card-title">Fondos de inversión y ETFs</h5>
                             <p class="card-text">Conoce las ventajas de invertir en fondos de inversión para
                                 diversificar tu portafolio.</p>
-                            <a href="https://www.cnmv.es/DocPortal/Publicaciones/Guias/G07_ETF.pdf" class="btn btn-outline-primary">Leer más</a>
+                            <a href="https://www.cnmv.es/DocPortal/Publicaciones/Guias/G07_ETF.pdf"
+                                class="btn btn-outline-primary">Leer más</a>
                         </div>
                     </div>
                 </div>
@@ -164,7 +556,8 @@
                             <h5 class="card-title">Uso responsable de las tarjetas de crédito</h5>
                             <p class="card-text">Evita las deudas y aprende a utilizar tu tarjeta de crédito de manera
                                 inteligente.</p>
-                            <a href="https://bsc.com.do/api/content/uploads/2024/03/Gui%CC%81a-5-Pasos-para-el-uso-responsable-de-tarjetas-de-cre%CC%81dito.pdf" class="btn btn-outline-primary">Leer más</a>
+                            <a href="https://bsc.com.do/api/content/uploads/2024/03/Gui%CC%81a-5-Pasos-para-el-uso-responsable-de-tarjetas-de-cre%CC%81dito.pdf"
+                                class="btn btn-outline-primary">Leer más</a>
                         </div>
                     </div>
                 </div>
@@ -178,9 +571,11 @@
             <div class="accordion" id="faqAccordion">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne">
                             <svg class="faq-icon" viewBox="0 0 24 24">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
                             </svg>
                             ¿Por qué es importante ahorrar?
                         </button>
@@ -201,16 +596,19 @@
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo">
                             <svg class="faq-icon" viewBox="0 0 24 24">
-                                <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                                <path
+                                    d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
                             </svg>
                             ¿Qué tipos de inversión existen?
                         </button>
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
-                            <p>Existen diversos tipos de inversiones, cada una con diferentes niveles de riesgo y rendimiento:</p>
+                            <p>Existen diversos tipos de inversiones, cada una con diferentes niveles de riesgo y
+                                rendimiento:</p>
                             <ul>
                                 <li><strong>Renta Fija:</strong> Bonos gubernamentales, corporativos, CDTs</li>
                                 <li><strong>Renta Variable:</strong> Acciones, ETFs, fondos mutuos</li>
@@ -224,9 +622,11 @@
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree">
                             <svg class="faq-icon" viewBox="0 0 24 24">
-                                <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
+                                <path
+                                    d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z" />
                             </svg>
                             ¿Cómo empezar a invertir?
                         </button>
@@ -290,7 +690,8 @@
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <img src="https://www.finect.com/image/254ca92df54d4c2f9a635a8ec6e341ad" alt="Blog 1" class="card-img-top">
+                        <img src="https://www.finect.com/image/254ca92df54d4c2f9a635a8ec6e341ad" alt="Blog 1"
+                            class="card-img-top">
                         <div class="card-body">
                             <span class="badge bg-primary mb-2">Inversiones</span>
                             <h5 class="card-title">Cómo empezar a invertir con poco capital</h5>
@@ -305,7 +706,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <img src="https://i0.wp.com/blog.kubofinanciero.com/wp-content/uploads/2021/11/Consejos-para-ha%CC%81bitos-de-ahorro-y-gasto-inteligente-scaled.jpg?fit=2560%2C1331&ssl=1" alt="Blog 2" class="card-img-top">
+                        <img src="https://i0.wp.com/blog.kubofinanciero.com/wp-content/uploads/2021/11/Consejos-para-ha%CC%81bitos-de-ahorro-y-gasto-inteligente-scaled.jpg?fit=2560%2C1331&ssl=1"
+                            alt="Blog 2" class="card-img-top">
                         <div class="card-body">
                             <span class="badge bg-success mb-2">Ahorro</span>
                             <h5 class="card-title">10 hábitos de ahorro efectivos</h5>
@@ -320,7 +722,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <img src="https://i.ytimg.com/vi/uTRLHoJsDOY/maxresdefault.jpg" alt="Blog 3" class="card-img-top">
+                        <img src="https://i.ytimg.com/vi/uTRLHoJsDOY/maxresdefault.jpg" alt="Blog 3"
+                            class="card-img-top">
                         <div class="card-body">
                             <span class="badge bg-warning mb-2">Emprendimiento</span>
                             <h5 class="card-title">Finanzas claves para tu startup</h5>

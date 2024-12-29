@@ -7,8 +7,248 @@
     <title>EdiFinanzas Comunidad</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-    <link rel="icon" href="/img/EduFinanzas.png">
-    <link rel="stylesheet" href="/CSS/comunidad.css">
+    <link rel="icon" href="EduFinanzas.png">
+    <style>
+        :root {
+            --primary-color: #2a4365;
+            --secondary-color: #63b3ed;
+            --accent-color: #edf2f7;
+            --text-light: #f7fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f7fafc;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(26, 95, 122, 0.9), rgba(45, 139, 172, 0.9)),
+                url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white !important;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+        }
+
+
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dropdown-menu {
+            background: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .dropdown-item {
+            color: #333;
+            padding: 0.7rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(var(--primary-color-rgb), 0.1);
+            transform: translateX(5px);
+        }
+
+        .dropdown-divider {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ajuste para el menú desplegable del perfil */
+        #profileDropdown {
+            display: flex;
+            align-items: center;
+            padding: 0.25rem 1rem;
+        }
+
+        #profileDropdown::after {
+            display: none;
+        }
+
+        .nav-link:hover::after {
+            width: 0;
+        }
+
+
+        @media (max-width: 991px) {
+            .profile-avatar {
+                width: 35px;
+                height: 35px;
+            }
+
+            .dropdown-menu {
+                border: none;
+                background: rgba(255, 255, 255, 0.1);
+                margin-top: 0;
+            }
+
+            .dropdown-item {
+                color: white;
+            }
+        }
+
+
+        .community-card {
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .community-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .event-card {
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .member-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .discussion-preview {
+            background: var(--accent-color);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .activity-item {
+            border-left: 2px solid var(--secondary-color);
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .community-stats {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: var(--text-light);
+            padding: 40px 0;
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .member-preview {
+            text-align: center;
+        }
+
+        .member-preview img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .join-floating {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+            font-weight: 600;
+        }
+
+        .join-floating:hover {
+            transform: translateY(-3px);
+            color: white;
+            background: var(--secondary-color);
+        }
+
+        .btn-outline-primary {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 20px 0;
+        }
+
+        .footer h5 {
+            color: var(--secondary-color);
+        }
+
+        .social-icon {
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: var(--secondary-color) !important;
+        }
+
+        @media (max-width: 768px) {
+            .display-4 {
+                font-size: 2.5rem;
+            }
+
+            .members-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -36,8 +276,7 @@
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="profile-avatar">
-                                <img src="/img/Fabian.jpg"
-                                    alt="Usuario" class="rounded-circle">
+                                <img src="Fabian.jpg" alt="Usuario" class="rounded-circle">
                             </div>
                             <span class="ms-2">Mi Perfil</span>
                         </a>
@@ -45,9 +284,10 @@
                             <li><a class="dropdown-item" href="wallet.html"><i class="fas fa-user me-2"></i>Ver
                                     Perfil</a>
                             </li>
-                            <li><a class="dropdown-item" href="/HTML/miProgreso.html"><i class="fas fa-chart-bar me-2"></i>Mi
+                            <li><a class="dropdown-item" href="miProgreso.html"><i class="fas fa-chart-bar me-2"></i>Mi
                                     Progreso</a></li>
-                            <li><a class="dropdown-item" href="/HTML/configuracion.html"><i class="fas fa-cog me-2"></i>Configuración</a>
+                            <li><a class="dropdown-item" href="configuracion.html"><i
+                                        class="fas fa-cog me-2"></i>Configuración</a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -97,10 +337,10 @@
                         <div class="card-body">
                             <h5 class="card-title">Miembros Online</h5>
                             <div class="d-flex flex-wrap gap-2 mb-3">
-                                <img src="/img/Fabian.jpg" alt="Miembro" class="member-avatar">
-                                <img src="/img/Adrian.jpg" alt="Miembro" class="member-avatar">
-                                <img src="/img/Pipe.jpg" alt="Miembro" class="member-avatar">
-                                <img src="/img/Chucho.jpg" alt="Miembro" class="member-avatar">
+                                <img src="Fabian.jpg" alt="Miembro" class="member-avatar">
+                                <img src="Adrian.jpg" alt="Miembro" class="member-avatar">
+                                <img src="Pipe.jpg" alt="Miembro" class="member-avatar">
+                                <img src="Chucho.jpg" alt="Miembro" class="member-avatar">
                             </div>
                             <p class="mb-0">+45 miembros activos ahora</p>
                         </div>
@@ -194,22 +434,22 @@
             <h2 class="mb-4">Miembros Destacados</h2>
             <div class="members-grid">
                 <div class="member-preview">
-                    <img src="/img/Fabian.jpg" alt="Miembro">
+                    <img src="Fabian.jpg" alt="Miembro">
                     <h6 class="mb-0">Fabi</h6>
                     <small class="text-muted">Mentor Principal</small>
                 </div>
                 <div class="member-preview">
-                    <img src="/img/Adrian.jpg" alt="Miembro">
+                    <img src="Adrian.jpg" alt="Miembro">
                     <h6 class="mb-0">Adrian</h6>
                     <small class="text-muted">Top Contribuidor</small>
                 </div>
                 <div class="member-preview">
-                    <img src="/img/Pipe.jpg" alt="Miembro">
+                    <img src="Pipe.jpg" alt="Miembro">
                     <h6 class="mb-0">Andres Felipe</h6>
                     <small class="text-muted">Experto Crypto</small>
                 </div>
                 <div class="member-preview">
-                    <img src="/img/Chucho.jpg" alt="Miembro">
+                    <img src="Chucho.jpg" alt="Miembro">
                     <h6 class="mb-0">Jesús Camilo</h6>
                     <small class="text-muted">Analista Senior</small>
                 </div>

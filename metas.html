@@ -1,14 +1,91 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edufinanzas Metas</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="icon" href="/img/EduFinanzas.png">
-    <link rel="stylesheet" href="/CSS/metas.css">
+    <link rel="icon" href="EduFinanzas.png">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #27ae60;
+            --accent-color: #e74c3c;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), #34495e);
+            color: white;
+            padding: 6rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .goal-card {
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .goal-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .goal-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+        }
+
+        .btn-custom {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #219a52;
+            transform: scale(1.05);
+        }
+
+        .achievement-badge {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .modal-content {
+            border-radius: 15px;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+        }
+    </style>
 </head>
+
 <body>
     <!-- Hero Section -->
     <div class="hero-section">
@@ -29,7 +106,8 @@
             <div class="col-lg-8 mx-auto text-center">
                 <h2 class="mb-4">Tu Progreso General</h2>
                 <div class="progress">
-                    <div class="progress-bar bg-success" id="overall-progress" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                    <div class="progress-bar bg-success" id="overall-progress" role="progressbar" style="width: 65%;"
+                        aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
                 </div>
             </div>
         </div>
@@ -252,10 +330,10 @@
 
             goals.push(newGoal);
             renderGoals();
-            
+
             const modal = bootstrap.Modal.getInstance(document.getElementById('newGoalModal'));
             modal.hide();
-            
+
             document.getElementById('newGoalForm').reset();
             showNotification('¡Nueva meta creada con éxito!');
         }
@@ -273,9 +351,9 @@
         function updateGoalProgress() {
             const newProgress = Number(document.getElementById('currentProgress').value);
             const goalIndex = goals.findIndex(g => g.id === selectedGoalId);
-            
+
             if (goalIndex === -1) return;
-            
+
             const goal = goals[goalIndex];
             if (newProgress > goal.target) {
                 showNotification('El progreso no puede ser mayor que la meta');
@@ -284,10 +362,10 @@
 
             goals[goalIndex].current = newProgress;
             renderGoals();
-            
+
             const modal = bootstrap.Modal.getInstance(document.getElementById('updateProgressModal'));
             modal.hide();
-            
+
             showNotification('¡Progreso actualizado con éxito!');
         }
 
@@ -297,4 +375,5 @@
         });
     </script>
 </body>
+
 </html>

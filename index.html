@@ -10,8 +10,507 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="icon" href="/img/EduFinanzas.png" />
-    <link rel="stylesheet" href="/CSS/index.css" />
+    <link rel="icon" href="EduFinanzas.png" />
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f1c40f;
+            --light-bg: #f8f9fa;
+            --dark-bg: #2c3e50;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-bg);
+        }
+
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white !important;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+        }
+
+
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dropdown-menu {
+            background: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .dropdown-item {
+            color: #333;
+            padding: 0.7rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(var(--primary-color-rgb), 0.1);
+            transform: translateX(5px);
+        }
+
+        .dropdown-divider {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ajuste para el menú desplegable del perfil */
+        #profileDropdown {
+            display: flex;
+            align-items: center;
+            padding: 0.25rem 1rem;
+        }
+
+        #profileDropdown::after {
+            display: none;
+        }
+
+        .nav-link:hover::after {
+            width: 0;
+        }
+
+
+        @media (max-width: 991px) {
+            .profile-avatar {
+                width: 35px;
+                height: 35px;
+            }
+
+            .dropdown-menu {
+                border: none;
+                background: rgba(255, 255, 255, 0.1);
+                margin-top: 0;
+            }
+
+            .dropdown-item {
+                color: white;
+            }
+        }
+
+        .offcanvas {
+            width: 320px !important;
+            background: linear-gradient(90deg, #002bba, #3367af);
+            color: white;
+        }
+
+        .offcanvas-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1050;
+            background: linear-gradient(90deg, #002bba, #3367af);
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .stats-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stats-card h5 {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            opacity: 0.9;
+        }
+
+        .stats-card .value {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .progress {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+        }
+
+        .card-highlight {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .resources-section {
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+        }
+
+        .resource-link {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .resource-link:hover {
+            opacity: 1;
+            color: white;
+        }
+
+        .badge-custom {
+            background: rgba(255, 255, 255, 0.2);
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+        }
+
+        /* Hero Section Mejorado */
+        .hero {
+            height: 80vh;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-1.2.1');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .carousel-item {
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .carousel-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .carousel-caption {
+            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            text-align: left;
+        }
+
+        .carousel-caption h5 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-caption p {
+            font-size: 1.2rem;
+            color: #f8f9fa;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            opacity: 1;
+        }
+
+        .carousel-indicators {
+            margin-bottom: 1rem;
+        }
+
+        .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin: 0 5px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-indicators button.active {
+            background-color: #fff;
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .carousel-caption h5 {
+                font-size: 1.5rem;
+            }
+
+            .carousel-caption p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Dashboard Section */
+        .dashboard {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .credit-simulator {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+        }
+
+        .simulator-input {
+            margin-bottom: 1.5rem;
+        }
+
+        .simulator-result {
+            display: none;
+        }
+
+        .form-control-sm {
+            height: calc(1.5em + 0.5rem + 2px);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        #loanChart {
+            max-height: 200px !important;
+        }
+
+        .result-card {
+            min-height: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+
+        .accordion-custom {
+            --bs-accordion-btn-bg: var(--primary-color);
+            --bs-accordion-btn-color: white;
+            --bs-accordion-btn-active-bg: var(--secondary-color);
+            --bs-accordion-btn-active-color: white;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .accordion-body {
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .section-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: scale(1.02);
+        }
+
+        .tooltip-inner {
+            max-width: 300px;
+            text-align: left;
+        }
+
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer Mejorado */
+        .footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--secondary-color);
+        }
+    </style>
 </head>
 
 <body>
@@ -33,13 +532,13 @@
                         <a class="nav-link" href="informacion.html">Recursos Educativos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/HTML/informacion.html#asesoria">Asesoría Personal</a>
+                        <a class="nav-link" href="informacion.html#asesoria">Asesoría Personal</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="profile-avatar">
-                                <img src="/img/Fabian.jpg" alt="Usuario" class="rounded-circle" />
+                                <img src="Fabian.jpg" alt="Usuario" class="rounded-circle" />
                             </div>
                             <span class="ms-2">Mi Perfil</span>
                         </a>
@@ -49,11 +548,12 @@
                                     Perfil</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="/HTML/miProgreso.html"><i class="fas fa-chart-bar me-2"></i>Mi
+                                <a class="dropdown-item" href="miProgreso.html"><i class="fas fa-chart-bar me-2"></i>Mi
                                     Progreso</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="/HTML/configuracion.html"><i class="fas fa-cog me-2"></i>Configuración</a>
+                                <a class="dropdown-item" href="configuracion.html"><i
+                                        class="fas fa-cog me-2"></i>Configuración</a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider" />
@@ -175,7 +675,7 @@
             <p class="animate__animated animate__fadeInUp">
                 Descubre herramientas poderosas para mejorar tu educación financiera
             </p>
-            <a href="/HTML/registro-modulos.html">
+            <a href="registro-modulos.html">
                 <button class="btn btn-primary btn-lg animate__animated animate__fadeInUp">
                     Comenzar Ahora
                 </button>
